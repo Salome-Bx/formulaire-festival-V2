@@ -1,141 +1,170 @@
 <?php
 
+namespace src\Models;
+
+use src\Services\Hydratation;
+
 class User
 {
-  private $_id;
-  private $_nom;
-  private $_prenom;
-  private $_mail;
-  private $_tel;
-  private $_adresse;
-  private $_password;
+  private int $_Id_User;
+  private string $_lastName;
+  private string $_firstName;
+  private string $_password;
+  private string $_address;
+  private int $_telephone;
+  private bool $_User_Role;
+  private string $mail;
+
+
+  use Hydratation;
+
+
+
+
 
 
 
   /**
-   * Création d'un nouvel utilisateur
-   * @param string $nom      Le nom de l'utilisateur
-   * @param string $prenom   Le prénom de l'utilisateur
-   * @param string $mail     Le mail de l'utilisateur
-   * @param string $password Le mot de passe chiffré de l'utilisateur
-   * @param int $id       L'id de l'utilisateur si on le connait, sinon rien.
+   * Get the value of _Id_User
    */
-
-  function __construct(string $nom, string $prenom, string $mail, int $tel, string $adresse, string $password, int|string $id = "à créer")
+  public function getIdUser(): int
   {
-
-    $this->setId($id);
-    $this->setNom($nom);
-    $this->setPrenom($prenom);
-    $this->setMail($mail);
-
-    $this->setTel($tel);
-    $this->setAdresse($adresse);
-    $this->setPassword($password);
+    return $this->_Id_User;
   }
 
-  public function getId(): int
+  /**
+   * Set the value of _Id_User
+   */
+  public function setIdUser(int $_Id_User): self
   {
-    return $this->_id;
-  }
-  public function setId(int|string $id): void
-  {
-    if (is_string($id) && $id === "à créer") {
-      $this->_id = $this->CreerNouvelId();
-    } else {
-      $this->_id = $id;
-    }
-  }
-  public function getNom(): string
-  {
-    return $this->_nom;
-  }
-  public function setNom(string $nom): void
-  {
-    $this->_nom = $nom;
-  }
-  public function getPrenom(): string
-  {
-    return $this->_prenom;
-  }
-  public function setPrenom(string $prenom): void
-  {
-    $this->_prenom = $prenom;
-  }
-  public function getMail(): string
-  {
-    return $this->_mail;
-  }
-  public function setMail(string $mail): void
-  {
-    $this->_mail = $mail;
+    $this->_Id_User = $_Id_User;
+
+    return $this;
   }
 
-  public function getTel(): int
+  /**
+   * Get the value of _lastName
+   */
+  public function getLastName(): string
   {
-    return $this->_tel;
-  }
-  public function setTel(int $tel)
-  {
-    $this->_tel = $tel;
-  }
-
-  public function getAdresse(): string
-  {
-    return $this->_adresse;
-  }
-  public function setAdresse(string $adresse): void
-  {
-    $this->_adresse = $adresse;
+    return $this->_lastName;
   }
 
+  /**
+   * Set the value of _lastName
+   */
+  public function setLastName(string $_lastName): self
+  {
+    $this->_lastName = $_lastName;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of _firstName
+   */
+  public function getFirstName(): string
+  {
+    return $this->_firstName;
+  }
+
+  /**
+   * Set the value of _firstName
+   */
+  public function setFirstName(string $_firstName): self
+  {
+    $this->_firstName = $_firstName;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of _password
+   */
   public function getPassword(): string
   {
     return $this->_password;
   }
-  public function setPassword(string $password): void
+
+  /**
+   * Set the value of _password
+   */
+  public function setPassword(string $_password): self
   {
-    $this->_password = $password;
+    $this->_password = $_password;
+
+    return $this;
   }
 
-
-  private function CreerNouvelId()
+  /**
+   * Get the value of _address
+   */
+  public function getAddress(): string
   {
-    $Database = new Database("User");
-
-    $utilisateurs = $Database->getAllUtilisateurs();
-
-    
-    $IDs = [];
-
-    foreach ($utilisateurs as $utilisateur) {
-      $IDs[] = $utilisateur->getId();
-    }
-
-    
-    $i = 1;
-    $unique = false;
-    while ($unique === false) {
-      if (in_array($i, $IDs)) {
-        $i++;
-      } else {
-        $unique = true;
-      }
-    }
-    return $i;
+    return $this->_address;
   }
 
-  public function getObjectToArray(): array
+  /**
+   * Set the value of _address
+   */
+  public function setAddress(string $_address): self
   {
-    return [
-      "id" => $this->getId(),
-      "nom" => $this->getNom(),
-      "prenom" => $this->getPrenom(),
-      "mail" => $this->getMail(),
-      "tel" => $this->getTel(),
-      "adresse" => $this->getAdresse(),
-      "password" => $this->getPassword()
+    $this->_address = $_address;
 
-    ];
+    return $this;
+  }
+
+  /**
+   * Get the value of _telephone
+   */
+  public function getTelephone(): int
+  {
+    return $this->_telephone;
+  }
+
+  /**
+   * Set the value of _telephone
+   */
+  public function setTelephone(int $_telephone): self
+  {
+    $this->_telephone = $_telephone;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of _User_Role
+   */
+  public function isUserRole(): bool
+  {
+    return $this->_User_Role;
+  }
+
+  /**
+   * Set the value of _User_Role
+   */
+  public function setUserRole(bool $_User_Role): self
+  {
+    $this->_User_Role = $_User_Role;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of mail
+   */
+  public function getMail(): string
+  {
+    return $this->mail;
+  }
+
+  /**
+   * Set the value of mail
+   */
+  public function setMail(string $mail): self
+  {
+    $this->mail = $mail;
+
+    return $this;
   }
 }
