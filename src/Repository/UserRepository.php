@@ -36,7 +36,7 @@ class UserRepository
             ':mail' => $user->getMail()
         ]);
 
-        $user->setId($this->DB->lastInsertId());
+
 
         return $user;
     }
