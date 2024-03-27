@@ -1,42 +1,32 @@
 <?php
 
-class Database
+namespace src\Models;
+
+require "../../config.php";
+
+use PDO;
+use PDOException;
+
+final class Database
 {
+    private $DB;
+    private $config;
 
-    private $_DBU; //Base de données utilisateur
-    private $_DBR; //Basse de données réseevation
-
-
-    /**
-     * Fonction qui permet d'attribuer la bonne Database
-     *
-     * @param   nomClasse    prends en paramètre la classe souhaitée
-     *
-     * @return  [type]       attribut le dossier csv correspondant
-     */
-    public function __construct($nomClasse)
+    public function __construct()
     {
-        if ($nomClasse == "User") {
-            $this->_DBU = __DIR__ . "/../csv/utilisateurs.csv";
-        } else if ($nomClasse == "Reservation") {
-            $this->_DBR = __DIR__ . "/../csv/reservations.csv";
-        }
+        $this->config = __DIR__ . '/../../config.php';
+        require_once $this->config;
+
+        $this->connexionDB();
     }
 
-    /********** DataBaseUtilisateur **********/
-
-    /**
-     * Fonction qui récupère tous les utilisateurs du csv 
-     *
-     * @return  array   retourne un tableau avec tous les utilisateurs, 1 par ligne
-     */
-    public function getAllUtilisateurs(): array
+    private function connexionDB(): void
     {
-        $connexion = fopen($this->_DBU, 'r');
-        $utiliseurs = [];
-
-        while (($user = fgetcsv($connexion, 1000, ",")) !== FALSE) {
-            $utiliseurs[] = new User($user[1], $user[2], $user[3], $user[4], $user[5], $user[6], $user[0]);
+        try {
+            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+            $this->DB = new PDO($dsn, DB_USER, DB_PWD);
+        } catch (PDOException $error) {
+            echo "Quelque chose s'est mal passé : " . $error->getMessage();
         }
 
         fclose($connexion);
@@ -164,13 +154,3 @@ class Database
         return $retour;
     }
 }
-
-
-
-
-
-
-
-
-?>
-
