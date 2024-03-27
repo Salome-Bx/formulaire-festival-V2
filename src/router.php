@@ -1,10 +1,9 @@
 <?php
 
-use src\Controllers\FilmController;
-use src\Controllers\HomeController;
+use src\Controllers\ReservationController;
 
-$HomeController = new HomeController;
-$FilmController = new FilmController;
+$ReservationController = new ReservationController;
+$UserController = new UserController;
 
 
 $route = $_SERVER['REDIRECT_URL'];
@@ -42,48 +41,39 @@ switch ($route) {
       // On a ici toutes les routes qu'on a à partir du dashboard
 
       switch ($route) {
-        case str_contains($route, "films"):
-          // On a ici toutes les routes qu'on peut faire pour les films
+        case str_contains($route, "reservation"):
+          // On a ici toutes les routes qu'on peut faire
           switch ($route) {
             case str_contains($route, "new"):
               if ($methode === "POST") {
                 $data = $_POST;
-                $FilmController->save($data);
+                $ReservationController->save($data);
               } else {
-                $FilmController->new();
+                $ReservationController->new();
               }
               break;
 
             case str_contains($route, 'details'):
-              $idFilm = explode('/', $route);
-              $idFilm = end($idFilm);
-              $FilmController->show($idFilm);
+              $idResa = explode('/', $route);
+              $idResa = end($idResa);
+              $ReservationController->show($idResa);
               break;
 
             case str_contains($route, "edit"):
-              $idFilm = explode('/', $route);
-              $idFilm = end($idFilm);
-              $FilmController->edit($idFilm);
-              break;
-
-            case str_contains($route, "update"):
-              if ($methode === "POST") {
-                $idFilm = explode('/', $route);
-                $idFilm = end($idFilm);
-                $data = $_POST;
-                $FilmController->save($data, $idFilm);
-              }
+              $idResa = explode('/', $route);
+              $idResa = end($idResa);
+              $ReservationController->edit($idResa);
               break;
 
             case str_contains($route, "delete"):
-              $idFilm = explode('/', $route);
-              $idFilm = end($idFilm);
-              $FilmController->delete($idFilm);
+              $idResa = explode('/', $route);
+              $idResa = end($idResa);
+              $ReservationController->delete($idResa);
               break;
 
             default:
               // par défaut on voit la liste des films.
-              $FilmController->index();
+              $ReservationController->index();
               break;
           }
 
@@ -91,7 +81,7 @@ switch ($route) {
 
         default:
           // par défaut une fois connecté, on voit la liste des films.
-          $FilmController->index();
+          $ReservationController->index();
           break;
       }
     } else {

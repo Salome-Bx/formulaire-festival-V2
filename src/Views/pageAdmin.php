@@ -1,14 +1,15 @@
 <?php
+
+use src\Models\Database;
+use src\Repository\UserRepository;
+use src\Repository\ReservationRepository;
+
 session_start();
 
 if (!isset($_SESSION['connectéUser'])) {
     header('location: connexion.php');
     die;
 }
-
-require_once "src/classes/Reservation.php";
-require_once "src/classes/User.php";
-require_once "src/classes/Database.php";
 
 
 ?>
@@ -33,23 +34,24 @@ require_once "src/classes/Database.php";
 <body>
 
     <!------------------- HEADER ------------------->
-    <header class="header">
-        <a href="./deconnexion.php" class="boutonConnexion">Déconnexion</a>
-        <h1>Vercors Musique Festival</h1>
-    </header>
+
+    <?php include_once './includes/headerConnected.php';  ?>
+
     <!------------------- BODY ------------------->
 
     <section>
         <?php
         // instanciation de la classe Database
-        $DBR = new Database('Reservation');
-        $reservations = $DBR->getAllReservations();
+        $DBR = new Database();
+        $resaRepo = new ReservationRepository();
+        $reservations = $resaRepo->getAllReservations();
 
         foreach ($reservations as $reservation) {
             $IdUser = $reservation->getIdUser();
             // instanciation de la classe User
-            $DBU = new Database('User');
-            $utilisateur = $DBU->getThisUtilisateurById($IdUser); ?>
+            $DBU = new Database();
+            $userRepo = new UserRepository();
+            $utilisateur = $userRepo->getThisUtilisateurById($IdUser); ?>
 
             <div class="reservation <?= $reservation->getId() ?>">
                 <div class="displaynomnum">
