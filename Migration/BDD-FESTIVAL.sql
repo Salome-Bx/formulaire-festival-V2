@@ -7,7 +7,7 @@
 # Table: USER
 #------------------------------------------------------------
 
-CREATE TABLE USER(
+CREATE TABLE festival_USER(
         Id_User   Int NOT NULL ,
         lastName  Varchar (50) NOT NULL ,
         firstName Varchar (50) NOT NULL ,
@@ -25,7 +25,7 @@ CREATE TABLE USER(
 # Table: Reservation
 #------------------------------------------------------------
 
-CREATE TABLE Reservation(
+CREATE TABLE festival_Reservation(
         ID_RESERVATION     Int  Auto_increment  NOT NULL ,
         Number_Reservation Int NOT NULL ,
         Quantity_Sledge    Int NOT NULL ,
@@ -42,7 +42,7 @@ CREATE TABLE Reservation(
 # Table: Event
 #------------------------------------------------------------
 
-CREATE TABLE Event(
+CREATE TABLE festival_Event(
         Id_Date       Int  Auto_increment  NOT NULL ,
         Date          Date NOT NULL ,
         Price         Decimal (50) NOT NULL ,
@@ -56,7 +56,7 @@ CREATE TABLE Event(
 # Table: Night
 #------------------------------------------------------------
 
-CREATE TABLE Night(
+CREATE TABLE festival_Night(
         Id_Date Int NOT NULL ,
         Price   Decimal NOT NULL ,
         Name    Varchar (250) NOT NULL
@@ -68,7 +68,7 @@ CREATE TABLE Night(
 # Table: ReservationHasEvent
 #------------------------------------------------------------
 
-CREATE TABLE ReservationHasEvent(
+CREATE TABLE festival_ReservationHasEvent(
         Id_Date        Int NOT NULL ,
         ID_RESERVATION Int NOT NULL
 	,CONSTRAINT ReservationHasEvent_PK PRIMARY KEY (Id_Date,ID_RESERVATION)
@@ -82,7 +82,7 @@ CREATE TABLE ReservationHasEvent(
 # Table: ReservationHasNight
 #------------------------------------------------------------
 
-CREATE TABLE ReservationHasNight(
+CREATE TABLE festival_ReservationHasNight(
         Id_Date        Int NOT NULL ,
         ID_RESERVATION Int NOT NULL ,
         Date           Date NOT NULL
