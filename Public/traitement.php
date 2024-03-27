@@ -1,18 +1,18 @@
 <?php
 
 // importer ici les classes nécéssaires
-require_once "./classes/User.php";
-require_once "./classes/Database.php";
-require_once "./classes/Reservation.php";
+// require_once "./classes/User.php";
+// require_once "./classes/Database.php";
+// require_once "./classes/Reservation.php";
 
-require_once "./config.php";
+// require_once "./config.php";
 
 
 // vérification champs formulaire et récupération des données
-
+var_dump($_POST);
 if (isset($_POST['nombrePlaces']) && isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['email']) && isset($_POST['telephone']) && isset($_POST['adressePostale']) && isset($_POST['password']) && isset($_POST['passwordBis'])  && !empty($_POST['nombrePlaces']) && !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['telephone']) && !empty($_POST['adressePostale']) && !empty($_POST['password']) && !empty($_POST['passwordBis'])) {
 
-     // deux instanciations de la classe Database : user et reservation
+    // deux instanciations de la classe Database : user et reservation
     $databaseUser = new Database("User");
     $databaseReservation = new Database("Reservation");
 
@@ -117,6 +117,7 @@ if (isset($_POST['nombrePlaces']) && isset($_POST['nom']) && isset($_POST['preno
 
     // instanciation de la classe Réservation
     $reservation = new Reservation($nbrReservation, $typeRerservation, $nuit, $nbrEnfant, $nbrCasqueEnfant, $nbrDescenteLuge, $idUser);
+    $reservationRepo =new ReservationRepository();
     $retourReservation = $databaseReservation->saveReservation($reservation);
 
 

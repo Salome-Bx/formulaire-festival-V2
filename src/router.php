@@ -1,25 +1,25 @@
 <?php
 
+use src\Controllers\HomeController;
 use src\Controllers\ReservationController;
 
 $ReservationController = new ReservationController;
-$UserController = new UserController;
-
+// $UserController = new UserController;
+$HomeController = new HomeController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
-
 switch ($route) {
   case HOME_URL:
     if (isset($_SESSION['connecté'])) {
-      header('location: '.HOME_URL.'dashboard');
+      header('location: ' . HOME_URL . 'dashboard');
       die;
     } else {
       $HomeController->index();
     }
     break;
 
-  case HOME_URL.'connexion':
+  case HOME_URL . 'connexion':
     if (isset($_SESSION['connecté'])) {
       header('location: /dashboard');
       die;
@@ -32,7 +32,7 @@ switch ($route) {
     }
     break;
 
-  case HOME_URL.'deconnexion':
+  case HOME_URL . 'deconnexion':
     $HomeController->quit();
     break;
 
@@ -85,7 +85,7 @@ switch ($route) {
           break;
       }
     } else {
-      header("location: ".HOME_URL);
+      header("location: " . HOME_URL);
       die;
     }
     break;

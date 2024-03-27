@@ -6,146 +6,141 @@ use src\Services\Hydratation;
 
 class User
 {
-  private int $_Id_User;
-  private string $_lastName;
-  private string $_firstName;
-  private string $_password;
-  private string $_address;
-  private int $_telephone;
-  private bool $_User_Role;
+  private int $Id_User;
+  private string $lastName;
+  private string $firstName;
+  private string $password;
+  private string $address;
+  private int $telephone;
+  private bool $User_Role;
   private string $mail;
 
 
   use Hydratation;
 
 
-
-
-
-
-
   /**
-   * Get the value of _Id_User
+   * Get the value of Id_User
    */
   public function getIdUser(): int
   {
-    return $this->_Id_User;
+    return $this->Id_User;
   }
 
   /**
-   * Set the value of _Id_User
+   * Set the value of Id_User
    */
-  public function setIdUser(int $_Id_User): self
+  public function setIdUser(int $Id_User): self
   {
-    $this->_Id_User = $_Id_User;
+    $this->Id_User = $Id_User;
 
     return $this;
   }
 
   /**
-   * Get the value of _lastName
+   * Get the value of lastName
    */
   public function getLastName(): string
   {
-    return $this->_lastName;
+    return $this->lastName;
   }
 
   /**
-   * Set the value of _lastName
+   * Set the value of lastName
    */
-  public function setLastName(string $_lastName): self
+  public function setLastName(string $lastName): self
   {
-    $this->_lastName = $_lastName;
+    $this->lastName = $lastName;
 
     return $this;
   }
 
   /**
-   * Get the value of _firstName
+   * Get the value of firstName
    */
   public function getFirstName(): string
   {
-    return $this->_firstName;
+    return $this->firstName;
   }
 
   /**
-   * Set the value of _firstName
+   * Set the value of firstName
    */
-  public function setFirstName(string $_firstName): self
+  public function setFirstName(string $firstName): self
   {
-    $this->_firstName = $_firstName;
+    $this->firstName = $firstName;
 
     return $this;
   }
 
   /**
-   * Get the value of _password
+   * Get the value of password
    */
   public function getPassword(): string
   {
-    return $this->_password;
+    return $this->password;
   }
 
   /**
-   * Set the value of _password
+   * Set the value of password
    */
-  public function setPassword(string $_password): self
+  public function setPassword(string $password): self
   {
-    $this->_password = $_password;
+    $this->password = $password;
 
     return $this;
   }
 
   /**
-   * Get the value of _address
+   * Get the value of address
    */
   public function getAddress(): string
   {
-    return $this->_address;
+    return $this->address;
   }
 
   /**
-   * Set the value of _address
+   * Set the value of address
    */
-  public function setAddress(string $_address): self
+  public function setAddress(string $address): self
   {
-    $this->_address = $_address;
+    $this->address = $address;
 
     return $this;
   }
 
   /**
-   * Get the value of _telephone
+   * Get the value of telephone
    */
   public function getTelephone(): int
   {
-    return $this->_telephone;
+    return $this->telephone;
   }
 
   /**
-   * Set the value of _telephone
+   * Set the value of telephone
    */
-  public function setTelephone(int $_telephone): self
+  public function setTelephone(int $telephone): self
   {
-    $this->_telephone = $_telephone;
+    $this->telephone = $telephone;
 
     return $this;
   }
 
   /**
-   * Get the value of _User_Role
+   * Get the value of User_Role
    */
   public function isUserRole(): bool
   {
-    return $this->_User_Role;
+    return $this->User_Role;
   }
 
   /**
-   * Set the value of _User_Role
+   * Set the value of User_Role
    */
-  public function setUserRole(bool $_User_Role): self
+  public function setUserRole(bool $User_Role): self
   {
-    $this->_User_Role = $_User_Role;
+    $this->User_Role = $User_Role;
 
     return $this;
   }
