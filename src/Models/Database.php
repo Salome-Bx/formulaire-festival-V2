@@ -1,176 +1,107 @@
 <?php
 
-class Database
+namespace src\Models;
+
+use PDO;
+use PDOException;
+
+final class Database
 {
+    private $DB;
+    private $config;
 
-    private $_DBU; //Base de données utilisateur
-    private $_DBR; //Basse de données réseevation
-
-
-    /**
-     * Fonction qui permet d'attribuer la bonne Database
-     *
-     * @param   nomClasse    prends en paramètre la classe souhaitée
-     *
-     * @return  [type]       attribut le dossier csv correspondant
-     */
-    public function __construct($nomClasse)
+    public function __construct()
     {
-        if ($nomClasse == "User") {
-            $this->_DBU = __DIR__ . "/../csv/utilisateurs.csv";
-        } else if ($nomClasse == "Reservation") {
-            $this->_DBR = __DIR__ . "/../csv/reservations.csv";
+        $this->config = __DIR__ . '/../../config.php';
+        require_once $this->config;
+
+        $this->connexionDB();
+    }
+
+    private function connexionDB(): void
+    {
+        try {
+            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+            $this->DB = new PDO($dsn, DB_USER, DB_PWD);
+        } catch (PDOException $error) {
+            echo "Quelque chose s'est mal passé : " . $error->getMessage();
         }
     }
 
-    /********** DataBaseUtilisateur **********/
-
-    /**
-     * Fonction qui récupère tous les utilisateurs du csv 
-     *
-     * @return  array   retourne un tableau avec tous les utilisateurs, 1 par ligne
-     */
-    public function getAllUtilisateurs(): array
+    public function getDB()
     {
-        $connexion = fopen($this->_DBU, 'r');
-        $utiliseurs = [];
-
-        while (($user = fgetcsv($connexion, 1000, ",")) !== FALSE) {
-            $utiliseurs[] = new User($user[1], $user[2], $user[3], $user[4], $user[5], $user[6], $user[0]);
-        }
-
-        fclose($connexion);
-
-        return $utiliseurs;
+        return $this->DB;
     }
 
     /**
-     * Fonction qui permet de récupérer les utilisateurs par leur ID
-     *
-     * @param   int   $id  La paramètre doit être un nombre
-     *
-     * @return  User       retourne les infos utilisateur s'il y a un ID en nombre, sinon $user = false
+     * Initialisation de la Base de Données : installation des tables et mise à jour du fichier config.php
+     * @return string message d'échec ou de réussite.
      */
-    public function getThisUtilisateurById(int $id): User|bool
+    public function initializeDB(): string
     {
-        $connexion = fopen($this->_DBU, 'r');
-        while (($user = fgetcsv($connexion, 1000)) !== FALSE) {
-            if ((int) $user[0] === $id) {
-                $user = new User($user[1], $user[2], $user[3], $user[4], $user[5], $user[6], $user[0]);
-                break;
-            } else {
-                $user = false;
+
+        // Vérifier si la base de données est vide
+        if ($this->testIfTableTaskExists()) {
+            return "La base de données semble déjà remplie.";
+            die();
+        }
+        // Télécharger le fichier sql d'initialisation dans la BDD
+        try {
+            $sql = file_get_contents(__DIR__ . "/../Migrations/todolist.sql");
+
+            $this->DB->query($sql);
+            // Mettre à jour le fichier config.php
+
+            if ($this->MiseAJourConfig()) {
+                return "installation de la Base de Données terminée !";
+                die();
             }
+        } catch (PDOException $erreur) {
+            return "impossible de remplir la Base de données : " . $erreur->getMessage();
+            die();
         }
-        fclose($connexion);
-        return $user;
-    }
-
-    public function getThisUtilisateurByEmail(string $email): User|bool
-    {
-        $connexion = fopen($this->_DBU, 'r');
-        while (($user = fgetcsv($connexion, 1000)) !== FALSE) {
-            if ((string) $user[3] === $email) {
-                $user = new User($user[1], $user[2], $user[3], $user[4], $user[5], $user[6], $user[0]);
-                break;
-            } else {
-                $user = false;
-            }
-        }
-        fclose($connexion);
-        return $user;
-    }
-
-
-    /**
-     * Function qui fait appel à la méthode getObjectToArray() pour créer un csv avec les infos utilisateur
-     *
-     * @param   User  $user  classe User
-     *
-     * @return  bool         retourne true ou false
-     */
-    public function saveUtilisateur(User $user): bool
-    {
-        $connexion = fopen($this->_DBU, 'ab');
-
-        $retour = fputcsv($connexion, $user->getObjectToArray()); //Formate une ligne en CSV et l'écrit dans un fichier
-
-        fclose($connexion);
-
-        return $retour;
-    }
-
-
-
-
-    /********** DataBaseReservation **********/
-
-    /**
-     * Fonction qui récupère toutes les réservations du csv 
-     *
-     * @return  array   retourne un tableau avec toutes les réservations, 1 par ligne
-     */
-    public function getAllReservations(): array
-    {
-        $connexion = fopen($this->_DBR, 'r');
-        $reservations = [];
-
-        while (($reservation = fgetcsv($connexion, 1000, ",")) !== FALSE) {
-            $reservations[] = new Reservation($reservation[2], $reservation[3], $reservation[4], $reservation[5], $reservation[6], $reservation[7], $reservation[1], $reservation[0]);
-        }
-
-        fclose($connexion);
-
-        return $reservations;
     }
 
     /**
-     * Fonction qui permet de récupérer les réservations par leur ID
-     *
-     * @param   int   $id  La paramètre doit être un nombre
-     *
-     * @return  User       retourne les infos réservation s'il y a un ID en nombre, sinon $user = false
+     * Vérifie si la table Films existe déjà dans la BDD
+     * @return bool
      */
-    public function getThisReservationById(int $id): Reservation|bool
+    private function testIfTableTaskExists(): bool
     {
-        $connexion = fopen($this->_DBR, 'r');
-        while (($reservation = fgetcsv($connexion, 1000)) !== FALSE) {
-            if ((int) $reservation[0] === $id) {
-                $reservation = new Reservation($reservation[2], $reservation[3], $reservation[4], $reservation[5], $reservation[6], $reservation[7], $reservation[1], $reservation[0]);
-                break;
-            } else {
-                $reservation = false;
-            }
+        $existant = $this->DB->query('SHOW TABLES FROM ' . DB_NAME . ' like \'' . PREFIXE . 'task\'')->fetch();
+
+        if ($existant !== false && $existant[0] == PREFIXE . "Task") {
+            return true;
+        } else {
+            return false;
         }
-        fclose($connexion);
-        return $reservation;
     }
 
-    /**
-     * Function qui fait appel à la méthode getObjectToArray() pour créer un csv avec les infos de réservations
-     *
-     * @param   Reservation  $reservation  classe Reservation
-     *
-     * @return  bool         retourne true ou false
-     */
-    public function saveReservation(Reservation $reservation): bool
+    private function MiseAJourConfig(): bool
     {
-        $connexion = fopen($this->_DBR, 'ab');
 
-        $retour = fputcsv($connexion, $reservation->getObjectToArray());
+        $fconfig = fopen($this->config, 'w');
 
-        fclose($connexion);
+        $contenu = "<?php
+    // lors de la mise en open source, remplacer les infos concernant la base de données.
+    
+    define('DB_HOST', '" . DB_HOST . "');
+    define('DB_NAME', '" . DB_NAME . "');
+    define('DB_USER', '" . DB_USER . "');
+    define('DB_PWD', '" . DB_PWD . "');
+    define('PREFIXE', '" . PREFIXE . "');
+    
+    // Ne pas toucher :
+    
+    define('DB_INITIALIZED', TRUE);";
 
-        return $retour;
+
+        if (fwrite($fconfig, $contenu)) {
+            fclose($fconfig);
+            return true;
+        } else {
+            fclose($fconfig);
+            return false;
+        }
     }
 }
-
-
-
-
-
-
-
-
-?>
-
