@@ -2,47 +2,48 @@
 
 namespace src\Controllers;
 
-use Reservation;
+use src\Models\Reservation;
+use src\Repositories\ReservationRepository;
 use src\Services\Reponse;
-use src\Repository\ReservationRepository;
 
 class ReservationController
 {
-
-    private $ReservationRepository;
+    private Reservation $Resa;
+    private ReservationRepository $ReservationRepository;
     use Reponse;
 
     public function __construct()
     {
-        $this->ReservationRepository = new ReservationRepository;
+        $this->Resa = new Reservation();
+        $this->ReservationRepository = new ReservationRepository();
     }
 
     public function index($Id_User)
     {
-        $Reservation = $this->ReservationRepository->getAllReservation();
+        $Reservation = $this->ReservationRepository->getAllReservationFromDB();
         $this->render("Dashboard", ['section' => 'Reservation', 'action' => '']);
     }
 
     public function details($id)
     {
-        $Reservation = $this->ReservationRepository->getThisReservationById($id);
+        $Reservation = $this->ReservationRepository->getReservationFromDB($id);
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'details']);
     }
 
     public function edit($id)
     {
-        $Reservation = $this->ReservationRepository->getThisReservationById($id);
+        $Reservation = $this->ReservationRepository->edtiReservationInDB($id);
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'edit']);
     }
     public function show($id)
     {
-        $Reservation = $this->ReservationRepository->getThisReservationById($id);
+        $Reservation = $this->ReservationRepository->getReservationFromDB($id);
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'show']);
     }
 
     public function new()
     {
-        $Reservation = $this->ReservationRepository->getNewReservation($id);
+        $Reservation = $this->ReservationRepository->putReservationInDB();
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'new']);
     }
 
@@ -54,29 +55,23 @@ class ReservationController
                 $data[$key] = htmlspecialchars($value);
             }
         }
-        $Reservation = new Reservation($data);
-        if (isset($data[$Reservation]) && !empty($data[$Reservation])) {
-            $Reservation->setIdCategories($data[]);
-        } else {
-            $Reservation->setIdCategories([]);
-        }
 
+        $Reservation = $this->Resa;
         if (
-            !empty($Reservation->???()) &&
-            !empty($Reservation->???()) &&
-            !empty($Reservation->???()) &&
-            !empty($Reservation->???()) &&
-            !empty($Reservation->???()) &&
-            !empty($Reservation->???()) &&
-            !empty($Reservation->???())
+            !empty($Reservation->getIdReservation()) &&
+            !empty($Reservation->getNumberReservation()) &&
+            !empty($Reservation->getChildren()) &&
+            !empty($Reservation->getQuantityHeadphone()) &&
+            !empty($Reservation->getQuantitySledge()) &&
+            !empty($Reservation->getIdUser())
         ) {
 
             if ($id !== null) {
-                $Reservation->setId($id);
-                $this->ReservationRepository->???($Reservation);
+                $Reservation->setIdUser($id);
+                $this->ReservationRepository->putReservationInDB($Reservation);
             }
-            
-            header('location: /dashboard/Reservation/details/' . $Reservation->getId());
+
+            header('location: /dashboard/Reservation/details/' . $Reservation->getIdUser());
             die;
         } else {
             if ($id !== null) {
@@ -88,8 +83,8 @@ class ReservationController
 
     public function delete($id)
     {
-        $this->ReservationRepository->deleteThisReservation($id);
-        $Reservation = $this->ReservationRepository->getAllReservation();
+        $this->ReservationRepository->deleteReservationInDB($id);
+        $Reservation = $this->ReservationRepository->getReservationFromDB($id);
         $this->render("Dashboard", ['section' => 'Reservation', 'Reservation' => $Reservation]);
     }
 }

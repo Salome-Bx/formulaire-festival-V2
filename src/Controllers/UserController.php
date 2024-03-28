@@ -25,9 +25,6 @@ class UserController
         $this->ReservationRepo = new ReservationRepository();
     }
 
-
-
-
     public function registerUser($data, $id = null)
     {
         foreach ($data as $key => $value) {
@@ -41,7 +38,6 @@ class UserController
 
         if (isset($data['Id_User']) && !empty($data['Id_User'])) {
             $this->UserRepo->saveUser($user['Id_User']);
-
         }
     }
 }
