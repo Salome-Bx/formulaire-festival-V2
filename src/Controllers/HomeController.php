@@ -17,12 +17,12 @@ class HomeController
             $erreur = '';
         }
 
-        $this->render("Accueil", ["erreur" => $erreur]);
+        $this->render("inscriptionUser", ["erreur" => $erreur]);
     }
 
     public function auth(string $password): void
     {
-        
+
         if ($password === 'admin') {
             $_SESSION['connecté'] = TRUE;
             header('location: ' . HOME_URL . 'dashboard');

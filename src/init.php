@@ -11,3 +11,4 @@ if (DB_INITIALIZED == FALSE) {
 
     $db->initializeDB();
 }
+require_once __DIR__ . "/router.php";

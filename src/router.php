@@ -4,16 +4,19 @@ use src\Controllers\HomeController;
 use src\Controllers\ReservationController;
 use src\Controllers\UserController;
 
-$ReservationController = new ReservationController;
-$UserController = new UserController;
+// $ReservationController = new ReservationController;
+// $UserController = new UserController;
 $HomeController = new HomeController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
+
+var_dump($_SERVER);
+
 switch ($route) {
   case HOME_URL:
     if (isset($_SESSION['connecté'])) {
-      header('location: ' . HOME_URL . 'dashboard');
+      // header('location: ' . HOME_URL . 'dashboard');
       die;
     } else {
       $HomeController->index();
@@ -22,7 +25,7 @@ switch ($route) {
 
   case HOME_URL . 'connexion':
     if (isset($_SESSION['connecté'])) {
-      header('location: /dashboard');
+      // header('location: /dashboard');
       die;
     } else {
       if ($methode === 'POST') {
@@ -85,35 +88,35 @@ switch ($route) {
           $ReservationController->index($IdUser);
           break;
       }
+
+      switch ($route) {
+        case str_contains($route, "edit"):
+          $IdUser = explode('/', $route);
+          $IdUser = end($IdUser);
+          // $UserController->edit($IdUser);
+          break;
+
+        case str_contains($route, "delete"):
+          $IdUser = explode('/', $route);
+          $IdUser = end($IdUser);
+          // $UserController->delete($IdUser);
+          break;
+
+        case str_contains($route, 'deconnexion'):
+          // $UserController->index();
+          break;
+
+        default:
+          $HomeController->quit();
+          break;
+      }
+
+      break;
     } else {
-      header("location: " . HOME_URL);
+      // header("location: " . HOME_URL);
       die;
     }
     break;
-    switch ($route) {
-      case str_contains($route, "edit"):
-        $IdUser = explode('/', $route);
-        $IdUser = end($IdUser);
-        $UserController->edit($IdUser);
-        break;
-
-      case str_contains($route, "delete"):
-        $IdUser = explode('/', $route);
-        $IdUser = end($IdUser);
-        $UserController->delete($IdUser);
-        break;
-
-      case str_contains($route, 'deconnexion'):
-        $UserController->index();
-        break;
-
-      default:
-        $HomeController->quit();
-        break;
-    }
-
-    break;
-
   default:
     $HomeController->page404();
     break;
