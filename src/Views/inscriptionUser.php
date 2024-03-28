@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <?php include __DIR__ . './includes/header.php'; ?>
+    <?php include __DIR__ . '/includes/header.php'; ?>
     <form action="./../Controllers/UserController.php" id="inscriptionUser" method="POST">
         <div id="coordonnees" class="blocFormulaire">
 
