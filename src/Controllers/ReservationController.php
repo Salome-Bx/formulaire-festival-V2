@@ -2,7 +2,7 @@
 
 namespace src\Controllers;
 
-
+use ReservationRepository;
 use src\Services\Reponse;
 
 class ReservationController
