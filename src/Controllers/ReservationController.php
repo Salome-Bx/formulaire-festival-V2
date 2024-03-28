@@ -74,13 +74,8 @@ class ReservationController
             if ($id !== null) {
                 $Reservation->setId($id);
                 $this->ReservationRepository->???($Reservation);
-
-                $this->ReservationRepository->???($Reservation);
-                $this->ReservationRepository->???($Reservation);
-            } else {
-                $film = $this->ReservationRepository->???($Reservation);
-                $this->ReservationRepository->???($Reservation);
             }
+            
             header('location: /dashboard/Reservation/details/' . $Reservation->getId());
             die;
         } else {

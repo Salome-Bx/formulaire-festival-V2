@@ -89,20 +89,26 @@ switch ($route) {
       header("location: " . HOME_URL);
       die;
     }
-
+    break;
     switch ($route) {
       case str_contains($route, "edit"):
         $IdUser = explode('/', $route);
         $IdUser = end($IdUser);
-        $ReservationController->edit($IdUser);
+        $UserController->edit($IdUser);
         break;
+
       case str_contains($route, "delete"):
         $IdUser = explode('/', $route);
         $IdUser = end($IdUser);
-        $ReservationController->delete($IdUser);
+        $UserController->delete($IdUser);
         break;
-      default:
+
+      case str_contains($route, 'deconnexion'):
         $UserController->index();
+        break;
+
+      default:
+        $HomeController->quit();
         break;
     }
 
