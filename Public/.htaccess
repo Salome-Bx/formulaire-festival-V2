@@ -1,3 +1,4 @@
+
 <IfModule mod_rewrite.c>
   RewriteEngine on
 
@@ -9,4 +10,5 @@
 
   ## Retour d'erreur :
   ErrorDocument 404 /page-introuvable
+
 </IfModule>

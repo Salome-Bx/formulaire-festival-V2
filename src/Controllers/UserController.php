@@ -37,19 +37,11 @@ class UserController
             }
         }
         $user = new User($data);
-        $userRepo = new UserRepository();
-        if (isset($user) && !empty($user)) {
-            $userRepo->saveUser($user);
-        }else {
-            $categories = $this->CategoryRepo->getAllCategories();
-            $classifications = $this->ClassificationRepo->getAllClassifications();
-            if ($id !== null) {
-                $this->render('Dashboard', ['section' => 'films', 'action' => 'edit', 'film' => $film, 'categories' => $categories, 'classifications' => $classifications, 'error' => 'Tous les champs sont requis.']);
-                die;
-            } else {
-                $this->render('Dashboard', ['section' => 'films', 'action' => 'new', 'film' => $film, 'categories' => $categories, 'classifications' => $classifications, 'error' => 'Tous les champs sont requis.']);
-                die;
-            }
+
+
+        if (isset($data['Id_User']) && !empty($data['Id_User'])) {
+            $this->UserRepo->saveUser($user['Id_User']);
+
         }
     }
 }
