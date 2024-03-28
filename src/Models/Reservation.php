@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Models;
 
 use src\Services\Hydratation;

@@ -6,7 +6,6 @@ use PDO;
 use src\Models\Reservation;
 use src\Models\Database;
 
-
 class ReservationRepository
 {
     private Database $DB;
@@ -36,6 +35,15 @@ class ReservationRepository
             ":Children" => $reservation->getChildren(),
             "iD_User" => $reservation->getIdUser()
         ]);
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function getAllReservationFromDB(): array
+    {
+        $sql = "SELECT * FROM festival_reservation";
+
+
+        $statement = $this->DB->getDB()->prepare($sql);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
