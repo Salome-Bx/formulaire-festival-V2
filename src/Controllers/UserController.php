@@ -3,8 +3,6 @@
 namespace src\Controllers;
 
 use src\Models\User;
-use src\Repositories\ReservationRepository;
-use src\Repositories\Reservation;
 use src\Repositories\UserRepository;
 use src\Services\Reponse;
 
@@ -22,7 +20,7 @@ class UserController
     {
         // Instanciez les 3 propriétés avec les repositories concernés.
         $this->UserRepo = new UserRepository();
-        $this->ReservationRepo = new ReservationRepository();
+        // $this->ReservationRepo = new ReservationRepository();
     }
 
     public function registerUser($data, $id = null)
@@ -33,11 +31,23 @@ class UserController
                 $data[$key] = htmlspecialchars($value);
             }
         }
+
+        //!verification des password email etc... puis creation du nouvel utilisateur 
+        $data = [
+            'LastName' => $data['nom'],
+            'FirstName' => $data['prenom'],
+            'Password' => $data['password'],
+            'Address' => $data['adressePostale'],
+            'Telephone' => $data['telephone'],
+            'UserRole' => 0,
+            'Mail' => $data['email']
+        ];
+        var_dump($data);
         $user = new User($data);
 
 
-        if (isset($data['Id_User']) && !empty($data['Id_User'])) {
-            $this->UserRepo->saveUser($user['Id_User']);
+        if (isset($user) && !empty($user)) {
+            $this->UserRepo->saveUser($user);
         }
     }
 }
