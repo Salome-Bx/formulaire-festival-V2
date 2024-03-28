@@ -1,8 +1,4 @@
-<?php
-?>
-<?php include_once './includes/header.php';  ?>
-
-<form action="./traitement.php" id="inscription" method="POST">
+<form action="./src/traitement.php" id="reservation" method="POST">
     <div id="reservation" class="blocFormulaire">
 
         <h2>Réservation</h2>
@@ -135,7 +131,7 @@
         <p class="bouton" onclick="precedent(blocOptions, blocReservation)">Précédent</p>
 
     </div>
-
+    <script src="../../Public/assets/script.js"></script>
+    <script src="../../Public/assets/traitement.js"></script>
 
 </form>
-<?php include_once './includes/footer.php';  ?>
