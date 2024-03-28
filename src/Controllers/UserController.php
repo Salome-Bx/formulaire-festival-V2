@@ -28,7 +28,7 @@ class UserController
 
 
 
-    public function register($data, $id = null)
+    public function registerUser($data, $id = null)
     {
         foreach ($data as $key => $value) {
             // On enlève les catégories du formatage, car c'est un tableau
@@ -38,8 +38,10 @@ class UserController
         }
         $user = new User($data);
 
+
         if (isset($data['Id_User']) && !empty($data['Id_User'])) {
             $this->UserRepo->saveUser($user['Id_User']);
+
         }
     }
 }
