@@ -79,5 +79,4 @@ class ReservationRepository
         ]);
         return $statement->rowCount() > 0;
     }
-
 }
