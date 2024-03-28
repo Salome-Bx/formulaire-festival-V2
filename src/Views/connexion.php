@@ -9,7 +9,7 @@ if (isset($_SESSION['connecté'])) {
     die;
 }
 
-require_once "./src/config.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -27,11 +27,7 @@ require_once "./src/config.php";
 </head>
 
 <body>
-    <!------------------- HEADER ------------------->
-    <header class="header">
-        <a href="./index.php" class="boutonConnexion">Formulaire</a>
-        <h1>Vercors Musique Festival</h1>
-    </header>
+    <?php include_once './includes/header.php';  ?>
     <!------------------- BODY ------------------->
     <section class="connexion">
         <h2>Connexion</h2>
@@ -69,7 +65,7 @@ require_once "./src/config.php";
         </form>
 
     </section>
-
+    <?php include_once './includes/footer.php';  ?>
 </body>
 
 </html>

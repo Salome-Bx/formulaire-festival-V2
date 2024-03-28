@@ -6,10 +6,9 @@ if (!isset($_SESSION['connecté'])) {
     die;
 }
 
-require_once "src/classes/Reservation.php";
-require_once "src/classes/User.php";
-require_once "src/classes/Database.php";
-
+use src\Models\Database;
+use src\Repository\UserRepository;
+use src\Repository\ReservationRepository;
 
 ?>
 
