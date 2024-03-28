@@ -2,9 +2,10 @@
 
 use src\Controllers\HomeController;
 use src\Controllers\ReservationController;
+use src\Controllers\UserController;
 
 $ReservationController = new ReservationController;
-// $UserController = new UserController;
+$UserController = new UserController;
 $HomeController = new HomeController;
 
 $route = $_SERVER['REDIRECT_URL'];
@@ -54,26 +55,26 @@ switch ($route) {
               break;
 
             case str_contains($route, 'details'):
-              $idResa = explode('/', $route);
-              $idResa = end($idResa);
-              $ReservationController->show($idResa);
+              $IdUser = explode('/', $route);
+              $IdUser = end($IdUser);
+              $ReservationController->show($IdUser);
               break;
 
             case str_contains($route, "edit"):
-              $idResa = explode('/', $route);
-              $idResa = end($idResa);
-              $ReservationController->edit($idResa);
+              $IdUser = explode('/', $route);
+              $IdUser = end($IdUser);
+              $ReservationController->edit($IdUser);
               break;
 
             case str_contains($route, "delete"):
-              $idResa = explode('/', $route);
-              $idResa = end($idResa);
-              $ReservationController->delete($idResa);
+              $IdUser = explode('/', $route);
+              $IdUser = end($IdUser);
+              $ReservationController->delete($IdUser);
               break;
 
             default:
               // par défaut on voit la liste des films.
-              $ReservationController->index();
+              $ReservationController->index($IdUser);
               break;
           }
 
@@ -81,13 +82,30 @@ switch ($route) {
 
         default:
           // par défaut une fois connecté, on voit la liste des films.
-          $ReservationController->index();
+          $ReservationController->index($IdUser);
           break;
       }
     } else {
       header("location: " . HOME_URL);
       die;
     }
+
+    switch ($route) {
+      case str_contains($route, "edit"):
+        $IdUser = explode('/', $route);
+        $IdUser = end($IdUser);
+        $ReservationController->edit($IdUser);
+        break;
+      case str_contains($route, "delete"):
+        $IdUser = explode('/', $route);
+        $IdUser = end($IdUser);
+        $ReservationController->delete($IdUser);
+        break;
+      default:
+        $UserController->index();
+        break;
+    }
+
     break;
 
   default:
