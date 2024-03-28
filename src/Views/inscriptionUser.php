@@ -2,11 +2,13 @@
     <div id="coordonnees" class="blocFormulaire">
 
         <h2>Coordonnées</h2>
-        <div class="messageErreurChampsVides"><?php if (!empty($_GET['erreur'])) {
-                                                    if ($_GET['erreur'] == 4 || $_GET['erreur'] == 2 || $_GET['erreur'] == 1 || $_GET['erreur'] == 3 || $_GET['erreur'] == 5 || $_GET['erreur'] == 6 || $_GET['erreur'] == 7 || $_GET['erreur'] == 8) {
-                                                        echo ("Formulaire incorrect");
-                                                    }
-                                                }; ?></div>
+        <div class="messageErreurChampsVides">
+            <?php if (!empty($_GET['erreur'])) {
+                if ($_GET['erreur']) {
+                    echo ("Formulaire incorrect");
+                }
+            };  ?>
+        </div>
 
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom" placeholder="Dupont">
