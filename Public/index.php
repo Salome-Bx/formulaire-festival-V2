@@ -163,7 +163,7 @@
             <h2>Coordonnées</h2>
             <div class="messageErreurChampsVides"><?php if (!empty($_GET['erreur'])) {
                                                         if ($_GET['erreur'] == 4 || $_GET['erreur'] == 2 || $_GET['erreur'] == 1 || $_GET['erreur'] == 3 || $_GET['erreur'] == 5 || $_GET['erreur'] == 6 || $_GET['erreur'] == 7 || $_GET['erreur'] == 8) {
-                                                            echo ("Formulaire incorrect");
+                                                            echo ("fulaire incorrect");
                                                         }
                                                     }; ?></div>
 
