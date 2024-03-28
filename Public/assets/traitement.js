@@ -8,7 +8,8 @@ let champsAdresse = document.querySelector("#adressePostale");
 let champsMdp = document.querySelector("#password");
 let champsMdpBis = document.querySelector("#passwordBis");
 
-let formulaire = document.querySelector("#inscription");
+let formulaireResa = document.querySelector("#reservation");
+let formulaireUser = document.querySelector("#inscriptionUser");
 
 // function verification() {
 
@@ -22,7 +23,7 @@ let formulaire = document.querySelector("#inscription");
  * @param   {[type]}  evenement  clic du bouton  "Réserver"
  *
  */
-formulaire.addEventListener("submit", function (evenement) {
+formulaireUser.addEventListener("submit", function (evenement) {
   if (
     champsNom.value == "" ||
     champsPrenom.value == "" ||

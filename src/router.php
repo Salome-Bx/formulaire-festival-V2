@@ -1,25 +1,26 @@
 <?php
 
+use src\Controllers\HomeController;
 use src\Controllers\ReservationController;
+use src\Controllers\UserController;
 
 $ReservationController = new ReservationController;
 $UserController = new UserController;
-
+$HomeController = new HomeController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
-
 switch ($route) {
   case HOME_URL:
     if (isset($_SESSION['connecté'])) {
-      header('location: '.HOME_URL.'dashboard');
+      header('location: ' . HOME_URL . 'dashboard');
       die;
     } else {
       $HomeController->index();
     }
     break;
 
-  case HOME_URL.'connexion':
+  case HOME_URL . 'connexion':
     if (isset($_SESSION['connecté'])) {
       header('location: /dashboard');
       die;
@@ -32,7 +33,7 @@ switch ($route) {
     }
     break;
 
-  case HOME_URL.'deconnexion':
+  case HOME_URL . 'deconnexion':
     $HomeController->quit();
     break;
 
@@ -54,26 +55,26 @@ switch ($route) {
               break;
 
             case str_contains($route, 'details'):
-              $idResa = explode('/', $route);
-              $idResa = end($idResa);
-              $ReservationController->show($idResa);
+              $IdUser = explode('/', $route);
+              $IdUser = end($IdUser);
+              $ReservationController->show($IdUser);
               break;
 
             case str_contains($route, "edit"):
-              $idResa = explode('/', $route);
-              $idResa = end($idResa);
-              $ReservationController->edit($idResa);
+              $IdUser = explode('/', $route);
+              $IdUser = end($IdUser);
+              $ReservationController->edit($IdUser);
               break;
 
             case str_contains($route, "delete"):
-              $idResa = explode('/', $route);
-              $idResa = end($idResa);
-              $ReservationController->delete($idResa);
+              $IdUser = explode('/', $route);
+              $IdUser = end($IdUser);
+              $ReservationController->delete($IdUser);
               break;
 
             default:
               // par défaut on voit la liste des films.
-              $ReservationController->index();
+              $ReservationController->index($IdUser);
               break;
           }
 
@@ -81,13 +82,36 @@ switch ($route) {
 
         default:
           // par défaut une fois connecté, on voit la liste des films.
-          $ReservationController->index();
+          $ReservationController->index($IdUser);
           break;
       }
     } else {
-      header("location: ".HOME_URL);
+      header("location: " . HOME_URL);
       die;
     }
+    break;
+    switch ($route) {
+      case str_contains($route, "edit"):
+        $IdUser = explode('/', $route);
+        $IdUser = end($IdUser);
+        $UserController->edit($IdUser);
+        break;
+
+      case str_contains($route, "delete"):
+        $IdUser = explode('/', $route);
+        $IdUser = end($IdUser);
+        $UserController->delete($IdUser);
+        break;
+
+      case str_contains($route, 'deconnexion'):
+        $UserController->index();
+        break;
+
+      default:
+        $HomeController->quit();
+        break;
+    }
+
     break;
 
   default:

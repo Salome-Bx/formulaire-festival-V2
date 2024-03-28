@@ -36,9 +36,7 @@ class UserRepository
             ':mail' => $user->getMail()
         ]);
 
-
-
-        return $user;
+        return $statement;
     }
 
     public function userExist(User $user)
