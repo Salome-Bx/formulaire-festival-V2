@@ -6,159 +6,160 @@ use src\Services\Hydratation;
 
 class User
 {
-  private int $Id_User;
-  private string $lastName;
-  private string $firstName;
-  private string $password;
-  private string $address;
-  private int $telephone;
-  private bool $User_Role;
-  private string $mail;
+  private int $IdUser;
+  private string $LastName;
+  private string $FirstName;
+  private string $Password;
+  private string $Address;
+  private int $Telephone;
+  private bool $UserRole;
+  private string $Mail;
 
 
   use Hydratation;
 
 
+
   /**
-   * Get the value of Id_User
+   * Get the value of IdUser
    */
   public function getIdUser(): int
   {
-    return $this->Id_User;
+    return $this->IdUser;
   }
 
   /**
-   * Set the value of Id_User
+   * Set the value of IdUser
    */
-  public function setIdUser(int $Id_User): self
+  public function setIdUser(int $IdUser): self
   {
-    $this->Id_User = $Id_User;
+    $this->IdUser = $IdUser;
 
     return $this;
   }
 
   /**
-   * Get the value of lastName
+   * Get the value of LastName
    */
   public function getLastName(): string
   {
-    return $this->lastName;
+    return $this->LastName;
   }
 
   /**
-   * Set the value of lastName
+   * Set the value of LastName
    */
-  public function setLastName(string $lastName): self
+  public function setLastName(string $LastName): self
   {
-    $this->lastName = $lastName;
+    $this->LastName = $LastName;
 
     return $this;
   }
 
   /**
-   * Get the value of firstName
+   * Get the value of FirstName
    */
   public function getFirstName(): string
   {
-    return $this->firstName;
+    return $this->FirstName;
   }
 
   /**
-   * Set the value of firstName
+   * Set the value of FirstName
    */
-  public function setFirstName(string $firstName): self
+  public function setFirstName(string $FirstName): self
   {
-    $this->firstName = $firstName;
+    $this->FirstName = $FirstName;
 
     return $this;
   }
 
   /**
-   * Get the value of password
+   * Get the value of Password
    */
   public function getPassword(): string
   {
-    return $this->password;
+    return $this->Password;
   }
 
   /**
-   * Set the value of password
+   * Set the value of Password
    */
-  public function setPassword(string $password): self
+  public function setPassword(string $Password): self
   {
-    $this->password = $password;
+    $this->Password = $Password;
 
     return $this;
   }
 
   /**
-   * Get the value of address
+   * Get the value of Address
    */
   public function getAddress(): string
   {
-    return $this->address;
+    return $this->Address;
   }
 
   /**
-   * Set the value of address
+   * Set the value of Address
    */
-  public function setAddress(string $address): self
+  public function setAddress(string $Address): self
   {
-    $this->address = $address;
+    $this->Address = $Address;
 
     return $this;
   }
 
   /**
-   * Get the value of telephone
+   * Get the value of Telephone
    */
   public function getTelephone(): int
   {
-    return $this->telephone;
+    return $this->Telephone;
   }
 
   /**
-   * Set the value of telephone
+   * Set the value of Telephone
    */
-  public function setTelephone(int $telephone): self
+  public function setTelephone(int $Telephone): self
   {
-    $this->telephone = $telephone;
+    $this->Telephone = $Telephone;
 
     return $this;
   }
 
   /**
-   * Get the value of User_Role
+   * Get the value of UserRole
    */
   public function isUserRole(): bool
   {
-    return $this->User_Role;
+    return $this->UserRole;
   }
 
   /**
-   * Set the value of User_Role
+   * Set the value of UserRole
    */
-  public function setUserRole(bool $User_Role): self
+  public function setUserRole(bool $UserRole): self
   {
-    $this->User_Role = $User_Role;
+    $this->UserRole = $UserRole;
 
     return $this;
   }
 
   /**
-   * Get the value of mail
+   * Get the value of Mail
    */
   public function getMail(): string
   {
-    return $this->mail;
+    return $this->Mail;
   }
 
   /**
-   * Set the value of mail
+   * Set the value of Mail
    */
-  public function setMail(string $mail): self
+  public function setMail(string $Mail): self
   {
-    $this->mail = $mail;
+    $this->Mail = $Mail;
 
     return $this;
   }

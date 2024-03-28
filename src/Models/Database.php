@@ -9,7 +9,6 @@ final class Database
 {
     private $DB;
     private $config;
-
     public function __construct()
     {
         $this->config = __DIR__ . '/../../config.php';

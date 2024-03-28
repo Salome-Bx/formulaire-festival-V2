@@ -1,229 +1,127 @@
 <?php
+namespace src\Models;
+
+use src\Services\Hydratation;
+
 
 class Reservation
 {
-    private $_id;
-    private $_nbrReservation;
-    private $_typeRerservation;
-    private $_prixTotalReservation;
-    private $_nuit;
-    private $_prixTotalNuit;
-    private $_nbrEnfant;
-    private $_nbrCasqueEnfant;
-    private $_prixTotalCasqueEnfant;
-    private $_nbrDescenteLuge;
-    private $_prixDescenteLuge;
-    public $_prixTotal;
-    private $_idUser;
+    private int $IdReservation;
+    private int $NumberReservation;
+    private int $Children;
+    private int $QuantityHeadphone;
+    private int $QuantitySledge;
+    private int $IdUser;
 
 
-    function __construct(int $nbrReservation, string $typeRerservation, string $nuit, bool $nbrEnfant, int $nbrCasqueEnfant, int $nbrDescenteLuge, $idUser, int|string $id = "à créer")
+    use Hydratation;
 
 
+
+    /**
+     * Get the value of IdReservation
+     */
+    public function getIdReservation(): int
     {
-        $this->setId($id);
-        $this->setNbrReservation($nbrReservation);
-        $this->setTypeRerservation($typeRerservation);
-        $this->setPrixTotalReservation($typeRerservation);
-        $this->setNuit($nuit);
-        $this->setPrixTotalNuit($nuit);
-        $this->setNbrEnfant($nbrEnfant);
-        $this->setNbrCasqueEnfant($nbrCasqueEnfant);
-        $this->setPrixTotalCasqueEnfant($nbrCasqueEnfant);
-        $this->setNbrDescenteLuge($nbrDescenteLuge);
-        $this->setPrixDescenteLuge($nbrDescenteLuge);
-        $this->setIdUser($idUser);
+        return $this->IdReservation;
     }
 
+    /**
+     * Set the value of IdReservation
+     */
+    public function setIdReservation(int $IdReservation): self
+    {
+        $this->IdReservation = $IdReservation;
 
-  
-    public function getId(): int
-    {
-        return $this->_id;
-    }
-    public function setId(int|string $id): void
-    {
-        if (is_string($id) && $id === "à créer") {
-            $this->_id = $this->CreerNouvelId();
-        } else {
-            $this->_id = $id;
-        }
+        return $this;
     }
 
-
-   
-    public function getNbrReservation(): int
+    /**
+     * Get the value of NumberReservation
+     */
+    public function getNumberReservation(): int
     {
-        return $this->_nbrReservation;
-    }
-    public function setNbrReservation(int $nbrReservation): void
-    {
-        $this->_nbrReservation = $nbrReservation;
+        return $this->NumberReservation;
     }
 
-    public function getTypeRerservation(): string
+    /**
+     * Set the value of NumberReservation
+     */
+    public function setNumberReservation(int $NumberReservation): self
     {
-        return $this->_typeRerservation;
-    }
-    public function setTypeRerservation(string $typeRerservation): void
-    {
-        $this->_typeRerservation = $typeRerservation;
+        $this->NumberReservation = $NumberReservation;
+
+        return $this;
     }
 
-    public function getPrixTotalReservation(): int
+    /**
+     * Get the value of Children
+     */
+    public function getChildren(): int
     {
-        return $this->_prixTotalReservation;
+        return $this->Children;
     }
 
-    public function setPrixTotalReservation(string $typeRerservation): int
+    /**
+     * Set the value of Children
+     */
+    public function setChildren(int $Children): self
     {
-        if ($typeRerservation === '1Journee0107' || $typeRerservation === '1Journee0207' || $typeRerservation === '1Journee0307') {
-            $prix = 40;
-        } else if ($typeRerservation === '2Journees01070207' || $typeRerservation === '2Journees02070307') {
-            $prix = 70;
-        } else if ($typeRerservation === '3Journees') {
-            $prix = 100;
-        } else if ($typeRerservation === '1JourneeReduit') {
-            $prix = 25;
-        } else if ($typeRerservation === '2JourneesReduit') {
-            $prix = 50;
-        } else if ($typeRerservation === '3JourneesReduit') {
-            $prix = 65;
-        }
-        return $this->_prixTotalReservation = $prix * $this->getNbrReservation();
+        $this->Children = $Children;
+
+        return $this;
     }
 
-    public function getNuit(): string
+    /**
+     * Get the value of QuantityHeadphone
+     */
+    public function getQuantityHeadphone(): int
     {
-        return $this->_nuit;
-    }
-    public function setNuit(string $nuit): void
-    {
-        $this->_nuit = $nuit;
-    }
-
-    public function getPrixTotalNuit(): int
-    {
-        return $this->_prixTotalNuit;
+        return $this->QuantityHeadphone;
     }
 
-    public function setPrixTotalNuit(string $nuit): int
+    /**
+     * Set the value of QuantityHeadphone
+     */
+    public function setQuantityHeadphone(int $QuantityHeadphone): self
     {
-        $prix = 0;
-        $tableauNuit = str_split($nuit);
+        $this->QuantityHeadphone = $QuantityHeadphone;
 
-        foreach ($tableauNuit as $checkNuit) {
-
-            if ($checkNuit == "a" || "b" || "c" || "e" || "f" || "g") {
-                $prix += 5;
-            } else if ($checkNuit == "d" || "h") {
-                $prix += 12;
-            }
-        }
-        return $this->_prixTotalNuit = $prix;
+        return $this;
     }
 
-    public function getNbrEnfant(): bool
+    /**
+     * Get the value of QuantitySledge
+     */
+    public function getQuantitySledge(): int
     {
-        return $this->_nbrEnfant;
-    }
-    public function setNbrEnfant(bool $nbrEnfant): void
-    {
-        $this->_nbrEnfant = $nbrEnfant;
-    }
-
-    public function getNbrCasqueEnfant(): int
-    {
-        return $this->_nbrCasqueEnfant;
-    }
-    public function setNbrCasqueEnfant(int $nbrCasqueEnfant): void
-    {
-        $this->_nbrCasqueEnfant = $nbrCasqueEnfant;
+        return $this->QuantitySledge;
     }
 
-    public function getPrixTotalCasqueEnfant(): int
+    /**
+     * Set the value of QuantitySledge
+     */
+    public function setQuantitySledge(int $QuantitySledge): self
     {
-        return $this->_prixTotalCasqueEnfant;
-    }
-    public function setPrixTotalCasqueEnfant(int $nbrCasqueEnfant): void
-    {
-        $this->_prixTotalCasqueEnfant = $nbrCasqueEnfant * 2;
+        $this->QuantitySledge = $QuantitySledge;
+
+        return $this;
     }
 
-    public function getNbrDescenteLuge(): string
-    {
-        return $this->_nbrDescenteLuge;
-    }
-    public function setNbrDescenteLuge(string $nbrDescenteLuge): void
-    {
-        $this->_nbrDescenteLuge = $nbrDescenteLuge;
-    }
-
-    public function getPrixDescenteLuge(): int
-    {
-        return $this->_prixDescenteLuge;
-    }
-    public function setPrixDescenteLuge(int $nbrDescenteLuge): void
-    {
-        $this->_prixDescenteLuge = $nbrDescenteLuge * 5;
-    }
-
+    /**
+     * Get the value of IdUser
+     */
     public function getIdUser(): int
     {
-        return $this->_idUser;
-    }
-    public function setIdUser(int $idUser): void
-    {
-        $this->_idUser = $idUser;
+        return $this->IdUser;
     }
 
-
-    private function CreerNouvelId()
+    /**
+     * Set the value of IdUser
+     */
+    public function setIdUser(int $IdUser): self
     {
-        $Database = new Database("Reservation");
-
-        $reservations = $Database->getAllReservations();
-
-        
-        $IDs = [];
-
-        foreach ($reservations as $reservation) {
-            $IDs[] = $reservation->getId();
-        }
-
-        
-        $i = 1;
-        $unique = false;
-        while ($unique === false) {
-            if (in_array($i, $IDs)) {
-                $i++;
-            } else {
-                $unique = true;
-            }
-        }
-        return $i;
-    }
-
-    
-    public function calculerPrix(): int
-    {
-        $prixTotal = $this->getPrixTotalReservation() + $this->getPrixTotalNuit() + $this->getPrixTotalCasqueEnfant() + $this->getPrixTotalCasqueEnfant() + $this->getPrixDescenteLuge();
-        return $this->_prixTotal = $prixTotal;
-    }
-
-
-    public function getObjectToArray(): array
-    {
-        return [
-            "id" => $this->getId(),
-            "idUser" => $this->getIdUser(),
-            "NbrReservation" => $this->getNbrReservation(),
-            "TypeRerservation" => $this->getTypeRerservation(),
-            "Nuit" => $this->getNuit(),
-            "NbrEnfant" => $this->getNbrEnfant(),
-            "NbrCasqueEnfant" => $this->getNbrCasqueEnfant(),
-            "NbrDescenteLuge" => $this->getNbrDescenteLuge(),
-            // "PrixTotal" => $this->calculerPrix(),
-        ];
+        $this->IdUser = $IdUser;
+        return $this;
     }
 }
