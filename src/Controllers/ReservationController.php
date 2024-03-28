@@ -2,8 +2,9 @@
 
 namespace src\Controllers;
 
-
+use Reservation;
 use src\Services\Reponse;
+use src\Repository\ReservationRepository;
 
 class ReservationController
 {
@@ -16,13 +17,13 @@ class ReservationController
         $this->ReservationRepository = new ReservationRepository;
     }
 
-    public function index()
+    public function index($Id_User)
     {
         $Reservation = $this->ReservationRepository->getAllReservation();
-        $this->render("Dashboard", ['section' => 'Reservation', 'new' => $Reservation]);
+        $this->render("Dashboard", ['section' => 'Reservation', 'action' => '']);
     }
 
-    public function show($id)
+    public function details($id)
     {
         $Reservation = $this->ReservationRepository->getThisReservationById($id);
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'details']);
@@ -32,6 +33,11 @@ class ReservationController
     {
         $Reservation = $this->ReservationRepository->getThisReservationById($id);
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'edit']);
+    }
+    public function show($id)
+    {
+        $Reservation = $this->ReservationRepository->getThisReservationById($id);
+        $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'show']);
     }
 
     public function new()
@@ -49,42 +55,32 @@ class ReservationController
             }
         }
         $Reservation = new Reservation($data);
-        if (isset($data[]) && !empty($data[])) {
+        if (isset($data[$Reservation]) && !empty($data[$Reservation])) {
             $Reservation->setIdCategories($data[]);
         } else {
             $Reservation->setIdCategories([]);
         }
 
         if (
-            !empty($Reservation->getNom()) &&
-            !empty($Reservation->getUrlAffiche()) &&
-            !empty($Reservation->getLienTrailer()) &&
-            !empty($Reservation->getResume()) &&
-            !empty($Reservation->getDuree()) &&
-            !empty($Reservation->getDateSortie()) &&
-            !empty($Reservation->getIdClassification())
+            !empty($Reservation->???()) &&
+            !empty($Reservation->???()) &&
+            !empty($Reservation->???()) &&
+            !empty($Reservation->???()) &&
+            !empty($Reservation->???()) &&
+            !empty($Reservation->???()) &&
+            !empty($Reservation->???())
         ) {
 
             if ($id !== null) {
-                $film->setId($id);
-                $this->ReservationRepository->updateThisFilm($film);
-
-                $this->ReservationRepository->removeFilmToCategories($film);
-                $this->ReservationRepository->addFilmToCategories($film);
-            } else {
-                $film = $this->ReservationRepository->CreateThisFilm($film);
-                $this->ReservationRepository->addFilmToCategories($film);
+                $Reservation->setId($id);
+                $this->ReservationRepository->???($Reservation);
             }
-            header('location: /dashboard/films/details/' . $film->getId());
+            
+            header('location: /dashboard/Reservation/details/' . $Reservation->getId());
             die;
         } else {
-            $categories = $this->CategoryRepo->getAllCategories();
-            $classifications = $this->ClassificationRepo->getAllClassifications();
             if ($id !== null) {
-                $this->render('Dashboard', ['section' => 'films', 'action' => 'edit', 'film' => $film, 'categories' => $categories, 'classifications' => $classifications, 'error' => 'Tous les champs sont requis.']);
-                die;
-            } else {
-                $this->render('Dashboard', ['section' => 'films', 'action' => 'new', 'film' => $film, 'categories' => $categories, 'classifications' => $classifications, 'error' => 'Tous les champs sont requis.']);
+                $this->render('Dashboard', ['section' => 'Reservation', 'action' => '']);
                 die;
             }
         }
@@ -92,8 +88,8 @@ class ReservationController
 
     public function delete($id)
     {
-        $this->ReservationRepository->deleteThisFilm($id);
-        $films = $this->ReservationRepository->getAllFilms();
-        $this->render("Dashboard", ['section' => 'films', 'films' => $films]);
+        $this->ReservationRepository->deleteThisReservation($id);
+        $Reservation = $this->ReservationRepository->getAllReservation();
+        $this->render("Dashboard", ['section' => 'Reservation', 'Reservation' => $Reservation]);
     }
 }
