@@ -25,9 +25,6 @@ class UserController
         $this->ReservationRepo = new ReservationRepository();
     }
 
-
-
-
     public function register($data, $id = null)
     {
         foreach ($data as $key => $value) {

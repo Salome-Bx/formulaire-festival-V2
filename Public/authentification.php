@@ -1,14 +1,19 @@
 <?php
+
+use src\Models\Database;
+
 session_start();
 require_once "./config.php";
 require_once "./classes/User.php";
 require_once "./classes/Database.php";
+require_once "../../formulaire-festival-V2/erreur.php";
 
-$Database = new Database("User");
+$Database = new Database();
 
 $mailAdmin = htmlspecialchars("admin@admin.com");
 $motDePasseAdmin = password_hash("Jesuisadmin", PASSWORD_DEFAULT);
 // Personne possédant un compte
+
 
 
 if (isset($_POST['emailConnexion']) && isset($_POST['motDePasseConnexion']) && !empty($_POST['emailConnexion']) && !empty($_POST['motDePasseConnexion'])) {
@@ -24,9 +29,10 @@ if (isset($_POST['emailConnexion']) && isset($_POST['motDePasseConnexion']) && !
                 die;
             } else {
                 
-                header('location:../connexion.php?erreur=' . ERREUR_CONNEXION);
+                header('location:../connexion.php?erreur=' . ERREUR_DE_CONNEXION);
             }
         }
+
         $userMailConnexion = $Database->getThisUtilisateurByEmail($mail);
         if ($userMailConnexion) {
            
@@ -37,14 +43,14 @@ if (isset($_POST['emailConnexion']) && isset($_POST['motDePasseConnexion']) && !
                     header('location:../pageUser.php');
                 }
             } else {
-               
+
                 header('location:../connexion.php?erreur=' . ERREUR_CONNEXION);
             }
         } else {
            header('location:../connexion.php?erreur=' . ERREUR_CONNEXION);
         }
     } else {
-       
+
         header('location:../connexion.php?erreur=' . ERREUR_CHAMP_VIDE);
     }
 }
