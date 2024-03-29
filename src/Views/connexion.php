@@ -16,7 +16,7 @@ include_once __DIR__ . '/includes/header.php';  ?>
 <section class="connexion">
     <h2>Connexion</h2>
 
-    <form action="./src/authentification.php" id="connexion" method="POST">
+    <form action="connexion" id="connexion" method="POST">
         <label for="emailConnexion">Email :</label>
         <input type="email" name="emailConnexion" id="emailConnexion">
         <label for="motDePasseConnexion">Mot de passe :</label>

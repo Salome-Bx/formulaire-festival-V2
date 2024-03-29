@@ -51,10 +51,24 @@ class UserController
     }
 
     //! il faut faire une fonction pour récuperer l'utilisateur
-    public function getThisUser($Email, $Password)
+    public function getThisUser($email, $password)
     {
-    }
-    //! fontion pour delete un utilisateur 
 
-    //! fonction pour modifier un utilisateur 
+        $User = $this->UserRepo->getThisUser($email, $password);
+        $this->render("pageUser", ['section' => '', 'user' => $User]);
+    }
+
+    //! fontion pour delete un utilisateur 
+    public function deleteUser($id)
+    {
+        $this->UserRepo->deleteThisUser($id);
+        $this->render("", ['' => '', '' => $User]);
+    }
+
+    //! fonction pour modifier un utilisateur
+    public function editThisUser($id)
+    {
+        $this->UserRepo->updateThisUser($id);
+        $this->render("", ['' => '', '' => $User]);
+    }
 }

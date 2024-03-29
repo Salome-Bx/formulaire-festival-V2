@@ -136,7 +136,3 @@
     </div>
 </form>
 <?php include_once __DIR__ . '/includes/footer.php'; ?>
-
-
-<script src="../../Public/assets/script.js"></script>
-<script src="../../Public/assets/traitement.js"></script>

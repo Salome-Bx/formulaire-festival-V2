@@ -31,7 +31,6 @@
 </form>
 </body>
 <?php include __DIR__ . '/includes/footer.php'; ?>
-<script src="./script.js"></script>
-<script src="./traitement.js"></script>
+
 
 </html>

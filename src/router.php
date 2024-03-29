@@ -11,7 +11,6 @@ $HomeController = new HomeController;
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
 
-var_dump($_SERVER);
 
 switch ($route) {
   case HOME_URL:
@@ -26,7 +25,6 @@ switch ($route) {
   case str_contains($route, "inscription"):
     if ($methode === "POST") {
       $data = $_POST;
-      var_dump($data);
       $UserController->registerUser($data);
     } else {
       $HomeController->index();
@@ -40,7 +38,7 @@ switch ($route) {
       die;
     } else {
       if ($methode === 'POST') {
-        $HomeController->auth($_POST['password']);
+        $UserController->getThisUser($_POST['password']);
       } else {
         $HomeController->index();
       }
