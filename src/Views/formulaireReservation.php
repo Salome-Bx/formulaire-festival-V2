@@ -1,7 +1,18 @@
-<?php require_once __DIR__ . "/includes/header.php";
+<?php
+
+use src\Repositories\ReservationRepository;
+
+require_once __DIR__ . "/includes/header.php";
+
+
+$reservationRepository = new ReservationRepository;
+
+$reservationRepository->$this->getEventFromDB();
+var_dump($reservationRepository);
+
 ?>
 
-<form action="ConfirmReservation" id="reservation" method="POST">
+<form action="formulaireReservation" id="reservation" method="POST">
     <div id="reservation" class="blocFormulaire">
         <h2>Réservation</h2>
         <h3>Nombre de réservation(s) :</h3>
@@ -113,7 +124,7 @@
 
 
         <!-- Si oui, afficher : -->
-        <section class="casqueEnfant tarifHidden">
+        <section class="casqueEnfant ">
             <h4>Voulez-vous louer un casque antibruit pour enfants* (2€ / casque) ?</h4>
             <label for="nombreCasquesEnfants">Nombre de casques souhaités :</label>
             <input type="number" name="nombreCasquesEnfants" id="nombreCasquesEnfants" min="0">

@@ -11,10 +11,7 @@ class UserController
     private $UserRepo;
     private $ReservationRepo;
 
-
     use Reponse;
-
-
 
     public function __construct()
     {

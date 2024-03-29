@@ -43,12 +43,13 @@ class ReservationController
 
     public function new()
     {
-        $Reservation = $this->ReservationRepository->putReservationInDB();
+        $this->ReservationRepository->putReservationInDB();
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'new']);
     }
 
     public function save($data, $id = null)
     {
+        var_dump($data);
         foreach ($data as $key => $value) {
             // On enlève les catégories du formatage, car c'est un tableau
             if (!is_array($value)) {
@@ -56,29 +57,11 @@ class ReservationController
             }
         }
 
-        $Reservation = $this->Resa;
-        if (
-            !empty($Reservation->getIdReservation()) &&
-            !empty($Reservation->getNumberReservation()) &&
-            !empty($Reservation->getChildren()) &&
-            !empty($Reservation->getQuantityHeadphone()) &&
-            !empty($Reservation->getQuantitySledge()) &&
-            !empty($Reservation->getIdUser())
-        ) {
-
-            if ($id !== null) {
-                $Reservation->setIdUser($id);
-                $this->ReservationRepository->putReservationInDB($Reservation);
-            }
-
+        $Reservation = $this->Resa;               
+        $this->ReservationRepository->putReservationInDB($data);
             header('location: /dashboard/Reservation/details/' . $Reservation->getIdUser());
             die;
-        } else {
-            if ($id !== null) {
-                $this->render('Dashboard', ['section' => 'Reservation', 'action' => '']);
-                die;
-            }
-        }
+        
     }
 
     public function delete($id)

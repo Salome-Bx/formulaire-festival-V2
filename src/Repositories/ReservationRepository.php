@@ -24,7 +24,6 @@ class ReservationRepository
     {
         $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User)";
 
-
         $statement = $this->DB->getDB()->prepare($sql);
         $reservation = $this->resa;
         $statement->execute([
@@ -90,5 +89,22 @@ class ReservationRepository
             ":Id_User" => $Id_User
         ]);
         return $statement->rowCount() > 0;
+    }
+
+
+    function getEventFromDB() : array {
+        $sql = "SELECT * FROM festival_event";
+
+        $statement = $this->DB->getDB()->prepare($sql);
+        $statement->execute();
+        return $statement;
+    }
+    function getNightFromDB(): array
+    {
+        $sql = "SELECT * FROM festival_night";
+
+        $statement = $this->DB->getDB()->prepare($sql);
+        $statement->execute();
+        return $statement;
     }
 }
