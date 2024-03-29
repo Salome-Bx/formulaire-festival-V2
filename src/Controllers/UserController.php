@@ -31,23 +31,30 @@ class UserController
                 $data[$key] = htmlspecialchars($value);
             }
         }
-
-        //!verification des password email etc... puis creation du nouvel utilisateur 
-        $data = [
-            'LastName' => $data['nom'],
-            'FirstName' => $data['prenom'],
-            'Password' => $data['password'],
-            'Address' => $data['adressePostale'],
-            'Telephone' => $data['telephone'],
-            'UserRole' => 0,
-            'Mail' => $data['email']
-        ];
-        var_dump($data);
-        $user = new User($data);
-
-
-        if (isset($user) && !empty($user)) {
-            $this->UserRepo->saveUser($user);
+        if ($data['password'] === $data['passwordBis']) {
+            $data = [
+                'LastName' => $data['nom'],
+                'FirstName' => $data['prenom'],
+                'Password' => $data['password'],
+                'Address' => $data['adressePostale'],
+                'Telephone' => $data['telephone'],
+                'UserRole' => 0,
+                'Mail' => $data['email']
+            ];
+            $user = new User($data);
+            if (isset($user) && !empty($user)) {
+                $this->UserRepo->saveUser($user);
+            }
+        } else {
+            var_dump('Erreur : les mots de passe ne sont pas identique.');
         }
     }
+
+    //! il faut faire une fonction pour récuperer l'utilisateur
+    public function getThisUser($Email, $Password)
+    {
+    }
+    //! fontion pour delete un utilisateur 
+
+    //! fonction pour modifier un utilisateur 
 }
