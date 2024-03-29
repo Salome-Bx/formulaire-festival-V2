@@ -8,7 +8,7 @@
 #------------------------------------------------------------
 
 CREATE TABLE festival_USER(
-        Id_User   Int NOT NULL ,
+        Id_User   Int  Auto_increment NOT NULL ,
         lastName  Varchar (50) NOT NULL ,
         firstName Varchar (50) NOT NULL ,
         password  Varchar (250) NOT NULL ,
