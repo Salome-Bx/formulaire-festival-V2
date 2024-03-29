@@ -1,4 +1,3 @@
-
 !<form action="./src/traitement.php" id="reservation" method="POST">
     <div id="reservation" class="blocFormulaire">
 
@@ -131,9 +130,9 @@
         <p class="bouton boutonOptions" onclick="suivant2(blocOptions, blocCoordonnees)">Suivant</p>
         <p class="bouton" onclick="precedent(blocOptions, blocReservation)">Précédent</p>
 
+        <button type="submit">Je valide ma réservation</button>
     </div>
     <script src="../../Public/assets/script.js"></script>
     <script src="../../Public/assets/traitement.js"></script>
 
 </form>
-
