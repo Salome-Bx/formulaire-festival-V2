@@ -23,6 +23,13 @@ class UserController
         // $this->ReservationRepo = new ReservationRepository();
     }
 
+    public function index()
+    {
+        $User = unserialize($_SESSION['user']);
+
+        $this->render('pageUser', ['User' => $User]);
+    }
+
     public function registerUser($data, $id = null)
     {
         foreach ($data as $key => $value) {
@@ -51,24 +58,35 @@ class UserController
     }
 
     //! il faut faire une fonction pour récuperer l'utilisateur
-    public function getThisUser($email, $password)
+    public function authication($email, $password)
     {
 
         $User = $this->UserRepo->getThisUser($email, $password);
-        $this->render("pageUser", ['section' => '', 'user' => $User]);
+        if ($password === $password) {
+            $_SESSION['connecté'] = TRUE;
+            $_SESSION['user'] = serialize($User);
+            header('location: ' . HOME_URL . 'pageUser');
+            die();
+        } else {
+            header('location: ' . HOME_URL . '?erreur=connexion');
+        }
+        // $this->render("pageUser", ['section' => '', 'user' => $User]);
+        die;
     }
 
     //! fontion pour delete un utilisateur 
     public function deleteUser($id)
     {
-        $this->UserRepo->deleteThisUser($id);
-        $this->render("", ['' => '', '' => $User]);
+        $User = $this->UserRepo->deleteThisUser($id);
+        // $this->render("", ['' => '', '' => $User]);
+        header('location: ' . HOME_URL . 'connexion');
     }
 
     //! fonction pour modifier un utilisateur
     public function editThisUser($id)
     {
-        $this->UserRepo->updateThisUser($id);
-        $this->render("", ['' => '', '' => $User]);
+        $User = $this->UserRepo->updateThisUser($id);
+        // $this->render("", ['' => '', '' => $User]);
+        header('location: ' . HOME_URL . 'editUser');
     }
 }
