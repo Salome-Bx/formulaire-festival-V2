@@ -44,7 +44,8 @@ CREATE TABLE festival_Reservation(
 
 CREATE TABLE festival_Event(
         Id_Date       Int  Auto_increment  NOT NULL ,
-        Date          Date NOT NULL ,
+        Date_Start    Date NOT NULL ,
+        Date_End      Date NOT NULL ,
         Price         Decimal (50) NOT NULL ,
         Reduced_Price Int NOT NULL ,
         Name          Varchar (255) NOT NULL
