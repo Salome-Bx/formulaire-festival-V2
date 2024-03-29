@@ -1,4 +1,5 @@
-<form action="./src/traitement.php" id="reservation" method="POST">
+
+!<form action="./src/traitement.php" id="reservation" method="POST">
     <div id="reservation" class="blocFormulaire">
 
         <h2>Réservation</h2>
@@ -135,3 +136,4 @@
     <script src="../../Public/assets/traitement.js"></script>
 
 </form>
+

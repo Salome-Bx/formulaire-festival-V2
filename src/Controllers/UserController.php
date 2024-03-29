@@ -3,8 +3,6 @@
 namespace src\Controllers;
 
 use src\Models\User;
-use src\Repositories\ReservationRepository;
-use src\Repositories\Reservation;
 use src\Repositories\UserRepository;
 use src\Services\Reponse;
 
@@ -22,7 +20,7 @@ class UserController
     {
         // Instanciez les 3 propriétés avec les repositories concernés.
         $this->UserRepo = new UserRepository();
-        $this->ReservationRepo = new ReservationRepository();
+        // $this->ReservationRepo = new ReservationRepository();
     }
 
     public function registerUser($data, $id = null)
@@ -33,11 +31,30 @@ class UserController
                 $data[$key] = htmlspecialchars($value);
             }
         }
-        $user = new User($data);
-
-
-        if (isset($data['Id_User']) && !empty($data['Id_User'])) {
-            $this->UserRepo->saveUser($user['Id_User']);
+        if ($data['password'] === $data['passwordBis']) {
+            $data = [
+                'LastName' => $data['nom'],
+                'FirstName' => $data['prenom'],
+                'Password' => $data['password'],
+                'Address' => $data['adressePostale'],
+                'Telephone' => $data['telephone'],
+                'UserRole' => 0,
+                'Mail' => $data['email']
+            ];
+            $user = new User($data);
+            if (isset($user) && !empty($user)) {
+                $this->UserRepo->saveUser($user);
+            }
+        } else {
+            var_dump('Erreur : les mots de passe ne sont pas identique.');
         }
     }
+
+    //! il faut faire une fonction pour récuperer l'utilisateur
+    public function getThisUser($Email, $Password)
+    {
+    }
+    //! fontion pour delete un utilisateur 
+
+    //! fonction pour modifier un utilisateur 
 }

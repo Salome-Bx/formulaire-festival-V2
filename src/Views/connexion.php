@@ -22,12 +22,12 @@ if (isset($_SESSION['connecté'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/style.css">
-    <link rel="stylesheet" href="./assets/responsive.css">
+    <link rel="stylesheet" href="../../Public/assets/script.js">
+    <link rel="stylesheet" href="../../Public/assets/responsive.css">
 </head>
 
 <body>
-    <?php include_once './includes/header.php';  ?>
+    <?php include_once __DIR__ . '/includes/header.php';  ?>
     <!------------------- BODY ------------------->
     <section class="connexion">
         <h2>Connexion</h2>
@@ -65,7 +65,7 @@ if (isset($_SESSION['connecté'])) {
         </form>
 
     </section>
-    <?php include_once './includes/footer.php';  ?>
+    <?php include_once __DIR__ . '/includes/footer.php';  ?>
 </body>
 
 </html>

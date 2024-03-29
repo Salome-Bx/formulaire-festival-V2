@@ -41,7 +41,7 @@ class UserRepository
 
     public function userExist(User $user)
     {
-        $sql = "SELECT * FROM festival_user WHERE mail = :mail";
+        $sql = "SELECT * FROM " . PREFIXE . "user WHERE mail = :mail";
         $mail = $user->getMail();
         $statement = $this->DB->prepare($sql);
         $statement->execute([':mail' => $mail]);
