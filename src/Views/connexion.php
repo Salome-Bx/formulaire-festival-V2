@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 if (isset($_SESSION['connecté'])) {
     header('location:pageUser.php');
@@ -52,4 +52,3 @@ include_once __DIR__ . '/includes/header.php';  ?>
 
 </section>
 <?php include_once __DIR__ . '/includes/footer.php'; ?>
-
