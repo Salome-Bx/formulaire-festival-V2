@@ -28,7 +28,7 @@
             <label for=" prenom">Prénom :</label>
             <input type="text" name="prenom" id="prenom" value="Pierre">
             <label for="email">Email :</label>
-            <input type="email" name="email" id="email" value="email@gmail.com">
+            <input type="email" name="email" id="email" value="plazdzaop@gmail.com">
             <label for="telephone">Téléphone :</label>
             <input type=" text" name="telephone" id="telephone" value="0612345678">
             <label for="adressePostale">Adresse Postale :</label>
