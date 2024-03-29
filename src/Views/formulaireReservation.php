@@ -22,7 +22,7 @@
         <!-- Si case cochée, afficher le choix du jour -->
         <section id="pass1jourDate" class="tarifHidden">
             <input type="checkbox" name="choixJour1" id="choixJour1">
-            <label for="choixJour1">Pass pour la journée du 01/07</label>
+            <label for="choixJour1"></label>
             <input type="checkbox" name="choixJour2" id="choixJour2">
             <label for="choixJour2">Pass pour la journée du 02/07</label>
             <input type="checkbox" name="choixJour3" id="choixJour3">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-full bg-gray-100">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="<?php HOME_URL ?>assets/responsive.css">
 </head>
 
-<body>
+<body class="h-full">
 
 
     <?php ?>
