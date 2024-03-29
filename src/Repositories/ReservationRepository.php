@@ -92,19 +92,22 @@ class ReservationRepository
     }
 
 
-    function getEventFromDB() : array {
-        $sql = "SELECT * FROM festival_event";
+    function getEventFromDB()
+    {
 
-        $statement = $this->DB->getDB()->prepare($sql);
+        $sql = "SELECT * FROM `festival_event`";
+
+        $statement = $this->DB->prepare($sql);
         $statement->execute();
-        return $statement;
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-    function getNightFromDB(): array
+
+    function getNightFromDB()
     {
         $sql = "SELECT * FROM festival_night";
 
-        $statement = $this->DB->getDB()->prepare($sql);
+        $statement = $this->DB->prepare($sql);
         $statement->execute();
-        return $statement;
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
