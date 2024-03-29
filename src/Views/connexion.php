@@ -18,9 +18,9 @@ include_once __DIR__ . '/includes/header.php';  ?>
 
     <form action="connexion" id="connexion" method="POST">
         <label for="emailConnexion">Email :</label>
-        <input type="email" name="emailConnexion" id="emailConnexion">
+        <input type="email" name="emailConnexion" id="emailConnexion" value="emazszjhihhl3@gmail.com">
         <label for="motDePasseConnexion">Mot de passe :</label>
-        <input type="password" name="motDePasseConnexion" id="motDePasseConnexion">
+        <input type="password" name="motDePasseConnexion" id="motDePasseConnexion" value="azdazdazd">
         <input type="submit" class="bouton" value="Connexion">
         <?php
         if (!empty($_GET['erreur'])) {

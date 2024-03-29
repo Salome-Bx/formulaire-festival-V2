@@ -1,3 +1,4 @@
+<?php ?>
 <!DOCTYPE html>
 <html lang="fr" class="h-full bg-gray-100">
 
@@ -12,10 +13,12 @@
     <link rel="stylesheet" href="<?php HOME_URL ?>assets/responsive.css">
 </head>
 
+
 <body class="h-full">
 
 
     <?php ?>
+
     <header class="header">
         <a href="./index.php" class="boutonConnexion">Formulaire</a>
         <h1>Vercors Musique Festival</h1>

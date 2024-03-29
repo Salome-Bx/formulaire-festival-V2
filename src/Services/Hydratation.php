@@ -5,7 +5,8 @@ namespace src\Services;
 trait Hydratation
 {
 
-  public function __construct(array $data = array()) {
+  public function __construct(array $data = array())
+  {
     $this->hydrate($data);
   }
 
@@ -36,7 +37,7 @@ trait Hydratation
       $nomMethode = $methode->getName();
       if (strpos($nomMethode, 'get') === 0) {
         // Vérifie si le nom de la méthode commence par 'get'
-        $ObjToArray[$nomMethode] = $this->$nomMethode();
+        $ObjToArray[ltrim($nomMethode, 'get')] = $this->$nomMethode();
       }
     }
     return $ObjToArray;

@@ -32,9 +32,9 @@ class HomeController
     public function auth(string $password): void
     {
 
-        if ($password === 'admin') {
+        if ($password === $password) {
             $_SESSION['connecté'] = TRUE;
-            header('location: ' . HOME_URL . 'dashboard');
+            header('location: ' . HOME_URL . 'pageUser');
             die();
         } else {
             header('location: ' . HOME_URL . '?erreur=connexion');

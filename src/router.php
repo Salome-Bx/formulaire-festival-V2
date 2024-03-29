@@ -15,31 +15,32 @@ $methode = $_SERVER['REQUEST_METHOD'];
 switch ($route) {
   case HOME_URL:
     if (isset($_SESSION['connecté'])) {
-      // header('location: ' . HOME_URL . 'dashboard');
+      header('location: ' . HOME_URL . 'pageUser');
       die;
     } else {
       $HomeController->index();
     }
     break;
-  case HOME_URL:
+
   case str_contains($route, "inscription"):
     if ($methode === "POST") {
       $data = $_POST;
       $UserController->registerUser($data);
     } else {
-      $HomeController->index();
+      header('location: ' . HOME_URL . 'inscriptionUser.php');
     }
 
     break;
 
   case HOME_URL . 'connexion':
     if (isset($_SESSION['connecté'])) {
-      // header('location: /dashboard');
+      header('location: ' . HOME_URL . 'pageUser');
       die;
     } else {
       if ($methode === 'POST') {
 
-        $UserController->getThisUser($_POST['password']);
+        $UserController->authication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
+
       } else {
         $HomeController->connexion();
       }
@@ -54,82 +55,74 @@ switch ($route) {
     $HomeController->formulaireResa();
     break;
 
-  case str_contains($route, "dashboard"):
-    if (isset($_SESSION["connecté"])) {
-      // On a ici toutes les routes qu'on a à partir du dashboard
+  case HOME_URL . "pageUser":
+    // On a ici toutes les routes qu'on a à partir de pageUser
+    switch ($route) {
+      case str_contains($route, "reservation"):
+        // On a ici toutes les routes qu'on peut faire
+        switch ($route) {
+          case str_contains($route, "new"):
+            if ($methode === "POST") {
+              $data = $_POST;
+              $ReservationController->save($data);
+            } else {
+              $ReservationController->new();
+            }
+            break;
 
-      switch ($route) {
-        case str_contains($route, "reservation"):
-          // On a ici toutes les routes qu'on peut faire
-          switch ($route) {
-            case str_contains($route, "new"):
-              if ($methode === "POST") {
-                $data = $_POST;
-                $ReservationController->save($data);
-              } else {
-                $ReservationController->new();
-              }
-              break;
+          case str_contains($route, 'details'):
+            $IdUser = explode('/', $route);
+            $IdUser = end($IdUser);
+            $ReservationController->show($IdUser);
+            break;
 
-            case str_contains($route, 'details'):
-              $IdUser = explode('/', $route);
-              $IdUser = end($IdUser);
-              $ReservationController->show($IdUser);
-              break;
+          case str_contains($route, "edit"):
+            $IdUser = explode('/', $route);
+            $IdUser = end($IdUser);
+            $ReservationController->edit($IdUser);
+            break;
 
-            case str_contains($route, "edit"):
-              $IdUser = explode('/', $route);
-              $IdUser = end($IdUser);
-              $ReservationController->edit($IdUser);
-              break;
+          case str_contains($route, "delete"):
+            $IdUser = explode('/', $route);
+            $IdUser = end($IdUser);
+            $ReservationController->delete($IdUser);
+            break;
 
-            case str_contains($route, "delete"):
-              $IdUser = explode('/', $route);
-              $IdUser = end($IdUser);
-              $ReservationController->delete($IdUser);
-              break;
+          default:
+            // par défaut on voit la liste des films.
+            $ReservationController->index($IdUser);
+            break;
+        }
 
-            default:
-              // par défaut on voit la liste des films.
-              $ReservationController->index($IdUser);
-              break;
-          }
+        break;
 
-          break;
-
-        default:
-          // par défaut une fois connecté, on voit la liste des films.
-          $ReservationController->index($IdUser);
-          break;
-      }
-
-      switch ($route) {
-        case str_contains($route, "edit"):
-          $IdUser = explode('/', $route);
-          $IdUser = end($IdUser);
-          // $UserController->edit($IdUser);
-          break;
-
-        case str_contains($route, "delete"):
-          $IdUser = explode('/', $route);
-          $IdUser = end($IdUser);
-          // $UserController->delete($IdUser);
-          break;
-
-        case str_contains($route, 'deconnexion'):
-          // $UserController->index();
-          break;
-
-        default:
-          $HomeController->quit();
-          break;
-      }
-
-      break;
-    } else {
-      // header("location: " . HOME_URL);
-      die;
+      default:
+        $UserController->index();
+        break;
     }
+
+    switch ($route) {
+      case str_contains($route, "edit"):
+        $IdUser = explode('/', $route);
+        $IdUser = end($IdUser);
+        // $UserController->edit($IdUser);
+        break;
+
+      case str_contains($route, "delete"):
+        $IdUser = explode('/', $route);
+        $IdUser = end($IdUser);
+        // $UserController->delete($IdUser);
+        break;
+
+      case str_contains($route, 'deconnexion'):
+        $HomeController->quit();
+        break;
+      default:
+        break;
+    }
+
+    break;
+
     break;
   default:
     $HomeController->page404();
