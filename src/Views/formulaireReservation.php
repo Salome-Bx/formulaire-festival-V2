@@ -1,6 +1,8 @@
-!<form action="./src/traitement.php" id="reservation" method="POST">
-    <div id="reservation" class="blocFormulaire">
+<?php require_once __DIR__ . "/includes/header.php";
+?>
 
+<form action="ConfirmReservation" id="reservation" method="POST">
+    <div id="reservation" class="blocFormulaire">
         <h2>Réservation</h2>
         <h3>Nombre de réservation(s) :</h3>
         <input type="number" name="nombrePlaces" id="NombrePlaces" min="1" required>
@@ -132,7 +134,11 @@
 
         <button type="submit">Je valide ma réservation</button>
     </div>
-    <script src="../../Public/assets/script.js"></script>
-    <script src="../../Public/assets/traitement.js"></script>
+    <!-- <script src="<?php HOME_URL ?>assets/script.js"></script> -->
+    <!-- <script src="<?php HOME_URL ?>assets/traitement.js"></script> -->
 
 </form>
+
+
+<?php require_once __DIR__ . "/includes/footer.php";
+?>

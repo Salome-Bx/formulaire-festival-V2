@@ -3,13 +3,13 @@
 namespace src\Repositories;
 
 use PDO;
-use src\Models\Reservation;
 use src\Models\Database;
+use src\Models\Reservation;
 
 class ReservationRepository
 {
-    private Database $DB;
-    private Reservation $resa;
+    private $DB;
+    private $resa;
     public function __construct()
     {
 

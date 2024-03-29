@@ -7,6 +7,7 @@ use src\Controllers\UserController;
 // $ReservationController = new ReservationController;
 $UserController = new UserController;
 $HomeController = new HomeController;
+$ReservationController = new ReservationController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
@@ -21,16 +22,17 @@ switch ($route) {
       $HomeController->index();
     }
     break;
-  case HOME_URL:
-  case str_contains($route, "inscription"):
+
+  case str_contains($route, "formulaireReservation"):
     if ($methode === "POST") {
       $data = $_POST;
       $UserController->registerUser($data);
     } else {
-      $HomeController->index();
+      header('location:formulaireReservation');
+      // $HomeController->index();
     }
-
     break;
+
 
   case HOME_URL . 'connexion':
     if (isset($_SESSION['connecté'])) {
@@ -49,8 +51,17 @@ switch ($route) {
     $HomeController->quit();
     break;
 
-  case HOME_URL . 'formulaireReservation':
-    $HomeController->formulaireResa();
+  case str_contains($route, "ConfirmReservation"):
+    if ($methode === "POST") {
+      $data = $_POST;
+      $ReservationController->save($data);
+    } else {
+      $ReservationController->index(
+        $jesaispascestjustepourenleverlerreurcamestresssinon
+        //! CEST QUOI LE PARAMETRE A METTRE JE SUIS CUL NU A LAIDE !\\
+      );
+    }
+
     break;
 
   case str_contains($route, "dashboard"):
