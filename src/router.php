@@ -38,7 +38,7 @@ switch ($route) {
       die;
     } else {
       if ($methode === 'POST') {
-        $HomeController->auth($_POST['password']);
+        $UserController->getThisUser($_POST['password']);
       } else {
         $HomeController->connexion();
       }
