@@ -38,7 +38,9 @@ switch ($route) {
       die;
     } else {
       if ($methode === 'POST') {
+
         $UserController->authication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
+
       } else {
         $HomeController->connexion();
       }

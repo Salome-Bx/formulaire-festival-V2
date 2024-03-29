@@ -4,7 +4,6 @@ use src\Models\Database;
 use src\Repository\UserRepository;
 use src\Repository\ReservationRepository;
 
-session_start();
 
 if (!isset($_SESSION['connectéUser'])) {
     header('location: connexion.php');

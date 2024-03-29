@@ -1,9 +1,6 @@
-<?php include __DIR__ . '/includes/header.php'; ?>
 
-<h1>zrgzqhrgqr</h1>
+<?php
+include_once __DIR__ . '/includes/header.php';
+include_once __DIR__ . '/includes/headerUser.php';
+include_once __DIR__ . '/includes/footer.php';
 
-<?php echo $User->getLastName(); ?>
-
-
-
-<?php include __DIR__ . '/includes/footer.php'; ?>
