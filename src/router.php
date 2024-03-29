@@ -11,7 +11,6 @@ $HomeController = new HomeController;
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
 
-var_dump($_SERVER);
 
 switch ($route) {
   case HOME_URL:
@@ -26,7 +25,6 @@ switch ($route) {
   case str_contains($route, "inscription"):
     if ($methode === "POST") {
       $data = $_POST;
-      var_dump($data);
       $UserController->registerUser($data);
     } else {
       $HomeController->index();
@@ -42,13 +40,17 @@ switch ($route) {
       if ($methode === 'POST') {
         $HomeController->auth($_POST['password']);
       } else {
-        $HomeController->index();
+        $HomeController->connexion();
       }
     }
     break;
 
   case HOME_URL . 'deconnexion':
     $HomeController->quit();
+    break;
+
+  case HOME_URL . 'formulaireReservation':
+    $HomeController->formulaireResa();
     break;
 
   case str_contains($route, "dashboard"):
