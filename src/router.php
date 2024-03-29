@@ -5,7 +5,7 @@ use src\Controllers\ReservationController;
 use src\Controllers\UserController;
 
 // $ReservationController = new ReservationController;
-// $UserController = new UserController;
+$UserController = new UserController;
 $HomeController = new HomeController;
 
 $route = $_SERVER['REDIRECT_URL'];
@@ -21,6 +21,17 @@ switch ($route) {
     } else {
       $HomeController->index();
     }
+    break;
+  case HOME_URL:
+  case str_contains($route, "inscription"):
+    if ($methode === "POST") {
+      $data = $_POST;
+      var_dump($data);
+      $UserController->registerUser($data);
+    } else {
+      $HomeController->index();
+    }
+
     break;
 
   case HOME_URL . 'connexion':
