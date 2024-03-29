@@ -32,12 +32,14 @@ include_once __DIR__ . '/includes/header.php';  ?>
                 <div class="messageechec">
                     Le mail ou le mot de passe est incorrect.
                 </div>
+
             <?php
             } else if ($_GET['erreur'] == 7) { ?>
                 <div class="messageechec">
                     Le mail incorrect.
                 </div>
             <?php
+
             } else if ($_GET['erreur'] == 8) { ?>
                 <div class="messageechec">
                     MDP incorrect.
@@ -50,3 +52,4 @@ include_once __DIR__ . '/includes/header.php';  ?>
 
 </section>
 <?php include_once __DIR__ . '/includes/footer.php'; ?>
+

@@ -20,6 +20,15 @@ class HomeController
         $this->render("inscriptionUser", ["erreur" => $erreur]);
     }
 
+    public function connexion()
+    {
+        $this->render("connexion", ["erreur" => '']);
+    }
+
+    public function formulaireResa()
+    {
+        $this->render("formulaireReservation", ["erreur" => '']);
+    }
     public function auth(string $password): void
     {
 

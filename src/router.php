@@ -40,13 +40,17 @@ switch ($route) {
       if ($methode === 'POST') {
         $UserController->getThisUser($_POST['password']);
       } else {
-        $HomeController->index();
+        $HomeController->connexion();
       }
     }
     break;
 
   case HOME_URL . 'deconnexion':
     $HomeController->quit();
+    break;
+
+  case HOME_URL . 'formulaireReservation':
+    $HomeController->formulaireResa();
     break;
 
   case str_contains($route, "dashboard"):

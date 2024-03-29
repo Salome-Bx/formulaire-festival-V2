@@ -35,7 +35,6 @@ class UserRepository
             ':User_Role' => $user->isUserRole(),
             ':mail' => $user->getMail()
         ]);
-
         return $statement;
     }
 

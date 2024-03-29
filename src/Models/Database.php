@@ -9,25 +9,24 @@ final class Database
 {
     private $DB;
     private $config;
+
     public function __construct()
     {
         $this->config = __DIR__ . '/../../config.php';
         require_once $this->config;
 
-        $this->connexionDB();
-    }
-
-    private function connexionDB(): void
-    {
         try {
             $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
-            $this->DB = new PDO($dsn, DB_USER, DB_PWD);
+            $this->DB = new PDO($dsn, DB_USER, DB_PWD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         } catch (PDOException $error) {
-            echo "Quelque chose s'est mal passé : " . $error->getMessage();
+            echo "Erreur de connexion à la Base de Données : " . $error->getMessage();
         }
     }
 
-    public function getDB()
+    /**
+     * Retourne la connexion BDD établie et l'objet PDO associé.
+     */
+    public function getDB(): PDO
     {
         return $this->DB;
     }
@@ -36,28 +35,37 @@ final class Database
      * Initialisation de la Base de Données : installation des tables et mise à jour du fichier config.php
      * @return string message d'échec ou de réussite.
      */
-    public function initializeDB(): string
+    public function initialisationBDD(): string
     {
 
         // Vérifier si la base de données est vide
-        if ($this->testIfTableTaskExists()) {
+        if ($this->testIfTableReservationExists()) {
             return "La base de données semble déjà remplie.";
             die();
-        }
-        // Télécharger le fichier sql d'initialisation dans la BDD
-        try {
-            $sql = file_get_contents(__DIR__ . "/../Migrations/todolist.sql");
+        } else {
+            // Télécharger le(s) fichier(s) sql d'initialisation dans la BDD
+            // Et effectuer les différentes migrations
+            try {
+                $i = 0;
+                $migrationExistante = TRUE;
+                while ($migrationExistante === TRUE) {
+                    $migration = __DIR__ . "/../Migrations/BDD-FESTIVAL$i.sql";
+                    if (file_exists($migration)) {
+                        $sql = file_get_contents($migration);
+                        $this->DB->query($sql);
+                        $i++;
+                    } else {
+                        $migrationExistante = FALSE;
+                    }
+                }
 
-            $this->DB->query($sql);
-            // Mettre à jour le fichier config.php
-
-            if ($this->MiseAJourConfig()) {
-                return "installation de la Base de Données terminée !";
-                die();
+                // Mettre à jour le fichier config.php
+                if ($this->UpdateConfig()) {
+                    return "installation de la Base de Données terminée !";
+                }
+            } catch (PDOException $erreur) {
+                return "impossible de remplir la Base de données : " . $erreur->getMessage();
             }
-        } catch (PDOException $erreur) {
-            return "impossible de remplir la Base de données : " . $erreur->getMessage();
-            die();
         }
     }
 
@@ -65,41 +73,45 @@ final class Database
      * Vérifie si la table Films existe déjà dans la BDD
      * @return bool
      */
-    private function testIfTableTaskExists(): bool
+    private function testIfTableReservationExists(): bool
     {
-        $existant = $this->DB->query('SHOW TABLES FROM ' . DB_NAME . ' like \'' . PREFIXE . 'task\'')->fetch();
+        $existant = $this->DB->query('SHOW TABLES FROM ' . DB_NAME . ' like \'%reservation%\'')->fetch();
 
-        if ($existant !== false && $existant[0] == PREFIXE . "Task") {
+        if ($existant !== false && $existant[0] == PREFIXE . "reservation") {
             return true;
         } else {
             return false;
         }
     }
 
-    private function MiseAJourConfig(): bool
+
+    private function UpdateConfig(): bool
     {
 
         $fconfig = fopen($this->config, 'w');
 
         $contenu = "<?php
-    // lors de la mise en open source, remplacer les infos concernant la base de données.
-    
-    define('DB_HOST', '" . DB_HOST . "');
-    define('DB_NAME', '" . DB_NAME . "');
-    define('DB_USER', '" . DB_USER . "');
-    define('DB_PWD', '" . DB_PWD . "');
-    define('PREFIXE', '" . PREFIXE . "');
-    
-    // Ne pas toucher :
-    
-    define('DB_INITIALIZED', TRUE);";
+      // lors de la mise en open source, remplacer les infos concernant la base de données.
+      
+      define('DB_HOST', '" . DB_HOST . "');
+      define('DB_NAME', '" . DB_NAME . "');
+      define('DB_USER', '" . DB_USER . "');
+      define('DB_PWD', '" . DB_PWD . "');
+      define('PREFIXE', '" . PREFIXE . "');
+      
+      // Si le nom de domaine ne pointe pas vers le dossier public, indiquer le chemin entre le nom de domaine et le dossier public.
+      // exemple: /mon-site/public/
+      define('HOME_URL', '" . HOME_URL . "');
+      
+      // Ne pas toucher :
+      
+      define('DB_INITIALIZED', TRUE);";
 
 
         if (fwrite($fconfig, $contenu)) {
             fclose($fconfig);
             return true;
         } else {
-            fclose($fconfig);
             return false;
         }
     }
