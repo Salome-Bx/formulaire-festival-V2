@@ -20,7 +20,7 @@ class UserRepository
     }
 
 
-    public function saveUser(User $user): User
+    public function saveUser(User $user)
     {
         $sql = "INSERT INTO " . PREFIXE . "user (lastName, firstName, password, address, telephone, User_Role, mail) VALUES (:lastName, :firstName, :password, :address, :telephone, :User_Role, :mail)";
 
@@ -35,7 +35,6 @@ class UserRepository
             ':User_Role' => $user->isUserRole(),
             ':mail' => $user->getMail()
         ]);
-
         return $statement;
     }
 

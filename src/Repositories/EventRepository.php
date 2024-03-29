@@ -19,7 +19,7 @@ class EventRepository
     }
     public function getAllEventDate()
     {
-        $sql = 'SELECT * FROM' . PREFIXE . ' event';
+        $sql = 'SELECT * FROM' . PREFIXE . 'event';
 
         $statement = $this->DB->prepare($sql);
         $statement->execute();
@@ -29,7 +29,7 @@ class EventRepository
     }
     public function getThisEventDate(int $IdDate)
     {
-        $sql = 'SELECT * FROM' . PREFIXE . ' event WHERE Id_Date = :ID_Date';
+        $sql = 'SELECT * FROM ' . PREFIXE . 'event WHERE Id_Date = :ID_Date';
 
 
         $statement = $this->DB->prepare($sql);
