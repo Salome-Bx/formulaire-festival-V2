@@ -62,7 +62,7 @@ class ReservationController
         ];
         $resa = new Reservation($data);
         if (isset($resa) && !empty($resa)) {
-            $this->ReservationRepository->putReservationInDB($data);
+            $this->ReservationRepository->putReservationInDB($resa);
         }
     }
     public function save($data, $id = null)
