@@ -20,21 +20,20 @@ class ReservationRepository
         require_once __DIR__ . '/../../config.php';
     }
     //* Create Reservation in Database
-    function putReservationInDB(): bool
+    function putReservationInDB($resa): bool
     {
 
         $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User)";
 
         $statement = $this->DB->prepare($sql);
-        $reservation = $this->resa;
         $statement->execute([
 
             ":ID_RESERVATION" => null,
-            ":Number_Reservation" => $reservation->getNumberReservation(),
-            ":Quantity_Sledge" => $reservation->getQuantitySledge(),
-            ":Quantity_Headphone" => $reservation->getQuantityHeadphone(),
-            ":Children" => $reservation->getChildren(),
-            ":Id_User" => $reservation->getIdUser()
+            ":Number_Reservation" => $resa->getNumberReservation(),
+            ":Quantity_Sledge" => $resa->getQuantitySledge(),
+            ":Quantity_Headphone" => $resa->getQuantityHeadphone(),
+            ":Children" => $resa->getChildren(),
+            ":Id_User" => $resa->getIdUser()
         ]);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }

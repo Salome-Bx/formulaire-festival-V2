@@ -61,9 +61,8 @@ class ReservationController
             //! plus tard remplacer le 1 par $_SESSION['User_ID']
         ];
         $resa = new Reservation($data);
-        if (isset($resa) && !empty($resa)) {
-            $this->ReservationRepository->putReservationInDB($resa);
-        }
+        $this->ReservationRepository->putReservationInDB($resa);
+    
     }
     public function save($data, $id = null)
     {
