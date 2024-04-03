@@ -1,14 +1,7 @@
-<form action="inscription" id="inscriptionUser" method="POST">
+<form action="<?= $action == "inscription" ? "/inscription/new" : "/dashboard/monprofil/edit" ?>" id="inscriptionUser" method="POST">
     <div id="coordonnees" class="blocFormulaire">
-
         <h2>Coordonnées</h2>
-        <div class="messageErreurChampsVides">
-            <?php if (!empty($_GET['erreur'])) {
-                if ($_GET['erreur']) {
-                    echo ("Formulaire incorrect");
-                }
-            };  ?>
-        </div>
+
 
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom" value="Dupont">
