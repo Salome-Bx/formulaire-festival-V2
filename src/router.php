@@ -25,7 +25,7 @@ switch ($route) {
   case str_contains($route, "inscription"):
     if ($methode === "POST") {
       $data = $_POST;
-      $UserController->registerUser($data);
+      $ReservationController->new($data);
     } else {
       $HomeController->index();
     }

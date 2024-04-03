@@ -41,7 +41,7 @@ class ReservationController
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'show']);
     }
 
-    public function new()
+    public function new($data)
     {
         $this->ReservationRepository->putReservationInDB();
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'new']);
@@ -60,14 +60,13 @@ class ReservationController
             'Id_User' => 1
             //! plus tard remplacer le 1 par $_SESSION['User_ID']
         ];
-        $user = new User($data);
-        if (isset($user) && !empty($user)) {
-            $this->UserRepo->saveUser($user);
+        $resa = new Reservation($data);
+        if (isset($resa) && !empty($resa)) {
+            $this->ReservationRepository->putReservationInDB($data);
         }
     }
     public function save($data, $id = null)
     {
-        var_dump($data);
         foreach ($data as $key => $value) {
             // On enlève les catégories du formatage, car c'est un tableau
             if (!is_array($value)) {
