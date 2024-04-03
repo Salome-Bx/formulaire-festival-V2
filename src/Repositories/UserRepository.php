@@ -66,6 +66,18 @@ class UserRepository
         return $retour;
     }
 
+    public function getThisUserById($id): User|bool
+    {
+        $sql = "SELECT * FROM " . PREFIXE . "user WHERE Id = :Id";
+
+        $statement = $this->DB->prepare($sql);
+        $statement->bindParam(':Id', $id);
+        $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_CLASS, User::class);
+        $retour = $statement->fetch();
+
+        return $retour;
+    }
 
     public function updateThisUser(User $user): bool
     {

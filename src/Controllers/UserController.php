@@ -27,10 +27,10 @@ class UserController
     {
         $User = unserialize($_SESSION['user']);
 
-        $this->render('pageUser', ['User' => $User]);
+        $this->render('dashboard', ['User' => $User]);
     }
 
-    public function registerUser($data, $id = null)
+    public function registerUser($data)
     {
         foreach ($data as $key => $value) {
             // On enlève les catégories du formatage, car c'est un tableau
@@ -58,7 +58,7 @@ class UserController
     }
 
     //! il faut faire une fonction pour récuperer l'utilisateur
-    public function authication($email, $password)
+    public function authentication($email, $password)
     {
 
         $User = $this->UserRepo->getThisUser($email, $password);
