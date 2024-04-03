@@ -22,11 +22,13 @@ class ReservationRepository
     //* Create Reservation in Database
     function putReservationInDB(): bool
     {
-        $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User)";
+        $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User);
+                INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User);";
 
-        $statement = $this->DB->getDB()->prepare($sql);
+        $statement = $this->DB->prepare($sql);
         $reservation = $this->resa;
         $statement->execute([
+            
             ":ID_RESERVATION" => $reservation->getIdReservation(),
             ":Number_Reservation" => $reservation->getQuantitySledge(),
             ":Quantity_Sledge" => $reservation->getQuantitySledge(),

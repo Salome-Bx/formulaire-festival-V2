@@ -5,7 +5,6 @@ use src\Repositories\ReservationRepository;
 require_once __DIR__ . "/includes/header.php";
 $reservationRepository = new ReservationRepository();
 $event = $reservationRepository->getEventFromDB();
-var_dump($event[0]);
 ?>
 
 <form action="formulaireReservation" id="reservation" method="POST">
@@ -26,12 +25,12 @@ var_dump($event[0]);
         </div>
 
         <!-- Si case cochée, afficher le choix du jour -->
-        <section id="pass1jourDate" class="tarifHidden">
-            <input type="checkbox" name="choixJour1" id="choixJour1">
+        <section id="pass1jourDate" class="">
+            <input type="checkbox" name="choixJour1" id="choixJour1" value="<?= $event[0]["Id_Date"] ?>">
             <label for="choixJour1"><?= $event[0]["Name"] ?> du <?= $event[0]["Date_Start"] ?></label>
-            <input type="checkbox" name="choixJour2" id="choixJour2">
+            <input type="checkbox" name="choixJour2" id="choixJour2" value="<?= $event[1]["Id_Date"] ?>">
             <label for="choixJour2"><?= $event[1]["Name"] ?> du <?= $event[1]["Date_Start"] ?></label>
-            <input type="checkbox" name="choixJour3" id="choixJour3">
+            <input type="checkbox" name="choixJour3" id="choixJour3" value="<?= $event[2]["Id_Date"] ?>">
             <label for="choixJour3"><?= $event[2]["Name"] ?> du <?= $event[2]["Date_Start"] ?></label>
         </section>
 

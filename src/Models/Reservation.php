@@ -7,7 +7,7 @@ use src\Services\Hydratation;
 
 class Reservation
 {
-    private int $IdReservation;
+    private int|null $IdReservation = null;
     private int $NumberReservation;
     private int $Children;
     private int $QuantityHeadphone;
@@ -22,7 +22,7 @@ class Reservation
     /**
      * Get the value of IdReservation
      */
-    public function getIdReservation(): int
+    public function getIdReservation(): int|null
     {
         return $this->IdReservation;
     }

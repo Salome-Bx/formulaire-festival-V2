@@ -52,7 +52,6 @@ switch ($route) {
   case HOME_URL . 'formulaireReservation':
     if ($methode === "POST") {
       $data = $_POST;
-      var_dump($data);
       $ReservationController->save($data);
     } else {
       $HomeController->formulaireResa();
