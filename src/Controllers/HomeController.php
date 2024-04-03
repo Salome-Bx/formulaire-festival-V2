@@ -17,12 +17,17 @@ class HomeController
             $erreur = '';
         }
 
-        $this->render("inscriptionUser", ["erreur" => $erreur]);
+        $this->render("accueil", ["erreur" => $erreur]);
     }
 
     public function connexion()
     {
-        $this->render("connexion", ["erreur" => '']);
+        $this->render("accueil", ["section" => 'menu', 'action' => 'connexion']);
+    }
+
+    public function inscription()
+    {
+        $this->render("accueil", ["section" => 'menu', 'action' => 'inscription']);
     }
 
     public function formulaireResa()
@@ -34,7 +39,7 @@ class HomeController
 
         if ($password === $password) {
             $_SESSION['connecté'] = TRUE;
-            header('location: ' . HOME_URL . 'pageUser');
+            header('location: ' . HOME_URL . 'dashboard');
             die();
         } else {
             header('location: ' . HOME_URL . '?erreur=connexion');

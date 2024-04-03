@@ -1,6 +1,3 @@
-<?php include_once __DIR__ . '/includes/header.php'; ?>
-
-
 <form action="./src/traitement.php" id="reservation" method="POST">
     <div id="reservation" class="blocFormulaire">
 
@@ -135,4 +132,3 @@
 
     </div>
 </form>
-<?php include_once __DIR__ . '/includes/footer.php'; ?>

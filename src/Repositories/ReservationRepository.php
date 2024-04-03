@@ -62,7 +62,7 @@ class ReservationRepository
     }
 
     //* Edit Reservation in Database
-    function edtiReservationInDB($Id_User): bool
+    function editThisReservationInDB($Id_User): bool
     {
         $sql = "UPDATE festival_reservation SET Number_Reservation = :Number_Reservation, Quantity_Sledge = :Quantity_Sledge, Quantity_Headphone = :Quantity_Headphone, Children = :Children WHERE Id_User = :Id_User";
 

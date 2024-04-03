@@ -1,8 +1,8 @@
 <?php
 
 use src\Models\Database;
-use src\Repository\UserRepository;
-use src\Repository\ReservationRepository;
+use src\Repositories\UserRepository;
+use src\Repositories\ReservationRepository;
 
 
 if (!isset($_SESSION['connectéUser'])) {
@@ -24,18 +24,18 @@ include __DIR__ . '/includes/header.php'; ?>
     // instanciation de la classe Database
     $DBR = new Database();
     $resaRepo = new ReservationRepository();
-    $reservations = $resaRepo->getAllReservations();
+    $reservations = $resaRepo->getAllReservationFromDB();
 
     foreach ($reservations as $reservation) {
         $IdUser = $reservation->getIdUser();
         // instanciation de la classe User
         $DBU = new Database();
         $userRepo = new UserRepository();
-        $utilisateur = $userRepo->getThisUtilisateurById($IdUser); ?>
+        $utilisateur = $userRepo->getThisUserById($IdUser); ?>
 
         <div class="reservation <?= $reservation->getId() ?>">
             <div class="displaynomnum">
-                <p class="fontsize"><b><?= $utilisateur->getPrenom() ?> <?= $utilisateur->getNom() ?></b></p>
+                <p class="fontsize"><b><?= $utilisateur->getFirstName() ?> <?= $utilisateur->getLastName() ?></b></p>
                 <p>Numéro de réservation : <?= $reservation->getId() ?></p>
             </div>
 

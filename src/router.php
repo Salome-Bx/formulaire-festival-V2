@@ -4,7 +4,7 @@ use src\Controllers\HomeController;
 use src\Controllers\ReservationController;
 use src\Controllers\UserController;
 
-// $ReservationController = new ReservationController;
+$ReservationController = new ReservationController;
 $UserController = new UserController;
 $HomeController = new HomeController;
 
@@ -15,19 +15,30 @@ $methode = $_SERVER['REQUEST_METHOD'];
 switch ($route) {
   case HOME_URL:
     if (isset($_SESSION['connecté'])) {
-      header('location: ' . HOME_URL . 'pageUser');
+      header('location: ' . HOME_URL . 'dashboard');
       die;
     } else {
       $HomeController->index();
     }
     break;
 
-  case str_contains($route, "inscription"):
+  case str_contains($route, "accueil"):
+    switch ($route) {
+      case str_contains($route, "connexion"):
+        // $UserController->authentication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
+        break;
+      case str_contains($route, "inscription"):
+
+        break;
+      default:
+        $HomeController->index();
+        break;
+    }
     if ($methode === "POST") {
       $data = $_POST;
       $UserController->registerUser($data);
     } else {
-      header('location: ' . HOME_URL . 'inscriptionUser.php');
+      $HomeController->connexion();
     }
 
     break;
@@ -39,8 +50,7 @@ switch ($route) {
     } else {
       if ($methode === 'POST') {
 
-        $UserController->authication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
-
+        $UserController->authentication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
       } else {
         $HomeController->connexion();
       }
@@ -55,10 +65,14 @@ switch ($route) {
     $HomeController->formulaireResa();
     break;
 
-  case HOME_URL . "pageUser":
+
+  case str_contains($route, "dashboard"):
     // On a ici toutes les routes qu'on a à partir de pageUser
     switch ($route) {
+
+
       case str_contains($route, "reservation"):
+
         // On a ici toutes les routes qu'on peut faire
         switch ($route) {
           case str_contains($route, "new"):

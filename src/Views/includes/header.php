@@ -17,9 +17,10 @@
 <body class="h-full">
 
 
-    <?php ?>
 
-    <header class="header">
-        <a href="./index.php" class="boutonConnexion">Formulaire</a>
-        <h1>Vercors Musique Festival</h1>
+
+    <header class="bg-white shadow">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Music Vercors Festival</h1>
+        </div>
     </header>
