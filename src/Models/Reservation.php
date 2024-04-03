@@ -7,35 +7,16 @@ use src\Services\Hydratation;
 
 class Reservation
 {
-    private int|null $IdReservation = null;
     private int $NumberReservation;
-    private int $Children;
-    private int $QuantityHeadphone;
-    private int $QuantitySledge;
-    private int $IdUser;
+    private bool $Children = false;
+    private int|null $QuantityHeadphone = null;
+    private int|null $QuantitySledge = null;
+    private int $IdUser = 1;
 
 
     use Hydratation;
 
 
-
-    /**
-     * Get the value of IdReservation
-     */
-    public function getIdReservation(): int|null
-    {
-        return $this->IdReservation;
-    }
-
-    /**
-     * Set the value of IdReservation
-     */
-    public function setIdReservation(int $IdReservation): self
-    {
-        $this->IdReservation = $IdReservation;
-
-        return $this;
-    }
 
     /**
      * Get the value of NumberReservation
@@ -58,7 +39,7 @@ class Reservation
     /**
      * Get the value of Children
      */
-    public function getChildren(): int
+    public function getChildren(): bool
     {
         return $this->Children;
     }
@@ -66,7 +47,7 @@ class Reservation
     /**
      * Set the value of Children
      */
-    public function setChildren(int $Children): self
+    public function setChildren(bool $Children): self
     {
         $this->Children = $Children;
 
@@ -76,7 +57,7 @@ class Reservation
     /**
      * Get the value of QuantityHeadphone
      */
-    public function getQuantityHeadphone(): int
+    public function getQuantityHeadphone(): ?int
     {
         return $this->QuantityHeadphone;
     }
@@ -84,7 +65,7 @@ class Reservation
     /**
      * Set the value of QuantityHeadphone
      */
-    public function setQuantityHeadphone(int $QuantityHeadphone): self
+    public function setQuantityHeadphone(?int $QuantityHeadphone): self
     {
         $this->QuantityHeadphone = $QuantityHeadphone;
 
@@ -94,7 +75,7 @@ class Reservation
     /**
      * Get the value of QuantitySledge
      */
-    public function getQuantitySledge(): int
+    public function getQuantitySledge(): ?int
     {
         return $this->QuantitySledge;
     }
@@ -102,7 +83,7 @@ class Reservation
     /**
      * Set the value of QuantitySledge
      */
-    public function setQuantitySledge(int $QuantitySledge): self
+    public function setQuantitySledge(?int $QuantitySledge): self
     {
         $this->QuantitySledge = $QuantitySledge;
 
@@ -123,6 +104,7 @@ class Reservation
     public function setIdUser(int $IdUser): self
     {
         $this->IdUser = $IdUser;
+
         return $this;
     }
 }

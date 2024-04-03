@@ -1,7 +1,7 @@
 <?php
 
 use src\Repositories\ReservationRepository;
-
+use src\Models\Reservation;
 require_once __DIR__ . "/includes/header.php";
 $reservationRepository = new ReservationRepository();
 $event = $reservationRepository->getEventFromDB();

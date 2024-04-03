@@ -22,19 +22,19 @@ class ReservationRepository
     //* Create Reservation in Database
     function putReservationInDB(): bool
     {
-        $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User);
-                INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User);";
+
+        $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User)";
 
         $statement = $this->DB->prepare($sql);
         $reservation = $this->resa;
         $statement->execute([
-            
-            ":ID_RESERVATION" => $reservation->getIdReservation(),
-            ":Number_Reservation" => $reservation->getQuantitySledge(),
+
+            ":ID_RESERVATION" => null,
+            ":Number_Reservation" => $reservation->getNumberReservation(),
             ":Quantity_Sledge" => $reservation->getQuantitySledge(),
-            "Quantity_Headphone" => $reservation->getQuantityHeadphone(),
+            ":Quantity_Headphone" => $reservation->getQuantityHeadphone(),
             ":Children" => $reservation->getChildren(),
-            "iD_User" => $reservation->getIdUser()
+            ":Id_User" => $reservation->getIdUser()
         ]);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
