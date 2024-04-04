@@ -43,7 +43,6 @@ class ReservationController
 
     public function new($data)
     {
-        $this->ReservationRepository->putReservationInDB();
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'new']);
 
         foreach ($data as $key => $value) {
@@ -52,6 +51,7 @@ class ReservationController
                 $data[$key] = htmlspecialchars($value);
             }
         }
+
         $data = [
             'Number_Reservation' => $data['nombrePlaces'],
             'Quantity_Sledge' => $data['nombreLugesEte'],
@@ -62,8 +62,8 @@ class ReservationController
         ];
         $resa = new Reservation($data);
         $this->ReservationRepository->putReservationInDB($resa);
-    
     }
+
     public function save($data, $id = null)
     {
         foreach ($data as $key => $value) {

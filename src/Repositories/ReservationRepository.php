@@ -29,11 +29,11 @@ class ReservationRepository
         $statement->execute([
 
             ":ID_RESERVATION" => null,
-            ":Number_Reservation" => $resa->getNumberReservation(),
-            ":Quantity_Sledge" => $resa->getQuantitySledge(),
-            ":Quantity_Headphone" => $resa->getQuantityHeadphone(),
-            ":Children" => $resa->getChildren(),
-            ":Id_User" => $resa->getIdUser()
+            ":Number_Reservation" => $this->resa->getNumberReservation(),
+            ":Quantity_Sledge" => $this->resa->getQuantitySledge(),
+            ":Quantity_Headphone" => $this->resa->getQuantityHeadphone(),
+            ":Children" => $this->resa->getChildren(),
+            ":Id_User" => $this->resa->getIdUser()
         ]);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
