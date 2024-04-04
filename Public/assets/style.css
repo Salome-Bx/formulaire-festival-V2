@@ -4,3 +4,10 @@
     background-size: cover;
     background-position: 100% 65%;
 }
+
+.svg-user {
+    background-image: url("./medias/user-solid.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
