@@ -1,5 +1,5 @@
 <?php include __DIR__ . '/includes/header.php'; ?>
-<form action="inscription" id="inscriptionUser" method="POST">
+<form action="" id="inscriptionUser" method="POST">
     <div id="coordonnees" class="blocFormulaire">
 
         <h2>Modification des coordonnées</h2>

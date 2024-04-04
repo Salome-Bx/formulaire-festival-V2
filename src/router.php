@@ -10,79 +10,67 @@ $HomeController = new HomeController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
-var_dump($route);
-
 switch ($route) {
-  case HOME_URL:
-    //   if (isset($_SESSION['connecté'])) {
-    //     header('location: ' . HOME_URL . 'dashboard');
-    //     die;
-    //   } else {
-    //     $HomeController->index();
-    //   }
+  case str_contains($route, "connexion"):
+    if ($methode === 'POST') {
+      $UserController->authentication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
+    } else {
+      $HomeController->connexion();
+    }
+    break;
+  case str_contains($route, "inscription"):
     switch ($route) {
-      case str_contains($route, "connexion"):
-        $UserController->authentication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
-        break;
-      case str_contains($route, "inscription"):
-        switch ($route) {
-          case str_contains($route, "new"):
-            if ($methode === "POST") {
-              $data = $_POST;
-              $UserController->registerUser($data);
-              $HomeController->connexion();
-            } else {
-              $HomeController->connexion();
-            }
-            break;
-
-          default:
-            $HomeController->inscription();
-            break;
+      case str_contains($route, "new"):
+        if ($methode === "POST") {
+          $data = $_POST;
+          $UserController->registerUser($data);
+          $HomeController->connexion();
+        } else {
+          echo "une erreur est survenue lors de lors de l'inscription";
         }
         break;
+
       default:
-        $HomeController->index();
+        $HomeController->inscription();
         break;
     }
     break;
 
-    // case str_contains($route, HOME_URL):
-
-
-    break;
-
-    // case HOME_URL . 'connexion':
-    //   if (isset($_SESSION['connecté'])) {
-    //     header('location: ' . HOME_URL . 'dashboard');
-    //     die;
-    //   } else {
-    //     if ($methode === 'POST') {
-    //       $UserController->authentication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
-    //     } else {
-    //       $HomeController->connexion();
-    //     }
-    //   }
-    //   break;
-
-  case str_contains($route, 'deconnexion'):
+  case HOME_URL . 'deconnexion':
     $HomeController->quit();
     break;
 
 
-
   case str_contains($route, "dashboard"):
+
     // On a ici toutes les routes qu'on a à partir de dashboard
+    var_dump($route);
     switch ($route) {
 
       case str_contains($route, "monprofil"):
-        $UserController->monProfil();
-        break;
-      case str_contains($route, "reservation"):
+        
+        switch ($route) {
+          case str_contains($route, "edit"):
+        
+            $UserController->monProfil();
+            break;
 
+          default:
+            $UserController->index();
+            break;
+        }
+        break;
+
+
+
+
+
+
+      case str_contains($route, "reservation"):
         // On a ici toutes les routes qu'on peut faire
         switch ($route) {
           case str_contains($route, "new"):
+            var_dump("helloNEW");
             if ($methode === "POST") {
               $data = $_POST;
               $ReservationController->save($data);
@@ -114,7 +102,6 @@ switch ($route) {
             $ReservationController->index($IdUser);
             break;
         }
-
         break;
 
       default:
@@ -139,10 +126,11 @@ switch ($route) {
         $HomeController->quit();
         break;
       default:
+        $UserController->index();
         break;
     }
 
-    break;
+
 
     break;
   default:

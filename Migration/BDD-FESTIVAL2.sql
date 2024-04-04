@@ -4,3 +4,11 @@ INSERT INTO `festival_event`(`Date_Start`, `Date_End`, `Price`, `Reduced_Price`,
 INSERT INTO `festival_event`(`Date_Start`, `Date_End`, `Price`, `Reduced_Price`, `Name`) VALUES ('2024-07-01','2024-07-02','70','50','Pass 2 jour');
 INSERT INTO `festival_event`(`Date_Start`, `Date_End`, `Price`, `Reduced_Price`, `Name`) VALUES ('2024-07-02','2024-07-03','70','50','Pass 2 jour');
 INSERT INTO `festival_event`(`Date_Start`, `Date_End`, `Price`, `Reduced_Price`, `Name`) VALUES ('2024-07-01','2024-07-03','100','65','Pass 3 jour');
+INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('1', '5', 'Van jour 1');
+INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('2', '5', 'Van jour 2');
+INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('3', '5', 'Van jour 3');
+INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('4', '12', 'Van 3 jours');
+INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('5', '5', 'Tente jour 1');
+INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('6', '5', 'Tente jour 2');
+INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('7', '5', 'Tente jour 3');
+INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('8', '12', 'Tente 3 jours');
