@@ -12,9 +12,9 @@
         <label for="adressePostale">Adresse Postale :</label>
         <input type="text" name="adressePostale" id="adressePostale" class="mb-1" value="<?= isset($User) ? $User->getAddress() : "" ?>">
         <label for="password">Mot de passe :</label>
-        <input type="password" name="password" id="password" class="mb-1" value="<?= isset($User) ? $User->getPassword() : "" ?>">
+        <input type="password" name="password" id="password" class="mb-1" value="">
         <label for="passwordBis">Confirmer votre mot de passe :</label>
-        <input type="password" name="passwordBis" id="passwordBis" class="mb-1" value="<?= isset($User) ? $User->getPassword() : "" ?>">
+        <input type="password" name="passwordBis" id="passwordBis" class="mb-1" value="">
 
         <input type="submit" class="bouton m-2 bg-sky-900 text-white rounded" value="<?= isset($User) ? "modifier" : "s'inscrire" ?>">
 
