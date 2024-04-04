@@ -65,7 +65,7 @@ class UserController
         if ($password === $password) {
             $_SESSION['connecté'] = TRUE;
             $_SESSION['user'] = serialize($User);
-            header('location: ' . HOME_URL . 'pageUser');
+            header('location: ' . HOME_URL . 'dashboard');
             die();
         } else {
             header('location: ' . HOME_URL . '?erreur=connexion');
@@ -83,10 +83,9 @@ class UserController
     }
 
     //! fonction pour modifier un utilisateur
-    public function editThisUser($id)
+    public function monProfil()
     {
-        $User = $this->UserRepo->updateThisUser($id);
-        // $this->render("", ['' => '', '' => $User]);
-        header('location: ' . HOME_URL . 'editUser');
+        $User = unserialize($_SESSION['user']);
+        $this->render("dashboard", ['section' => 'monprofil', 'action' => 'edit', "User" => $User]);
     }
 }
