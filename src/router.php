@@ -11,17 +11,15 @@ $HomeController = new HomeController;
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
 var_dump($route);
+
 switch ($route) {
-    // case HOME_URL:
+  case HOME_URL:
     //   if (isset($_SESSION['connecté'])) {
     //     header('location: ' . HOME_URL . 'dashboard');
     //     die;
     //   } else {
     //     $HomeController->index();
     //   }
-    //   break;
-
-  case str_contains($route, HOME_URL):
     switch ($route) {
       case str_contains($route, "connexion"):
         $UserController->authentication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
@@ -47,22 +45,25 @@ switch ($route) {
         $HomeController->index();
         break;
     }
+    break;
+
+    // case str_contains($route, HOME_URL):
 
 
     break;
 
-  // case HOME_URL . 'connexion':
-  //   if (isset($_SESSION['connecté'])) {
-  //     header('location: ' . HOME_URL . 'dashboard');
-  //     die;
-  //   } else {
-  //     if ($methode === 'POST') {
-  //       $UserController->authentication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
-  //     } else {
-  //       $HomeController->connexion();
-  //     }
-  //   }
-  //   break;
+    // case HOME_URL . 'connexion':
+    //   if (isset($_SESSION['connecté'])) {
+    //     header('location: ' . HOME_URL . 'dashboard');
+    //     die;
+    //   } else {
+    //     if ($methode === 'POST') {
+    //       $UserController->authentication($_POST['emailConnexion'], $_POST['motDePasseConnexion']);
+    //     } else {
+    //       $HomeController->connexion();
+    //     }
+    //   }
+    //   break;
 
   case str_contains($route, 'deconnexion'):
     $HomeController->quit();
