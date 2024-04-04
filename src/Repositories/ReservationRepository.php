@@ -22,6 +22,8 @@ class ReservationRepository
     //* Create Reservation in Database
     function putReservationInDB($resa): bool
     {
+
+        //* Put Reservation in Database
         $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User, Price_Reduced) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User, :Price_Reduced)";
 
         $statement = $this->DB->prepare($sql);
@@ -35,7 +37,8 @@ class ReservationRepository
             ":Price_Reduced" => $resa->getPriceReduced(),
         ]);
 
-        
+
+        //* Put Event Reservation in Database
         $lastInsertedId = $this->DB->lastInsertId();
 
         $sqlInsertReservationHasEvent = "INSERT INTO festival_reservationhasevent (Id_Date, ID_RESERVATION) VALUES (:Id_Date, :ID_RESERVATION)";
@@ -46,7 +49,32 @@ class ReservationRepository
         ]);
 
         return $statement->rowCount() > 0;
+
+
+        //* Put all options in Night Database
+        $filteredArray = array_filter($resa, function ($key) {
+            return strpos($key, 'tente') !== false || strpos($key, 'van') !== false;
+        }, ARRAY_FILTER_USE_KEY);
+
+        $sqlInsertReservationHasEvent = "INSERT INTO festival_reservationhasnight (Id_Date, ID_RESERVATION) VALUES (:Id_Date, :ID_RESERVATION)";
+        $statement = $this->DB->prepare($sqlInsertReservationHasEvent);
+
+        $lastInsertedId = $this->DB->lastInsertId();
+
+        foreach ($filteredArray as $key => $value) {
+            $date = $value;
+
+            $statement->execute([
+                ":Id_Date" => $date,
+                ":ID_RESERVATION" => $lastInsertedId,
+            ]);
+        }
+
+        //* Check if the last execute was successful
+        return $statement->rowCount() > 0;
     }
+
+
 
     function getAllReservationFromDB(): array
     {
