@@ -64,7 +64,7 @@ class ReservationController
         $this->ReservationRepository->putReservationInDB($resa);
     }
 
-    public function save($data, $id = null)
+    public function save($data)
     {
         foreach ($data as $key => $value) {
             // On enlève les catégories du formatage, car c'est un tableau

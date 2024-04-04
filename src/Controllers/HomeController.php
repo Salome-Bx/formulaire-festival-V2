@@ -29,6 +29,7 @@ class HomeController
     {
         $this->render("formulaireReservation", ["erreur" => '']);
     }
+    
     public function auth(string $password): void
     {
 
