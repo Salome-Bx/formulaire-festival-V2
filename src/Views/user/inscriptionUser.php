@@ -1,7 +1,7 @@
 <form action="<?= $action == "inscription" ? "/inscription/new" : "/dashboard/monprofil/edit" ?>" id="inscriptionUser" method="POST">
     <div id="coordonnees" class="blocFormulaire">
-        <h2>Coordonnées</h2>
 
+        <?= $action == "nouveau" ? "<h2>Mon profil :</h2>" : "<h2>Mettre à jour mon profil :</h2>" ?>
 
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom" value="Dupont">
