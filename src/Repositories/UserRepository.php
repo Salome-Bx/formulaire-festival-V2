@@ -52,13 +52,12 @@ class UserRepository
         }
     }
 
-    public function getThisUser($email, $password): User|bool
+    public function getThisUser($email): User|bool
     {
-        $sql = "SELECT * FROM " . PREFIXE . "user WHERE mail = :mail AND password = :password";
+        $sql = "SELECT * FROM " . PREFIXE . "user WHERE mail = :mail";
 
         $statement = $this->DB->prepare($sql);
         $statement->bindParam(':mail', $email);
-        $statement->bindParam(':password', $password);
         $statement->execute();
         $statement->setFetchMode(PDO::FETCH_CLASS, User::class);
         $retour = $statement->fetch();

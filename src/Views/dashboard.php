@@ -6,10 +6,10 @@ switch ($section) {
         switch ($action) {
             case 'edit':
                 include_once __DIR__ . '/user/inscriptionUser.php';
+                
                 break;
 
             default:
-                # code...
                 break;
         }
         break;

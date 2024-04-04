@@ -41,19 +41,36 @@ switch ($route) {
     break;
 
 
+  case str_contains($route, "dashboard"):
 
-  case HOME_URL . "dashboard":
     // On a ici toutes les routes qu'on a à partir de dashboard
+    var_dump($route);
     switch ($route) {
 
       case str_contains($route, "monprofil"):
-        $UserController->monProfil();
-        break;
-      case str_contains($route, "reservation"):
+        
+        switch ($route) {
+          case str_contains($route, "edit"):
+        
+            $UserController->monProfil();
+            break;
 
+          default:
+            $UserController->index();
+            break;
+        }
+        break;
+
+
+
+
+
+
+      case str_contains($route, "reservation"):
         // On a ici toutes les routes qu'on peut faire
         switch ($route) {
           case str_contains($route, "new"):
+            var_dump("helloNEW");
             if ($methode === "POST") {
               $data = $_POST;
               $ReservationController->save($data);

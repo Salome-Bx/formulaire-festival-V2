@@ -38,7 +38,9 @@ class UserController
                 $data[$key] = htmlspecialchars($value);
             }
         }
+
         if ($data['password'] === $data['passwordBis']) {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             $data = [
                 'LastName' => $data['nom'],
                 'FirstName' => $data['prenom'],
@@ -60,18 +62,25 @@ class UserController
     //! il faut faire une fonction pour récuperer l'utilisateur
     public function authentication($email, $password)
     {
+        if (isset($email) && isset($password) && !empty($password) && !empty($email)) {
+            if ($User = $this->UserRepo->getThisUser($email, $password)) {
 
-        $User = $this->UserRepo->getThisUser($email, $password);
-        if ($password === $password) {
-            $_SESSION['connecté'] = TRUE;
-            $_SESSION['user'] = serialize($User);
-            header('location: ' . HOME_URL . 'dashboard');
-            die();
-        } else {
-            header('location: ' . HOME_URL . '?erreur=connexion');
+
+                $User = $this->UserRepo->getThisUser($email, $password);
+                if (password_verify($password, $User->getPassword())) {
+                    $_SESSION['connecté'] = TRUE;
+                    $_SESSION['user'] = serialize($User);
+                    header('location: ' . HOME_URL . 'dashboard');
+                    die();
+                } else {
+                    header('location: ' . HOME_URL . '?erreur=connexion');
+                }
+                // $this->render("pageUser", ['section' => '', 'user' => $User]);
+                die;
+            } else {
+                header('location: ' . HOME_URL);
+            }
         }
-        // $this->render("pageUser", ['section' => '', 'user' => $User]);
-        die;
     }
 
     //! fontion pour delete un utilisateur 
@@ -85,6 +94,7 @@ class UserController
     //! fonction pour modifier un utilisateur
     public function monProfil()
     {
+        
         $User = unserialize($_SESSION['user']);
         $this->render("dashboard", ['section' => 'monprofil', 'action' => 'edit', "User" => $User]);
     }
