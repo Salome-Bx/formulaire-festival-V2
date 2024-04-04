@@ -1,12 +1,12 @@
-<section class="connexion">
-    <h2>Connexion</h2>
+<section class="connexion" class="">
+    <h2 class="text-center font-bold">Connexion</h2>
 
-    <form action="connexion" id="connexion" method="POST">
+    <form action="connexion" id="connexion" method="POST" class="flex flex-col m-auto w-1/2">
         <label for="emailConnexion">Email :</label>
         <input type="email" name="emailConnexion" id="emailConnexion" value="plazdzasasssaop@gmail.com">
         <label for="motDePasseConnexion">Mot de passe :</label>
         <input type="password" name="motDePasseConnexion" id="motDePasseConnexion" value="azdazdazd">
-        <input type="submit" class="bouton" value="Connexion">
+        <input type="submit" class="bouton m-2 bg-sky-900 text-white rounded" value="Connexion">
         <?php
         if (!empty($_GET['erreur'])) {
             if ($_GET['erreur'] == 4) { ?>

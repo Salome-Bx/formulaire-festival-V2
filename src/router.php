@@ -42,7 +42,7 @@ switch ($route) {
 
 
 
-  case HOME_URL . "dashboard":
+  case str_contains($route, "dashboard"):
     // On a ici toutes les routes qu'on a à partir de dashboard
     switch ($route) {
 
