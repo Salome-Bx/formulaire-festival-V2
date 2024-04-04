@@ -2,7 +2,6 @@
 <?php include __DIR__ . '/includes/navigation.php'; ?>
 <?php
 switch ($section) {
-
     case 'menu':
         switch ($action) {
             case 'connexion':

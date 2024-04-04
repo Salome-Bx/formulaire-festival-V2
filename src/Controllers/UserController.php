@@ -38,6 +38,13 @@ class UserController
                 $data[$key] = htmlspecialchars($value);
             }
         }
+        $data = htmlspecialchars(trim(strip_tags($data['nom'])));
+        $data = htmlspecialchars(trim(strip_tags($data['prenom'])));
+        $data = htmlspecialchars(trim(strip_tags($data['password'])));
+        $data = htmlspecialchars(trim(strip_tags($data['passwordBis'])));
+        $data = htmlspecialchars(trim(strip_tags($data['adressePostale'])));
+        $data = htmlspecialchars(trim(strip_tags($data['telephone'])));
+        $data = htmlspecialchars(trim(strip_tags($data['email'])));
 
         if ($data['password'] === $data['passwordBis']) {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -64,9 +71,6 @@ class UserController
     {
         if (isset($email) && isset($password) && !empty($password) && !empty($email)) {
             if ($User = $this->UserRepo->getThisUser($email, $password)) {
-
-
-                $User = $this->UserRepo->getThisUser($email, $password);
                 if (password_verify($password, $User->getPassword())) {
                     $_SESSION['connecté'] = TRUE;
                     $_SESSION['user'] = serialize($User);
@@ -75,7 +79,6 @@ class UserController
                 } else {
                     header('location: ' . HOME_URL . '?erreur=connexion');
                 }
-                // $this->render("pageUser", ['section' => '', 'user' => $User]);
                 die;
             } else {
                 header('location: ' . HOME_URL);
@@ -87,15 +90,48 @@ class UserController
     public function deleteUser($id)
     {
         $User = $this->UserRepo->deleteThisUser($id);
-        // $this->render("", ['' => '', '' => $User]);
         header('location: ' . HOME_URL . 'connexion');
     }
 
     //! fonction pour modifier un utilisateur
     public function monProfil()
     {
-
         $User = unserialize($_SESSION['user']);
         $this->render("dashboard", ['section' => 'monprofil', 'action' => 'edit', "User" => $User]);
+    }
+
+    public function updateThisUser($data, $IdUser)
+    {
+        $IdUser = htmlspecialchars(trim(strip_tags($IdUser)));
+        $data = htmlspecialchars(trim(strip_tags($data['nom'])));
+        $data = htmlspecialchars(trim(strip_tags($data['prenom'])));
+        $data = htmlspecialchars(trim(strip_tags($data['password'])));
+        $data = htmlspecialchars(trim(strip_tags($data['adressePostale'])));
+        $data = htmlspecialchars(trim(strip_tags($data['telephone'])));
+        $data = htmlspecialchars(trim(strip_tags($data['email'])));
+
+        $oldPassword = $data['password'];
+        if ($data['password'] === $data['passwordBis']) {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            $data = [
+                'Id_User' => $IdUser,
+                'LastName' => $data['nom'],
+                'FirstName' => $data['prenom'],
+                'Password' => $data['password'],
+                'Address' => $data['adressePostale'],
+                'Telephone' => $data['telephone'],
+                'UserRole' => 0,
+                'Mail' => $data['email']
+            ];
+        }
+        $user = new User($data);
+
+        if (isset($user) && !empty($user)) {
+            if ($this->UserRepo->updateThisUser($user)) {
+                $this->authentication($user->getMail(), $oldPassword);
+            }
+        } else {
+            //! erreur 
+        }
     }
 }

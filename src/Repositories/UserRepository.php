@@ -90,14 +90,13 @@ class UserRepository
             address = :address,
             telephone = :telephone, 
             User_Role = :User_Role,
-            mail = :mail,
-            WHERE Id_User = :Id_User";
-
-
+            mail = :mail
+            WHERE Id_User = :Id_User;";
 
         $statement = $this->DB->prepare($sql);
 
         $retour = $statement->execute([
+            ':Id_User' => $user->getIdUser(),
             ':lastName' => $user->getLastName(),
             ':firstName' => $user->getFirstName(),
             ':password' => $user->getPassword(),
@@ -105,7 +104,6 @@ class UserRepository
             ':telephone' => $user->getTelephone(),
             ':User_Role' => $user->isUserRole(),
             ':mail' => $user->getMail()
-
         ]);
 
         return $retour;

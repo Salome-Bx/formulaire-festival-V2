@@ -51,7 +51,14 @@ switch ($route) {
 
         switch ($route) {
           case str_contains($route, "edit"):
-            $UserController->monProfil();
+            if ($methode === "POST") {
+              $data = $_POST;
+              $IdUser = explode('/', $route);
+              $IdUser = end($IdUser);
+              $UserController->updateThisUser($data, $IdUser);
+            } else {
+              $UserController->monProfil();
+            }
             break;
 
           default:
