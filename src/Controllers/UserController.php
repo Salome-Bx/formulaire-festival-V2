@@ -94,7 +94,7 @@ class UserController
     //! fonction pour modifier un utilisateur
     public function monProfil()
     {
-        
+
         $User = unserialize($_SESSION['user']);
         $this->render("dashboard", ['section' => 'monprofil', 'action' => 'edit', "User" => $User]);
     }
