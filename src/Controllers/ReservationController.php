@@ -61,12 +61,14 @@ class ReservationController
             'Quantity_Sledge' => $data['NombreLugesEte'],
             'Quantity_Headphone' => $data['nombreCasquesEnfants'],
             'Children' => $data['enfants'],
-            'Id_User' => 1
+            'Id_User' => 1,
+            'Price_Reduced' => $data['tarifReduit'] ?? false,
+            'Id_Date' => $data['choixJour']
+
             //! plus tard remplacer le 1 par $_SESSION['User_ID']
         ];
         $resa = new Reservation($data);
         $this->ReservationRepository->putReservationInDB($resa);
-        
     }
 
     public function delete($id)

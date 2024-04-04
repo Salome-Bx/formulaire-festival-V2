@@ -12,9 +12,10 @@ class Reservation
     private int|null $QuantityHeadphone = null;
     private int|null $QuantitySledge = null;
     private int $IdUser = 1;
-    private int $passJour;
+    private int $IdDate;
     private int $nightTent;
     private int $nightVan;
+    private bool $PriceReduced = false;
 
     use Hydratation;
 
@@ -111,19 +112,19 @@ class Reservation
     }
 
     /**
-     * Get the value of passJour
+     * Get the value of IdDate
      */
-    public function getPassJour(): int
+    public function getIdDate(): int
     {
-        return $this->passJour;
+        return $this->IdDate;
     }
 
     /**
-     * Set the value of passJour
+     * Set the value of IdDate
      */
-    public function setPassJour(int $passJour): self
+    public function setIdDate(int $IdDate): self
     {
-        $this->passJour = $passJour;
+        $this->IdDate = $IdDate;
 
         return $this;
     }
@@ -142,6 +143,43 @@ class Reservation
     public function setNightTent(int $nightTent): self
     {
         $this->nightTent = $nightTent;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nightVan
+     */
+    public function getNightVan(): int
+    {
+        return $this->nightVan;
+    }
+
+    /**
+     * Set the value of nightVan
+     */
+    public function setNightVan(int $nightVan): self
+    {
+        $this->nightVan = $nightVan;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of PriceReduced
+     */
+    public function getPriceReduced(): bool
+    {
+        return $this->PriceReduced;
+    }
+
+    /**
+     * Set the value of PriceReduced
+     */
+    public function setPriceReduced(bool $PriceReduced): self
+    {
+        $this->PriceReduced = $PriceReduced;
 
         return $this;
     }

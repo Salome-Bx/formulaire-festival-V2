@@ -18,10 +18,11 @@ class ReservationRepository
 
         require_once __DIR__ . '/../../config.php';
     }
+
     //* Create Reservation in Database
     function putReservationInDB($resa): bool
     {
-        $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User)";
+        $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User, Price_Reduced) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User, :Price_Reduced)";
 
         $statement = $this->DB->prepare($sql);
         $statement->execute([
@@ -30,10 +31,23 @@ class ReservationRepository
             ":Quantity_Sledge" => $resa->getQuantitySledge(),
             ":Quantity_Headphone" => $resa->getQuantityHeadphone(),
             ":Children" => $resa->getChildren(),
-            ":Id_User" => $resa->getIdUser()
+            ":Id_User" => $resa->getIdUser(),
+            ":Price_Reduced" => $resa->getPriceReduced(),
         ]);
+
+        
+        $lastInsertedId = $this->DB->lastInsertId();
+
+        $sqlInsertReservationHasEvent = "INSERT INTO festival_reservationhasevent (Id_Date, ID_RESERVATION) VALUES (:Id_Date, :ID_RESERVATION)";
+        $statement = $this->DB->prepare($sqlInsertReservationHasEvent);
+        $statement->execute([
+            ":Id_Date" => $resa->getIdDate(),
+            ":ID_RESERVATION" => $lastInsertedId,
+        ]);
+
         return $statement->rowCount() > 0;
     }
+
     function getAllReservationFromDB(): array
     {
         $sql = "SELECT * FROM festival_reservation";
