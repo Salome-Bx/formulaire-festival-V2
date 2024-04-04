@@ -1,5 +1,4 @@
-<?php include __DIR__ . '/includes/header.php'; ?>
-<form action="" id="inscriptionUser" method="POST">
+<form action="inscription" id="inscriptionUser" method="POST">
     <div id="coordonnees" class="blocFormulaire">
 
         <h2>Modification des coordonnées</h2>
@@ -29,8 +28,3 @@
         <input type="submit" class="bouton" value="s'inscrire">
     </div>
 </form>
-</body>
-<?php include __DIR__ . '/includes/footer.php'; ?>
-
-
-</html>

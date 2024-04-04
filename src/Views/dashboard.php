@@ -15,7 +15,7 @@ switch ($section) {
         break;
 
     default:
-        # code...
+        include_once __DIR__ . '/reservation/FormReservationTicket.php';
         break;
 }
 
