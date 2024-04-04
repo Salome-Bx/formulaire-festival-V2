@@ -2,6 +2,7 @@
 
 use src\Repositories\ReservationRepository;
 use src\Models\Reservation;
+
 require_once __DIR__ . "/includes/header.php";
 $reservationRepository = new ReservationRepository();
 $event = $reservationRepository->getEventFromDB();
@@ -26,11 +27,11 @@ $event = $reservationRepository->getEventFromDB();
 
         <!-- Si case cochée, afficher le choix du jour -->
         <section id="pass1jourDate" class="">
-            <input type="checkbox" name="choixJour1" id="choixJour1" value="<?= $event[0]["Id_Date"] ?>">
+            <input type="checkbox" name="choixJour1" id="choixJour" value="<?= $event[0]["Id_Date"] ?>">
             <label for="choixJour1"><?= $event[0]["Name"] ?> du <?= $event[0]["Date_Start"] ?></label>
-            <input type="checkbox" name="choixJour2" id="choixJour2" value="<?= $event[1]["Id_Date"] ?>">
+            <input type="checkbox" name="choixJour2" id="choixJour" value="<?= $event[1]["Id_Date"] ?>">
             <label for="choixJour2"><?= $event[1]["Name"] ?> du <?= $event[1]["Date_Start"] ?></label>
-            <input type="checkbox" name="choixJour3" id="choixJour3" value="<?= $event[2]["Id_Date"] ?>">
+            <input type="checkbox" name="choixJour3" id="choixJour" value="<?= $event[2]["Id_Date"] ?>">
             <label for="choixJour3"><?= $event[2]["Name"] ?> du <?= $event[2]["Date_Start"] ?></label>
         </section>
 
@@ -41,9 +42,9 @@ $event = $reservationRepository->getEventFromDB();
 
         <!-- Si case cochée, afficher le choix des jours -->
         <section id="pass2joursDate" class="">
-            <input type="checkbox" name="choixJour12" id="choixJour12">
+            <input type="checkbox" name="choixJour" id="choixJour12">
             <label for="choixJour12"><?= $event[3]["Name"] ?> du <?= $event[3]["Date_Start"] ?> au <?= $event[3]["Date_End"] ?></label>
-            <input type="checkbox" name="choixJour23" id="choixJour23">
+            <input type="checkbox" name="choixJour" id="choixJour23">
             <label for="choixJour23"><?= $event[4]["Name"] ?> du <?= $event[4]["Date_Start"] ?> au <?= $event[4]["Date_End"] ?></label>
         </section>
 
@@ -111,10 +112,10 @@ $event = $reservationRepository->getEventFromDB();
 
         <h3>Venez-vous avec des enfants ?</h3>
         <div class="divenfants">
-            <input type="checkbox" name="enfantsOui"><label for="enfantsOui">Oui</label>
+            <input type="radio" name="enfants"><label for="enfantsOui">Oui</label>
         </div>
         <div class="divenfants">
-            <input type="checkbox" name="enfantsNon"><label for="enfantsNon">Non</label>
+            <input type="radio" name="enfants" checked="checked"><label for="enfantsNon">Non</label>
         </div>
 
 
@@ -122,7 +123,7 @@ $event = $reservationRepository->getEventFromDB();
         <section class="casqueEnfant ">
             <h4>Voulez-vous louer un casque antibruit pour enfants* (2€ / casque) ?</h4>
             <label for="nombreCasquesEnfants">Nombre de casques souhaités :</label>
-            <input type="number" name="nombreCasquesEnfants" id="nombreCasquesEnfants" min="0">
+            <input type="number" name="nombreCasquesEnfants" id="nombreCasquesEnfants" min="0" value="0">
             <p>*Dans la limite des stocks disponibles.</p>
             <div class="messageErreurCasques"></div>
         </section>
@@ -131,7 +132,7 @@ $event = $reservationRepository->getEventFromDB();
 
         <div class="divluge">
             <label for="NombreLugesEte">Nombre de descentes en luge d'été (5€/descentes) :</label>
-            <input type="number" name="NombreLugesEte" id="NombreLugesEte" min="0">
+            <input type="number" name="NombreLugesEte" id="NombreLugesEte" min="0" value="0">
             <div class="messageErreurLuge"></div>
         </div>
 
@@ -140,10 +141,8 @@ $event = $reservationRepository->getEventFromDB();
 
         <button type="submit">Je valide ma réservation</button>
     </div>
-    <!-- <script src="<?php // HOME_URL 
-                        ?>assets/script.js"></script> -->
-    <!-- <script src="<?php // HOME_URL 
-                        ?>assets/traitement.js"></script> -->
+    <!-- <script src="<?php // HOME_URL ?>assets/script.js"></script> -->
+    <!-- <script src="<?php // HOME_URL ?>assets/traitement.js"></script> -->
 
 </form>
 

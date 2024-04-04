@@ -8,11 +8,13 @@ use src\Services\Hydratation;
 class Reservation
 {
     private int $NumberReservation;
-    private bool $Children = false;
+    private bool $Children;
     private int|null $QuantityHeadphone = null;
     private int|null $QuantitySledge = null;
     private int $IdUser = 1;
-
+    private int $passJour;
+    private int $nightTent;
+    private int $nightVan;
 
     use Hydratation;
 
@@ -104,6 +106,42 @@ class Reservation
     public function setIdUser(int $IdUser): self
     {
         $this->IdUser = $IdUser;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of passJour
+     */
+    public function getPassJour(): int
+    {
+        return $this->passJour;
+    }
+
+    /**
+     * Set the value of passJour
+     */
+    public function setPassJour(int $passJour): self
+    {
+        $this->passJour = $passJour;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nightTent
+     */
+    public function getNightTent(): int
+    {
+        return $this->nightTent;
+    }
+
+    /**
+     * Set the value of nightTent
+     */
+    public function setNightTent(int $nightTent): self
+    {
+        $this->nightTent = $nightTent;
 
         return $this;
     }
