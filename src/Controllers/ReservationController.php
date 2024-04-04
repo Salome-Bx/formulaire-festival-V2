@@ -63,7 +63,9 @@ class ReservationController
             'Children' => $data['enfants'],
             'Id_User' => 1,
             'Price_Reduced' => $data['tarifReduit'] ?? false,
-            'Id_Date' => $data['choixJour']
+            'Id_Date' => $data['choixJour'],
+            'Van' => [$data['vanNuit1'] ?? null, $data['vanNuit2'] ?? null, $data['vanNuit3'] ?? null, $data['van3Nuits'] ?? null],
+            'tente' => [$data['tenteNuit1'] ?? null, $data['tenteNuit2'] ?? null, $data['tenteNuit3'] ?? null, $data['tente3Nuits'] ?? null]
 
             //! plus tard remplacer le 1 par $_SESSION['User_ID']
         ];

@@ -7,15 +7,15 @@ use src\Services\Hydratation;
 
 class Reservation
 {
-    private int $NumberReservation;
-    private bool $Children;
-    private int|null $QuantityHeadphone = null;
-    private int|null $QuantitySledge = null;
-    private int $IdUser = 1;
-    private int $IdDate;
-    private int $nightTent;
-    private int $nightVan;
-    private bool $PriceReduced = false;
+    public int $NumberReservation;
+    public bool $Children;
+    public int|null $QuantityHeadphone = null;
+    public int|null $QuantitySledge = null;
+    public int $IdUser = 1;
+    public int $IdDate;
+    public array $Tente;
+    public array $Van;
+    public bool $PriceReduced = false;
 
     use Hydratation;
 
@@ -130,37 +130,37 @@ class Reservation
     }
 
     /**
-     * Get the value of nightTent
+     * Get the value of Tente
      */
-    public function getNightTent(): int
+    public function getTente(): array
     {
-        return $this->nightTent;
+        return $this->Tente;
     }
 
     /**
-     * Set the value of nightTent
+     * Set the value of Tente
      */
-    public function setNightTent(int $nightTent): self
+    public function setTente(array $Tente): self
     {
-        $this->nightTent = $nightTent;
+        $this->Tente = $Tente;
 
         return $this;
     }
 
     /**
-     * Get the value of nightVan
+     * Get the value of Van
      */
-    public function getNightVan(): int
+    public function getVan(): array
     {
-        return $this->nightVan;
+        return $this->Van;
     }
 
     /**
-     * Set the value of nightVan
+     * Set the value of Van
      */
-    public function setNightVan(int $nightVan): self
+    public function setVan(array $Van): self
     {
-        $this->nightVan = $nightVan;
+        $this->Van = $Van;
 
         return $this;
     }

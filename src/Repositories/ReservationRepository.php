@@ -48,26 +48,37 @@ class ReservationRepository
             ":ID_RESERVATION" => $lastInsertedId,
         ]);
 
-        return $statement->rowCount() > 0;
-
-
         //* Put all options in Night Database
-        $filteredArray = array_filter($resa, function ($key) {
-            return strpos($key, 'tente') !== false || strpos($key, 'van') !== false;
-        }, ARRAY_FILTER_USE_KEY);
 
         $sqlInsertReservationHasEvent = "INSERT INTO festival_reservationhasnight (Id_Date, ID_RESERVATION) VALUES (:Id_Date, :ID_RESERVATION)";
         $statement = $this->DB->prepare($sqlInsertReservationHasEvent);
 
         $lastInsertedId = $this->DB->lastInsertId();
+        var_dump($resa);
+        // Assuming $resa is an instance of src\Models\Reservation
+        $resaArray = get_object_vars($resa);
+        var_dump($lastInsertedId);
 
-        foreach ($filteredArray as $key => $value) {
-            $date = $value;
+        // Now you can access the 'Tente' array and iterate over it
+        foreach ($resaArray['Tente'] as $key => $value) {
+            var_dump($value);
+            if ($value !== null) { // Check if the value is not null
+                // Assuming $statement and $lastInsertedId are defined elsewhere in your code
+                $statement->execute([
+                    ":Id_Date" => $value, // Assuming $value is the date you want to insert
+                    ":ID_RESERVATION" => $lastInsertedId, // Assuming $lastInsertedId is the ID you want to associate with this date
+                ]);
+            }
+        }
 
-            $statement->execute([
-                ":Id_Date" => $date,
-                ":ID_RESERVATION" => $lastInsertedId,
-            ]);
+        foreach ($resa['Van'] as $key => $value) {
+            $Iddate = $value;
+            if ($value) {
+                $statement->execute([
+                    ":Id_Date" => $Iddate,
+                    ":ID_RESERVATION" => $lastInsertedId,
+                ]);
+            }
         }
 
         //* Check if the last execute was successful
