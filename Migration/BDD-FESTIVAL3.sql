@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 04 avr. 2024 à 14:06
+-- Généré le : ven. 05 avr. 2024 à 11:42
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.2.13
 
@@ -95,27 +95,25 @@ CREATE TABLE IF NOT EXISTS `festival_reservation` (
   `Price_Reduced` tinyint NOT NULL,
   PRIMARY KEY (`ID_RESERVATION`),
   KEY `Reservation_USER_FK` (`Id_User`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `festival_reservation`
 --
 
 INSERT INTO `festival_reservation` (`ID_RESERVATION`, `Number_Reservation`, `Quantity_Sledge`, `Quantity_Headphone`, `Children`, `Id_User`, `Price_Reduced`) VALUES
-(30, 1, 0, 0, 1, 1, 0),
-(31, 1, 0, 0, 1, 1, 0),
-(32, 1, 0, 0, 1, 1, 0),
-(33, 1, 0, 0, 1, 1, 0),
-(34, 1, 0, 0, 1, 1, 0),
-(35, 1, 0, 0, 1, 1, 0),
-(36, 1, 2, 2, 1, 1, 0),
-(37, 1, 0, 0, 1, 1, 0),
-(38, 1, 0, 0, 1, 1, 0),
-(39, 1, 0, 0, 1, 1, 0),
-(40, 1, 0, 0, 1, 1, 0),
-(41, 1, 0, 0, 1, 1, 0),
-(42, 1, 0, 0, 1, 1, 0),
-(43, 1, 0, 0, 1, 1, 0);
+(102, 3, 3, 2, 1, 1, 0),
+(103, 1, 0, 0, 1, 2, 0),
+(104, 1, 0, 0, 1, 2, 0),
+(105, 1, 0, 0, 1, 2, 0),
+(106, 1, 2, 2, 1, 2, 0),
+(107, 1, 2, 2, 1, 2, 0),
+(108, 1, 0, 0, 1, 2, 0),
+(109, 1, 0, 0, 1, 2, 0),
+(110, 1, 1, 1, 1, 2, 0),
+(111, 1, 0, 0, 1, 2, 0),
+(112, 1, 0, 0, 1, 2, 0),
+(113, 1, 2, 2, 1, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -136,20 +134,18 @@ CREATE TABLE IF NOT EXISTS `festival_reservationhasevent` (
 --
 
 INSERT INTO `festival_reservationhasevent` (`Id_Date`, `ID_RESERVATION`) VALUES
-(6, 30),
-(6, 31),
-(6, 32),
-(6, 33),
-(6, 34),
-(6, 35),
-(1, 36),
-(1, 37),
-(1, 38),
-(1, 39),
-(1, 40),
-(1, 41),
-(1, 42),
-(1, 43);
+(1, 102),
+(1, 103),
+(1, 104),
+(1, 105),
+(1, 106),
+(1, 107),
+(1, 108),
+(1, 109),
+(1, 110),
+(1, 111),
+(1, 112),
+(1, 113);
 
 -- --------------------------------------------------------
 
@@ -164,6 +160,28 @@ CREATE TABLE IF NOT EXISTS `festival_reservationhasnight` (
   PRIMARY KEY (`Id_Date`,`ID_RESERVATION`),
   KEY `ReservationHasNight_Reservation0_FK` (`ID_RESERVATION`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `festival_reservationhasnight`
+--
+
+INSERT INTO `festival_reservationhasnight` (`Id_Date`, `ID_RESERVATION`) VALUES
+(1, 102),
+(2, 102),
+(5, 102),
+(7, 102),
+(1, 106),
+(2, 106),
+(5, 106),
+(6, 106),
+(1, 107),
+(2, 107),
+(5, 107),
+(6, 107),
+(1, 110),
+(5, 110),
+(1, 113),
+(5, 113);
 
 -- --------------------------------------------------------
 
@@ -183,14 +201,16 @@ CREATE TABLE IF NOT EXISTS `festival_user` (
   `mail` varchar(50) NOT NULL,
   PRIMARY KEY (`Id_User`),
   UNIQUE KEY `USER_AK` (`mail`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `festival_user`
 --
 
 INSERT INTO `festival_user` (`Id_User`, `lastName`, `firstName`, `password`, `address`, `telephone`, `User_Role`, `mail`) VALUES
-(1, 'Dupont', 'Pierre', 'azdazdazd', '4 rue Victor Hugo 38000 Grenoble', 612345678, 0, 'email@gmail.com');
+(1, 'Dupont', 'Pierre', 'azdazdazd', '4 rue Victor Hugo 38000 Grenoble', 612345678, 0, 'email@gmail.com'),
+(2, 'Vanhove', 'Killian', '$2y$10$7gxIezE835LN5520rHMSROlawN8c4hW4ItAMZAyCyuHBR22JaZ3lS', '22 TER RUE DE LA CHARTREUSE', 777033128, 0, 'killian2908@gmail.com'),
+(3, 'kiki', 'kika', '$2y$10$S62snxUbeFGAD/IwLS9u8.uX3xTOZbXKGVpb9L3u/0Dskto5vJp3q', '22 TER RUE DE LA CHARTREUSE', 789456123, 0, 'kiki@gmail.com');
 
 --
 -- Contraintes pour les tables déchargées

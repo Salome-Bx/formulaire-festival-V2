@@ -13,3 +13,4 @@ INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('6', '5', 'Ten
 INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('7', '5', 'Tente jour 3');
 INSERT INTO `festival_night` (`Id_Date`, `Price`, `Name`) VALUES ('8', '12', 'Tente 3 jours');
 ALTER TABLE `festival_reservationhasnight` DROP `Date`;
+ALTER TABLE `festival_reservation` ADD `Price_Reduced` TINYINT NOT NULL AFTER `Id_User`;
