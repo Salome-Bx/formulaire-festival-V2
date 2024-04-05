@@ -6,7 +6,7 @@ $reservationRepository = new ReservationRepository();
 $event = $reservationRepository->getEventFromDB();
 ?>
 
-<form action="" id="reservation" method="POST" class="blocFormulaire flex flex-col m-auto w-1/2">
+<form action="<?php HOME_URL ?>/dashboard/reservation/new" id="reservation" method="POST" class="blocFormulaire flex flex-col m-auto w-1/2">
     <div id="reservation" class="blocFormulaire">
         <h2>Réservation</h2>
         <h3>Nombre de réservation(s) :</h3>

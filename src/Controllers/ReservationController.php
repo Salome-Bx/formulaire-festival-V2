@@ -15,10 +15,10 @@ class ReservationController
 
 
 
-    public function index($Id_User)
+    public function index($User)
     {
-        // $Reservation = $this->ReservationRepository->getAllReservationFromDB();
-        $this->render("Dashboard", ['section' => 'Reservation', 'action' => 'new']);
+        $Reservation = $this->ReservationRepository->getAllReservationFromDB();
+        $this->render("Dashboard", ['section' => 'Reservation', 'action' => 'new', 'allresa' => $Reservation, 'User' => $User]);
     }
 
     public function details($id)
@@ -65,7 +65,7 @@ class ReservationController
         ];
         $resa = new Reservation($data);
         $ReservationRepository = new ReservationRepository();
-        $ReservationRepository->putReservationInDB($resa,$Id_User);
+        $ReservationRepository->putReservationInDB($resa, $Id_User);
     }
 
     public function delete($id)
@@ -74,8 +74,8 @@ class ReservationController
         $Reservation = $this->ReservationRepository->getReservationFromDB($id);
         $this->render("Dashboard", ['section' => 'Reservation', 'Reservation' => $Reservation]);
     }
-    public function new()
+    public function new($User)
     {
-        $this->render("dashboard", ['section' => 'reservation', 'action' => 'new']);
+        $this->render("dashboard", ['section' => 'reservation', 'action' => 'new', 'User' => $User]);
     }
 }

@@ -44,7 +44,6 @@ switch ($route) {
 
 
   case str_contains($route, "dashboard"):
-    $User = unserialize($_SESSION['user']);
     // On a ici toutes les routes qu'on a à partir de dashboard
     $User = unserialize($_SESSION['user']);
     switch ($route) {
@@ -67,11 +66,6 @@ switch ($route) {
         }
         break;
 
-
-
-
-
-
       case str_contains($route, "reservation"):
         // On a ici toutes les routes qu'on peut faire
         switch ($route) {
@@ -80,9 +74,9 @@ switch ($route) {
             if ($methode === "POST") {
               $data = $_POST;
               $ReservationController->save($data, $User->getIdUser());
-              $UserController->index();
+              $ReservationController->index($User);
             } else {
-              $ReservationController->new();
+              $ReservationController->new($User);
             }
             break;
 

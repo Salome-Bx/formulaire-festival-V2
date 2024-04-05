@@ -1,20 +1,15 @@
-<link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?php HOME_URL ?>assets/responsive.css">
-<link rel="stylesheet" href="<?php HOME_URL ?>assets/style.css">
-<link rel="stylesheet" href="<?php HOME_URL ?>assets/styles.css">
-
 <div class="">
   <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <a href="<?php HOME_URL ?>dashboard" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Accueil</a>
+            <a href="<?php HOME_URL ?>/dashboard/monprofil" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Accueil</a>
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="<?php HOME_URL ?>dashboard/reservation/new" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Nouvelle reservation</a>
+              <a href="<?php HOME_URL ?>/dashboard/reservation/new" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Nouvelle reservation</a>
               <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Editer une reservation</a>
             </div>
           </div>
@@ -50,8 +45,8 @@
               </script>
               <div class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" id="menuUser">
                 <!-- Active: "bg-gray-100", Not Active: "" -->
-                <a href="<?php HOME_URL ?>dashboard/monprofil/edit" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                <a href="<?php HOME_URL ?>deconnexion" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                <a href="<?php HOME_URL ?>/dashboard/monprofil/edit" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                <a href="<?php HOME_URL ?>/deconnexion" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
               </div>
             </div>
           </div>
@@ -79,7 +74,7 @@
       <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="<?php HOME_URL ?>dashboard/reservation/new" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Nouvelle reservation</a>
+        <a href="<?php HOME_URL ?>/reservation/new" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Nouvelle reservation</a>
         <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Editer une reservation</a>
       </div>
       <div class="border-t border-gray-700 pb-3 pt-4">
@@ -88,9 +83,9 @@
             <div class="h-8 w-8 rounded-full svg-user border-white border-solid" alt=""></div>
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium leading-none text-white"><?php // echo $User->getFirstName(); 
+            <div class="text-base font-medium leading-none text-white"><?php echo $User->getFirstName();
                                                                         ?></div>
-            <div class="text-sm font-medium leading-none text-gray-400"><?php // echo $User->getLastName(); 
+            <div class="text-sm font-medium leading-none text-gray-400"><?php echo $User->getLastName();
                                                                         ?></div>
           </div>
         </div>
@@ -104,7 +99,7 @@
 
   <div class="bg-white shadow">
     <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Bonjour, <?php // echo $User->getFirstName(); 
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Bonjour, <?php echo $User->getFirstName();
                                                                             ?></h1>
     </div>
   </div>

@@ -13,4 +13,3 @@
         </div>
     </li>
 </ul>
-<?php var_dump($Reservation); ?>

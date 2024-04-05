@@ -1,26 +1,7 @@
-body {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-
 .header {
   margin-top: 40px;
 }
 
-h1 {
-  color: white;
-  font-family: "Satisfy", cursive;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 3em;
-  text-align: center;
-  margin: 0;
-  padding: 0 0 2%;
-  text-shadow: 2px 1px 20px black;
-}
 
 .boutonConnexion {
   background-color: purple;
