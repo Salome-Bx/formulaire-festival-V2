@@ -13,7 +13,16 @@ switch ($section) {
                 break;
         }
         break;
+    case "reservation":
+        switch ($action) {
+            case 'new':
+                include_once __DIR__ . "/reservation/formulaireReservation.php";
+                break;
 
+            default:
+                # code...
+                break;
+        }
     default:
         include_once __DIR__ . '/reservation/FormReservationTicket.php';
         break;

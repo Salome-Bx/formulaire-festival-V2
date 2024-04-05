@@ -18,7 +18,7 @@ class ReservationController
     public function index($Id_User)
     {
         $Reservation = $this->ReservationRepository->getAllReservationFromDB();
-        $this->render("Dashboard", ['section' => 'Reservation', 'action' => '']);
+        $this->render("Dashboard", ['section' => 'Reservation', 'action' => 'new']);
     }
 
     public function details($id)
@@ -40,9 +40,6 @@ class ReservationController
         $this->render('dashboard', ['Reservation' => $Reservation]);
     }
 
-    public function new($data)
-    {
-    }
 
     public function save($data)
     {
@@ -77,5 +74,9 @@ class ReservationController
         $this->ReservationRepository->deleteReservationInDB($id);
         $Reservation = $this->ReservationRepository->getReservationFromDB($id);
         $this->render("Dashboard", ['section' => 'Reservation', 'Reservation' => $Reservation]);
+    }
+    public function new() {
+        $this->render("dashboard", ['section' => 'reservation', 'action' => 'new']);
+
     }
 }

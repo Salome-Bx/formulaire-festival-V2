@@ -42,6 +42,11 @@ class HomeController
         die();
     }
 
+    public function new()
+    {
+        $this->render("dashboard", ["section" => 'new', 'action' => 'inscription']);
+    }
+
     public function page404(): void
     {
         header("HTTP/1.1 404 Not Found");

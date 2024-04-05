@@ -1,4 +1,4 @@
-<form action="" id="reservation" method="POST">
+<form action="pageUser/reservation/new" id="reservation" method="POST">
     <div id="reservation" class="blocFormulaire">
 
         <h2>Réservation</h2>

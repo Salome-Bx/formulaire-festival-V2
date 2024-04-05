@@ -9,7 +9,7 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="/pageUser/reservation/new" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Nouvelle reservation</a>
+              <a href="/dashboard/reservation/new" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Nouvelle reservation</a>
               <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Editer une reservation</a>
             </div>
           </div>
@@ -74,7 +74,7 @@
       <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="/pageUser/reservation/new" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Nouvelle reservation</a>
+        <a href="/dashboard/reservation/new" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Nouvelle reservation</a>
         <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Editer une reservation</a>
       </div>
       <div class="border-t border-gray-700 pb-3 pt-4">
@@ -83,8 +83,8 @@
             <div class="h-8 w-8 rounded-full svg-user border-white border-solid" alt=""></div>
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium leading-none text-white"><?php echo $User->getFirstName(); ?></div>
-            <div class="text-sm font-medium leading-none text-gray-400"><?php echo $User->getLastName(); ?></div>
+            <div class="text-base font-medium leading-none text-white"><?php // echo $User->getFirstName(); ?></div>
+            <div class="text-sm font-medium leading-none text-gray-400"><?php // echo $User->getLastName(); ?></div>
           </div>
         </div>
         <div class="mt-3 space-y-1 px-2">
@@ -97,7 +97,7 @@
 
   <div class="bg-white shadow">
     <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Bonjour, <?php echo $User->getFirstName(); ?></h1>
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Bonjour, <?php // echo $User->getFirstName(); ?></h1>
     </div>
   </div>
 </div>
