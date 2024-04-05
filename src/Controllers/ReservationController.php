@@ -17,7 +17,7 @@ class ReservationController
 
     public function index($Id_User)
     {
-        $Reservation = $this->ReservationRepository->getAllReservationFromDB();
+        // $Reservation = $this->ReservationRepository->getAllReservationFromDB();
         $this->render("Dashboard", ['section' => 'Reservation', 'action' => 'new']);
     }
 
@@ -34,14 +34,13 @@ class ReservationController
     }
     public function show($Id_User)
     {
-        var_dump($Id_User);
         $_SESSION['Reservation'] = $this->ReservationRepository->getAllReservationFromDB($Id_User);
         $Reservation = $_SESSION['Reservation'];
         $this->render('dashboard', ['Reservation' => $Reservation]);
     }
 
 
-    public function save($data)
+    public function save($data, $Id_User)
     {
         // $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'new']);
 
@@ -57,7 +56,6 @@ class ReservationController
             'Quantity_Sledge' => $data['NombreLugesEte'],
             'Quantity_Headphone' => $data['nombreCasquesEnfants'],
             'Children' => $data['enfants'],
-            'Id_User' => 1,
             'Price_Reduced' => $data['tarifReduit'] ?? false,
             'Id_Date' => $data['choixJour'],
             'Van' => [$data['vanNuit1'] ?? null, $data['vanNuit2'] ?? null, $data['vanNuit3'] ?? null, $data['van3Nuits'] ?? null],
@@ -66,7 +64,8 @@ class ReservationController
             //! plus tard remplacer le 1 par $_SESSION['User_ID']
         ];
         $resa = new Reservation($data);
-        $this->ReservationRepository->putReservationInDB($resa);
+        $ReservationRepository = new ReservationRepository();
+        $ReservationRepository->putReservationInDB($resa,$Id_User);
     }
 
     public function delete($id)
@@ -75,8 +74,8 @@ class ReservationController
         $Reservation = $this->ReservationRepository->getReservationFromDB($id);
         $this->render("Dashboard", ['section' => 'Reservation', 'Reservation' => $Reservation]);
     }
-    public function new() {
+    public function new()
+    {
         $this->render("dashboard", ['section' => 'reservation', 'action' => 'new']);
-
     }
 }

@@ -11,7 +11,7 @@ class Reservation
     public bool $Children;
     public int|null $QuantityHeadphone = null;
     public int|null $QuantitySledge = null;
-    public int $IdUser = 1;
+    public  $IdUser;
     public int $IdDate;
     public array $Tente;
     public array $Van;
@@ -96,7 +96,7 @@ class Reservation
     /**
      * Get the value of IdUser
      */
-    public function getIdUser(): int
+    public function getIdUser()
     {
         return $this->IdUser;
     }
@@ -104,7 +104,7 @@ class Reservation
     /**
      * Set the value of IdUser
      */
-    public function setIdUser(int $IdUser): self
+    public function setIdUser($IdUser): self
     {
         $this->IdUser = $IdUser;
 

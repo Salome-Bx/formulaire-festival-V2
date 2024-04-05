@@ -5,9 +5,8 @@ use src\Repositories\ReservationRepository;
 $reservationRepository = new ReservationRepository();
 $event = $reservationRepository->getEventFromDB();
 ?>
-<link rel="stylesheet" href="../../../Public/assets/style.css">
-<link rel="stylesheet" href="../../../Public/assets/styles.css">
-<form action="formulaireReservation" id="reservation" method="POST">
+
+<form action="" id="reservation" method="POST" class="blocFormulaire flex flex-col m-auto w-1/2">
     <div id="reservation" class="blocFormulaire">
         <h2>Réservation</h2>
         <h3>Nombre de réservation(s) :</h3>
@@ -136,7 +135,5 @@ $event = $reservationRepository->getEventFromDB();
         <br>
         <button type="submit">Je valide ma réservation</button>
     </div>
-    <script src="<?php HOME_URL ?>assets/script.js"></script>
-    <!-- <script src="<?php HOME_URL ?>assets/traitement.js"></script> -->
 
 </form>

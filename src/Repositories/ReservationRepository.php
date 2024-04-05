@@ -21,7 +21,7 @@ class ReservationRepository
 
     //* Create Reservation in Database
 
-    function putReservationInDB($resa): bool
+    public function putReservationInDB($resa, $Id_User): bool
     {
         // Put Reservation in Database
         $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User, Price_Reduced) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User, :Price_Reduced)";
@@ -33,7 +33,7 @@ class ReservationRepository
             ":Quantity_Sledge" => $resa->getQuantitySledge(),
             ":Quantity_Headphone" => $resa->getQuantityHeadphone(),
             ":Children" => $resa->getChildren(),
-            ":Id_User" => $resa->getIdUser(),
+            ":Id_User" => $Id_User,
             ":Price_Reduced" => $resa->getPriceReduced(),
         ]);
 

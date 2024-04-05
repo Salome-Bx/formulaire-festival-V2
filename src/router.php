@@ -44,7 +44,7 @@ switch ($route) {
   case str_contains($route, "dashboard"):
 
     // On a ici toutes les routes qu'on a à partir de dashboard
-
+    $User = unserialize($_SESSION['user']);
     switch ($route) {
 
       case str_contains($route, "monprofil"):
@@ -79,7 +79,8 @@ switch ($route) {
 
             if ($methode === "POST") {
               $data = $_POST;
-              $ReservationController->save($data);
+              $ReservationController->save($data, $User->getIdUser());
+              $UserController->index();
             } else {
               $ReservationController->new();
             }
@@ -105,7 +106,7 @@ switch ($route) {
 
           default:
             // par défaut on voit la liste des films.
-            $ReservationController->index($IdUser);
+            $ReservationController->index($User->getIdUser());
             break;
         }
         break;
