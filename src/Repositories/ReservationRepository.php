@@ -20,7 +20,7 @@ class ReservationRepository
     }
 
     //* Create Reservation in Database
-   
+
     function putReservationInDB($resa): bool
     {
         // Put Reservation in Database
@@ -53,7 +53,7 @@ class ReservationRepository
         $resaArray = get_object_vars($resa);
 
         foreach ($resaArray['Tente'] as $key => $value) {
-            if ($value !== null) { 
+            if ($value !== null) {
                 $statement->execute([
                     ":Id_Date" => $value,
                     ":ID_RESERVATION" => $lastInsertedId,
@@ -64,24 +64,25 @@ class ReservationRepository
         foreach ($resaArray['Van'] as $key => $value) {
             if ($value !== null) {
                 $statement->execute([
-                    ":Id_Date" => $value, 
+                    ":Id_Date" => $value,
                     ":ID_RESERVATION" => $lastInsertedId,
                 ]);
             }
         }
 
-      
+
         return $statement->rowCount() > 0;
     }
 
 
 
-    function getAllReservationFromDB(): array
+    function getAllReservationFromDB($Id_User): array
     {
-        $sql = "SELECT * FROM festival_reservation";
-
-
-        $statement = $this->DB->getDB()->prepare($sql);
+        $sql = "SELECT * FROM festival_reservation, reservationhasnight, reservationhasevent WHERE Id_User = :Id_User GROUP BY :Id_User";
+        $statement = $this->DB->prepare($sql);
+        $statement->execute()([
+            ":Id_User" => $Id_User,
+        ]);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -92,7 +93,7 @@ class ReservationRepository
         $sql = "SELECT * FROM festival_reservation WHERE :Id_User";
 
 
-        $statement = $this->DB->getDB()->prepare($sql);
+        $statement = $this->DB->prepare($sql);
         $statement->execute([
             ":Id_User" => $Id_User
         ]);
@@ -104,7 +105,7 @@ class ReservationRepository
     {
         $sql = "UPDATE festival_reservation SET Number_Reservation = :Number_Reservation, Quantity_Sledge = :Quantity_Sledge, Quantity_Headphone = :Quantity_Headphone, Children = :Children WHERE Id_User = :Id_User";
 
-        $statement = $this->DB->getDB()->prepare($sql);
+        $statement = $this->DB->prepare($sql);
         $reservation = $this->resa;
         $statement->execute([
             ":Number_Reservation" => $reservation->getQuantitySledge(),
@@ -122,7 +123,7 @@ class ReservationRepository
     {
         $sql = "DELETE FROM festival_reservation WHERE Id_User = :Id_User";
 
-        $statement = $this->DB->getDB()->prepare($sql);
+        $statement = $this->DB->prepare($sql);
         $reservation = $this->resa;
         $statement->execute([
             ":Id_User" => $Id_User

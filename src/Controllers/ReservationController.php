@@ -32,10 +32,12 @@ class ReservationController
         $Reservation = $this->ReservationRepository->editThisReservationInDB($id);
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'edit']);
     }
-    public function show($id)
+    public function show($Id_User)
     {
-        $Reservation = $this->ReservationRepository->getReservationFromDB($id);
-        $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'show']);
+        var_dump($Id_User);
+        $_SESSION['Reservation'] = $this->ReservationRepository->getAllReservationFromDB($Id_User);
+        $Reservation = $_SESSION['Reservation'];
+        $this->render('dashboard', ['Reservation' => $Reservation]);
     }
 
     public function new($data)
