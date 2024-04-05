@@ -26,7 +26,6 @@ class UserController
         $User = unserialize($_SESSION['user']);
         $ReservationRepository = new ReservationRepository;
         $Reservation = $ReservationRepository->getAllReservationFromDB($User->getIdUser());
-
         $this->render('dashboard', ['User' => $User, 'allresa' => $Reservation]);
     }
 

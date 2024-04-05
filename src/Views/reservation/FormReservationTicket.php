@@ -4,7 +4,7 @@
             <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="" alt="">
             <div class="min-w-0 flex-auto">
                 <p class="text-sm font-semibold leading-6 text-gray-900">Nom du festival</p>
-                <p class="mt-1 truncate text-xs leading-5 text-gray-500">nbrs resa</p>
+                <p class="mt-1 truncate text-xs leading-5 text-gray-500"><?= $allresa['Number_Reservation'] ?> <?= $allresa['Quantity_Sledge'] ?> <?= $allresa['Quantity_Headphone'] ?> <?= $allresa['Children'] ?> <?= $allresa['Id_Date'] ?></p>
             </div>
         </div>
         <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">

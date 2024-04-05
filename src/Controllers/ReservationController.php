@@ -19,19 +19,19 @@ class ReservationController
     {
         $ReservationRepository = new ReservationRepository;
         $Reservation = $ReservationRepository->getAllReservationFromDB($User->getIdUser());
-        $this->render("Dashboard", ['section' => 'Reservation', 'action' => 'new', 'allresa' => $Reservation, 'User' => $User]);
+        $this->render("dashboard", ['section' => 'Reservation', 'action' => 'new', 'allresa' => $Reservation, 'User' => $User]);
     }
 
     public function details($id)
     {
         $Reservation = $this->ReservationRepository->getReservationFromDB($id);
-        $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'details']);
+        $this->render('dashboard', ['section' => 'Reservation', 'action' => 'details']);
     }
 
     public function edit($id)
     {
         $Reservation = $this->ReservationRepository->editThisReservationInDB($id);
-        $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'edit']);
+        $this->render('dashboard', ['section' => 'Reservation', 'action' => 'edit']);
     }
     public function show($Id_User)
     {
