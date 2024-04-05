@@ -35,13 +35,13 @@ class UserController
                 $data[$key] = htmlspecialchars($value);
             }
         }
-        $data = htmlspecialchars(trim(strip_tags($data['nom'])));
-        $data = htmlspecialchars(trim(strip_tags($data['prenom'])));
-        $data = htmlspecialchars(trim(strip_tags($data['password'])));
-        $data = htmlspecialchars(trim(strip_tags($data['passwordBis'])));
-        $data = htmlspecialchars(trim(strip_tags($data['adressePostale'])));
-        $data = htmlspecialchars(trim(strip_tags($data['telephone'])));
-        $data = htmlspecialchars(trim(strip_tags($data['email'])));
+        $data['nom'] = htmlspecialchars(trim(strip_tags($data['nom'])));
+        $data['prenom'] = htmlspecialchars(trim(strip_tags($data['prenom'])));
+        $data['password'] = htmlspecialchars(trim(strip_tags($data['password'])));
+        $data['passwordBis'] = htmlspecialchars(trim(strip_tags($data['passwordBis'])));
+        $data['adressePostale'] = htmlspecialchars(trim(strip_tags($data['adressePostale'])));
+        $data['telephone'] = htmlspecialchars(trim(strip_tags($data['telephone'])));
+        $data['email'] = htmlspecialchars(trim(strip_tags($data['email'])));
 
         if ($data['password'] === $data['passwordBis']) {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);

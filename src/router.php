@@ -81,7 +81,7 @@ switch ($route) {
               $data = $_POST;
               $ReservationController->save($data);
             } else {
-              $ReservationController->new();
+              $ReservationController->new($data);
             }
             break;
 
