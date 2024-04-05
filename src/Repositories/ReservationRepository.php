@@ -20,10 +20,10 @@ class ReservationRepository
     }
 
     //* Create Reservation in Database
+   
     function putReservationInDB($resa): bool
     {
-
-        //* Put Reservation in Database
+        // Put Reservation in Database
         $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User, Price_Reduced) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User, :Price_Reduced)";
 
         $statement = $this->DB->prepare($sql);
@@ -37,8 +37,7 @@ class ReservationRepository
             ":Price_Reduced" => $resa->getPriceReduced(),
         ]);
 
-
-        //* Put Event Reservation in Database
+        // Put Event Reservation in Database
         $lastInsertedId = $this->DB->lastInsertId();
 
         $sqlInsertReservationHasEvent = "INSERT INTO festival_reservationhasevent (Id_Date, ID_RESERVATION) VALUES (:Id_Date, :ID_RESERVATION)";
@@ -48,40 +47,30 @@ class ReservationRepository
             ":ID_RESERVATION" => $lastInsertedId,
         ]);
 
-        //* Put all options in Night Database
+        $sqlInsertReservationHasNight = "INSERT INTO festival_reservationhasnight (Id_Date, ID_RESERVATION) VALUES (:Id_Date, :ID_RESERVATION)";
+        $statement = $this->DB->prepare($sqlInsertReservationHasNight);
 
-        $sqlInsertReservationHasEvent = "INSERT INTO festival_reservationhasnight (Id_Date, ID_RESERVATION) VALUES (:Id_Date, :ID_RESERVATION)";
-        $statement = $this->DB->prepare($sqlInsertReservationHasEvent);
-
-        $lastInsertedId = $this->DB->lastInsertId();
-        var_dump($resa);
-        // Assuming $resa is an instance of src\Models\Reservation
         $resaArray = get_object_vars($resa);
-        var_dump($lastInsertedId);
 
-        // Now you can access the 'Tente' array and iterate over it
         foreach ($resaArray['Tente'] as $key => $value) {
-            var_dump($value);
-            if ($value !== null) { // Check if the value is not null
-                // Assuming $statement and $lastInsertedId are defined elsewhere in your code
+            if ($value !== null) { 
                 $statement->execute([
-                    ":Id_Date" => $value, // Assuming $value is the date you want to insert
-                    ":ID_RESERVATION" => $lastInsertedId, // Assuming $lastInsertedId is the ID you want to associate with this date
-                ]);
-            }
-        }
-
-        foreach ($resa['Van'] as $key => $value) {
-            $Iddate = $value;
-            if ($value) {
-                $statement->execute([
-                    ":Id_Date" => $Iddate,
+                    ":Id_Date" => $value,
                     ":ID_RESERVATION" => $lastInsertedId,
                 ]);
             }
         }
 
-        //* Check if the last execute was successful
+        foreach ($resaArray['Van'] as $key => $value) {
+            if ($value !== null) {
+                $statement->execute([
+                    ":Id_Date" => $value, 
+                    ":ID_RESERVATION" => $lastInsertedId,
+                ]);
+            }
+        }
+
+      
         return $statement->rowCount() > 0;
     }
 
