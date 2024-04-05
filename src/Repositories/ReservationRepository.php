@@ -76,12 +76,14 @@ class ReservationRepository
 
 
 
-    function getAllReservationFromDB($Id_User): array
+    public function getAllReservationFromDB($Id_User)
     {
-        $sql = "SELECT * FROM festival_reservation, reservationhasnight, reservationhasevent WHERE Id_User = :Id_User GROUP BY :Id_User";
+        $sql = "SELECT * FROM festival_reservation, festival_reservationhasnight, festival_reservationhasevent
+        WHERE Id_User = :Id_User GROUP BY Id_User";
+
         $statement = $this->DB->prepare($sql);
-        $statement->execute()([
-            ":Id_User" => $Id_User,
+        $statement->execute([
+            ":Id_User" => $Id_User
         ]);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }

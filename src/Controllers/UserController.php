@@ -3,6 +3,7 @@
 namespace src\Controllers;
 
 use src\Models\User;
+use src\Repositories\ReservationRepository;
 use src\Repositories\UserRepository;
 use src\Services\Reponse;
 
@@ -23,8 +24,10 @@ class UserController
     public function index()
     {
         $User = unserialize($_SESSION['user']);
+        $ReservationRepository = new ReservationRepository;
+        $Reservation = $ReservationRepository->getAllReservationFromDB($User->getIdUser());
 
-        $this->render('dashboard', ['User' => $User]);
+        $this->render('dashboard', ['User' => $User, 'allresa' => $Reservation]);
     }
 
     public function registerUser($data)

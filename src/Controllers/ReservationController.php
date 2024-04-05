@@ -17,7 +17,8 @@ class ReservationController
 
     public function index($User)
     {
-        $Reservation = $this->ReservationRepository->getAllReservationFromDB();
+        $ReservationRepository = new ReservationRepository;
+        $Reservation = $ReservationRepository->getAllReservationFromDB($User->getIdUser());
         $this->render("Dashboard", ['section' => 'Reservation', 'action' => 'new', 'allresa' => $Reservation, 'User' => $User]);
     }
 
