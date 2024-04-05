@@ -46,10 +46,10 @@ final class Database
             // Télécharger le(s) fichier(s) sql d'initialisation dans la BDD
             // Et effectuer les différentes migrations
             try {
-                $i = 0;
+                $i = 1;
                 $migrationExistante = TRUE;
                 while ($migrationExistante === TRUE) {
-                    $migration = __DIR__ . "/../Migrations/BDD-FESTIVAL$i.sql";
+                    $migration = __DIR__ . "/../../Migration/BDD-FESTIVAL$i.sql";
                     if (file_exists($migration)) {
                         $sql = file_get_contents($migration);
                         $this->DB->query($sql);
@@ -75,9 +75,9 @@ final class Database
      */
     private function testIfTableReservationExists(): bool
     {
-        $existant = $this->DB->query('SHOW TABLES FROM ' . DB_NAME . ' like \'%reservation%\'')->fetch();
+        $existant = $this->DB->query('SHOW TABLES FROM ' . DB_NAME . ' like \'%user%\'')->fetch();
 
-        if ($existant !== false && $existant[0] == PREFIXE . "reservation") {
+        if ($existant !== false && $existant[0] == PREFIXE . "user") {
             return true;
         } else {
             return false;
