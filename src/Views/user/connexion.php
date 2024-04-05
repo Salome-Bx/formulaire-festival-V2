@@ -3,9 +3,9 @@
 
     <form action="connexion" id="connexion" method="POST" class="flex flex-col m-auto w-1/2">
         <label for="emailConnexion">Email :</label>
-        <input type="email" name="emailConnexion" id="emailConnexion" value="plazdzasasssaop@gmail.com">
+        <input type="email" name="emailConnexion" id="emailConnexion" value="">
         <label for="motDePasseConnexion">Mot de passe :</label>
-        <input type="password" name="motDePasseConnexion" id="motDePasseConnexion" value="azdazdazd">
+        <input type="password" name="motDePasseConnexion" id="motDePasseConnexion" value="">
         <input type="submit" class="bouton m-2 bg-sky-900 text-white rounded" value="Connexion">
         <?php
         if (!empty($_GET['erreur'])) {
