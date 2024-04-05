@@ -61,7 +61,7 @@ switch ($route) {
             break;
 
           default:
-            $UserController->index();
+            $UserController->index($User);
             break;
         }
         break;
@@ -106,7 +106,7 @@ switch ($route) {
         break;
 
       default:
-        $UserController->index();
+        $UserController->index($User);
         break;
     }
 
@@ -127,7 +127,7 @@ switch ($route) {
         $HomeController->quit();
         break;
       default:
-        $UserController->index();
+
         break;
     }
 

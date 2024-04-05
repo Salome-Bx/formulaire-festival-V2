@@ -21,9 +21,9 @@ class UserController
         // $this->ReservationRepo = new ReservationRepository();
     }
 
-    public function index()
+    public function index($User)
     {
-        $User = unserialize($_SESSION['user']);
+        
         $ReservationRepository = new ReservationRepository;
         $Reservation = $ReservationRepository->getAllReservationFromDB($User->getIdUser());
         $this->render('dashboard', ['User' => $User, 'allresa' => $Reservation]);
