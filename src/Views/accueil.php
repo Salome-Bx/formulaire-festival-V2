@@ -1,6 +1,9 @@
 <?php include __DIR__ . '/includes/header.php'; ?>
 <?php include __DIR__ . '/includes/navigation.php'; ?>
 <?php
+if (isset($succes) && !empty($succes)) {
+    echo '<div class="font-bold text-center text-green-500">' . $succes . '</div>';
+}
 switch ($section) {
     case 'menu':
         switch ($action) {

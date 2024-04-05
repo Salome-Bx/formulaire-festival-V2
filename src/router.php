@@ -10,6 +10,8 @@ $HomeController = new HomeController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
+
+
 switch ($route) {
   case str_contains($route, "connexion"):
     if ($methode === 'POST') {
@@ -42,9 +44,8 @@ switch ($route) {
 
 
   case str_contains($route, "dashboard"):
-
+    $User = unserialize($_SESSION['user']);
     // On a ici toutes les routes qu'on a à partir de dashboard
-
     switch ($route) {
 
       case str_contains($route, "monprofil"):
@@ -53,9 +54,7 @@ switch ($route) {
           case str_contains($route, "edit"):
             if ($methode === "POST") {
               $data = $_POST;
-              $IdUser = explode('/', $route);
-              $IdUser = end($IdUser);
-              $UserController->updateThisUser($data, $IdUser);
+              $UserController->updateThisUser($data, $User->getIdUser());
             } else {
               $UserController->monProfil();
             }
@@ -104,8 +103,7 @@ switch ($route) {
             break;
 
           default:
-            // par défaut on voit la liste des films.
-            $ReservationController->index($IdUser);
+            $ReservationController->index($User->getIdUser());
             break;
         }
         break;

@@ -17,8 +17,8 @@ class ReservationController
 
     public function index($Id_User)
     {
-        $Reservation = $this->ReservationRepository->getAllReservationFromDB();
-        $this->render("Dashboard", ['section' => 'Reservation', 'action' => '']);
+        $Reservation = $this->ReservationRepository->getAllReservationFromDB($Id_User);
+        $this->render("dashboard", ['Reservation' => $Reservation]);
     }
 
     public function details($id)
@@ -34,10 +34,9 @@ class ReservationController
     }
     public function show($Id_User)
     {
-        var_dump($Id_User);
-        $_SESSION['Reservation'] = $this->ReservationRepository->getAllReservationFromDB($Id_User);
-        $Reservation = $_SESSION['Reservation'];
-        $this->render('dashboard', ['Reservation' => $Reservation]);
+        // $_SESSION['Reservation'] = $this->ReservationRepository->getAllReservationFromDB($Id_User);
+        // $Reservation = $_SESSION['Reservation'];
+        // $this->render('dashboard', ['Reservation' => $Reservation]);
     }
 
     public function new($data)

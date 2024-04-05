@@ -57,6 +57,7 @@ class UserController
             $user = new User($data);
             if (isset($user) && !empty($user)) {
                 $this->UserRepo->saveUser($user);
+                $this->render("accueil", ["section" => 'menu', 'action' => 'connexion', "succes" => "L'inscription est un SUCCES !!!!!"]);
             }
         } else {
             $this->render("accueil", ['section' => 'inscription', "erreur" => 'Les mots de passe ne sont pas identique']);
