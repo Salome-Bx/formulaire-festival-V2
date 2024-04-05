@@ -1,4 +1,4 @@
-<form action="<?= $action == "inscription" ? HOME_URL . "/inscription/new" : HOME_URL . "/dashboard/monprofil/edit/" . $User->getIdUser() . "" ?>" id="inscriptionUser" method="POST" class="flex flex-col m-auto w-1/2">
+<form action="<?= $action == "inscription" ? HOME_URL . "dashboard/inscription/new" : HOME_URL . "/dashboard/monprofil/edit/" . $User->getIdUser() . "" ?>" id="inscriptionUser" method="POST" class="flex flex-col m-auto w-1/2">
     <div id="coordonnees" class="blocFormulaire flex flex-col m-auto w-1/2">
         <?php  ?>
         <?php $action == "inscription" ? "<h2>S'inscrire :</h2>" : "<h2>Mettre à jour mon profil :</h2>" ?> <label for="nom">Nom :</label>
