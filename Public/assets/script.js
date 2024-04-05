@@ -17,39 +17,6 @@ let pass1jourreduit = document.querySelector("#pass1jourreduit");
 let pass2joursreduit = document.querySelector("#pass2joursreduit");
 let pass3joursreduit = document.querySelector("#pass3joursreduit");
 
-/**
- * [Passer de la page Réservation à la page Option si le nombre de réservation est rentré et si une formule est cochée]
- *
- * @param   {[string]}  blocACacher    [Bloc A Cacher ]
- * @param   {[string]}  blocAAfficher  [Bloc A Afficher ]
- *
- */
-function suivant(blocACacher, blocAAfficher) {
-  if (NombrePlaces.value > 0) {
-    if (
-      choixJour1.checked === true ||
-      choixJour2.checked === true ||
-      choixJour3.checked === true ||
-      choixJour12.checked === true ||
-      choixJour23.checked === true ||
-      pass3jours.checked === true ||
-      pass1jourreduit.checked === true ||
-      pass2joursreduit.checked === true ||
-      pass3joursreduit.checked === true
-    ) {
-      blocACacher.classList.add("hidden");
-      blocAAfficher.classList.remove("hidden");
-    } else {
-      //Message erreur jour choisi
-      document.querySelector(".messageErreurReservation").innerText =
-        "Merci de choisir une formule";
-    }
-  } else {
-    // Message erreur réservation
-    document.querySelector(".messageErreurReservation").innerText =
-      "Merci d'indiquer le nombre de réservation souhaité";
-  }
-}
 
 let nombreCasquesEnfants = document.querySelector("#nombreCasquesEnfants");
 let NombreLugesEte = document.querySelector("#NombreLugesEte");
