@@ -43,7 +43,7 @@ class UserController
         $data['telephone'] = htmlspecialchars(trim(strip_tags($data['telephone'])));
         $data['email'] = htmlspecialchars(trim(strip_tags($data['email'])));
 
-        if ($data['password'] === $data['passwordBis']) {
+        if ($data['password'] === $data['passwordBis'] && strlen($data['password']) >= 8) {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             $data = [
                 'LastName' => $data['nom'],
@@ -59,7 +59,7 @@ class UserController
                 $this->UserRepo->saveUser($user);
             }
         } else {
-            var_dump('Erreur : les mots de passe ne sont pas identique.');
+            $this->render("accueil", ['section' => 'inscription', "erreur" => 'Les mots de passe ne sont pas identique']);
         }
     }
 
@@ -100,15 +100,19 @@ class UserController
     public function updateThisUser($data, $IdUser)
     {
         $IdUser = htmlspecialchars(trim(strip_tags($IdUser)));
-        $data = htmlspecialchars(trim(strip_tags($data['nom'])));
-        $data = htmlspecialchars(trim(strip_tags($data['prenom'])));
-        $data = htmlspecialchars(trim(strip_tags($data['password'])));
-        $data = htmlspecialchars(trim(strip_tags($data['adressePostale'])));
-        $data = htmlspecialchars(trim(strip_tags($data['telephone'])));
-        $data = htmlspecialchars(trim(strip_tags($data['email'])));
+        $data['nom'] = htmlspecialchars(trim(strip_tags($data['nom'])));
+        $data['prenom'] = htmlspecialchars(trim(strip_tags($data['prenom'])));
+        $data['password'] = htmlspecialchars(trim(strip_tags($data['password'])));
+        $data['passwordBis'] = htmlspecialchars(trim(strip_tags($data['passwordBis'])));
+        $data['adressePostale'] = htmlspecialchars(trim(strip_tags($data['adressePostale'])));
+        $data['telephone'] = htmlspecialchars(trim(strip_tags($data['telephone'])));
+        $data['email'] = htmlspecialchars(trim(strip_tags($data['email'])));
 
-        $oldPassword = $data['password'];
-        if ($data['password'] === $data['passwordBis']) {
+        if (empty($data['password'])) {
+            $Password = $data['password'];
+        }
+
+        if ($data['password'] === $data['passwordBis'] && strlen($data['password']) >= 8) {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             $data = [
                 'Id_User' => $IdUser,
@@ -125,7 +129,7 @@ class UserController
 
         if (isset($user) && !empty($user)) {
             if ($this->UserRepo->updateThisUser($user)) {
-                $this->authentication($user->getMail(), $oldPassword);
+                $this->authentication($user->getMail(), $Password);
             }
         } else {
             //! erreur 
