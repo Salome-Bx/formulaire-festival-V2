@@ -8,15 +8,12 @@ use src\Services\Reponse;
 
 class ReservationController
 {
-    private Reservation $Resa;
-    private ReservationRepository $ReservationRepository;
+    private $Reservation;
+    private $ReservationRepository;
+
     use Reponse;
 
-    public function __construct()
-    {
-        $this->Resa = new Reservation();
-        $this->ReservationRepository = new ReservationRepository();
-    }
+
 
     public function index($Id_User)
     {
@@ -32,7 +29,7 @@ class ReservationController
 
     public function edit($id)
     {
-        $Reservation = $this->ReservationRepository->edtiReservationInDB($id);
+        $Reservation = $this->ReservationRepository->editThisReservationInDB($id);
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'edit']);
     }
     public function show($id)
