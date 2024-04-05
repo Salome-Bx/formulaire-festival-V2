@@ -38,13 +38,14 @@ class ReservationController
         $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'show']);
     }
 
-    public function new()
+    public function new($data)
     {
-        $this->render('pageUser', ['section' => 'reservation', 'action' => 'new']);
     }
 
-    public function save($data, $id = null)
+    public function save($data)
     {
+        // $this->render('Dashboard', ['section' => 'Reservation', 'action' => 'new']);
+
         foreach ($data as $key => $value) {
             // On enlève les catégories du formatage, car c'est un tableau
             if (!is_array($value)) {
@@ -52,29 +53,21 @@ class ReservationController
             }
         }
 
-        $Reservation = $this->Reservation;
-        if (
-            !empty($Reservation->getIdReservation()) &&
-            !empty($Reservation->getNumberReservation()) &&
-            !empty($Reservation->getChildren()) &&
-            !empty($Reservation->getQuantityHeadphone()) &&
-            !empty($Reservation->getQuantitySledge()) &&
-            !empty($Reservation->getIdUser())
-        ) {
+        $data = [
+            'Number_Reservation' => $data['nombrePlaces'],
+            'Quantity_Sledge' => $data['NombreLugesEte'],
+            'Quantity_Headphone' => $data['nombreCasquesEnfants'],
+            'Children' => $data['enfants'],
+            'Id_User' => 1,
+            'Price_Reduced' => $data['tarifReduit'] ?? false,
+            'Id_Date' => $data['choixJour'],
+            'Van' => [$data['vanNuit1'] ?? null, $data['vanNuit2'] ?? null, $data['vanNuit3'] ?? null, $data['van3Nuits'] ?? null],
+            'tente' => [$data['tenteNuit1'] ?? null, $data['tenteNuit2'] ?? null, $data['tenteNuit3'] ?? null, $data['tente3Nuits'] ?? null]
 
-            if ($id !== null) {
-                $Reservation->setIdUser($id);
-                $this->ReservationRepository->putReservationInDB($Reservation);
-            }
-
-            header('location: /dashboard/Reservation/details/' . $Reservation->getIdUser());
-            die;
-        } else {
-            if ($id !== null) {
-                $this->render('Dashboard', ['section' => 'Reservation', 'action' => '']);
-                die;
-            }
-        }
+            //! plus tard remplacer le 1 par $_SESSION['User_ID']
+        ];
+        $resa = new Reservation($data);
+        $this->ReservationRepository->putReservationInDB($resa);
     }
 
     public function delete($id)

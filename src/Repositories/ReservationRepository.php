@@ -3,40 +3,78 @@
 namespace src\Repositories;
 
 use PDO;
-use src\Models\Reservation;
 use src\Models\Database;
+use src\Models\Reservation;
 
 class ReservationRepository
 {
-    private Database $DB;
-    private Reservation $resa;
+    private $DB;
+    private $resa;
     public function __construct()
     {
-
         $database = new Database();
         $this->DB = $database->getDB();
         $this->resa = new Reservation();
 
         require_once __DIR__ . '/../../config.php';
     }
+
     //* Create Reservation in Database
-    function putReservationInDB(): bool
+   
+    function putReservationInDB($resa): bool
     {
-        $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User)";
+        // Put Reservation in Database
+        $sql = "INSERT INTO festival_reservation (ID_RESERVATION, Number_Reservation, Quantity_Sledge, Quantity_Headphone, Children, Id_User, Price_Reduced) VALUES (:ID_RESERVATION, :Number_Reservation, :Quantity_Sledge, :Quantity_Headphone, :Children, :Id_User, :Price_Reduced)";
 
-
-        $statement = $this->DB->getDB()->prepare($sql);
-        $reservation = $this->resa;
+        $statement = $this->DB->prepare($sql);
         $statement->execute([
-            ":ID_RESERVATION" => $reservation->getIdReservation(),
-            ":Number_Reservation" => $reservation->getQuantitySledge(),
-            ":Quantity_Sledge" => $reservation->getQuantitySledge(),
-            "Quantity_Headphone" => $reservation->getQuantityHeadphone(),
-            ":Children" => $reservation->getChildren(),
-            "iD_User" => $reservation->getIdUser()
+            ":ID_RESERVATION" => null,
+            ":Number_Reservation" => $resa->getNumberReservation(),
+            ":Quantity_Sledge" => $resa->getQuantitySledge(),
+            ":Quantity_Headphone" => $resa->getQuantityHeadphone(),
+            ":Children" => $resa->getChildren(),
+            ":Id_User" => $resa->getIdUser(),
+            ":Price_Reduced" => $resa->getPriceReduced(),
         ]);
-        return $statement->fetch(PDO::FETCH_ASSOC);
+
+        // Put Event Reservation in Database
+        $lastInsertedId = $this->DB->lastInsertId();
+
+        $sqlInsertReservationHasEvent = "INSERT INTO festival_reservationhasevent (Id_Date, ID_RESERVATION) VALUES (:Id_Date, :ID_RESERVATION)";
+        $statement = $this->DB->prepare($sqlInsertReservationHasEvent);
+        $statement->execute([
+            ":Id_Date" => $resa->getIdDate(),
+            ":ID_RESERVATION" => $lastInsertedId,
+        ]);
+
+        $sqlInsertReservationHasNight = "INSERT INTO festival_reservationhasnight (Id_Date, ID_RESERVATION) VALUES (:Id_Date, :ID_RESERVATION)";
+        $statement = $this->DB->prepare($sqlInsertReservationHasNight);
+
+        $resaArray = get_object_vars($resa);
+
+        foreach ($resaArray['Tente'] as $key => $value) {
+            if ($value !== null) { 
+                $statement->execute([
+                    ":Id_Date" => $value,
+                    ":ID_RESERVATION" => $lastInsertedId,
+                ]);
+            }
+        }
+
+        foreach ($resaArray['Van'] as $key => $value) {
+            if ($value !== null) {
+                $statement->execute([
+                    ":Id_Date" => $value, 
+                    ":ID_RESERVATION" => $lastInsertedId,
+                ]);
+            }
+        }
+
+      
+        return $statement->rowCount() > 0;
     }
+
+
 
     function getAllReservationFromDB(): array
     {
@@ -90,5 +128,24 @@ class ReservationRepository
             ":Id_User" => $Id_User
         ]);
         return $statement->rowCount() > 0;
+    }
+
+
+    function getEventFromDB()
+    {
+        $sql = "SELECT * FROM `festival_event`";
+
+        $statement = $this->DB->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function getNightFromDB()
+    {
+        $sql = "SELECT * FROM festival_night";
+
+        $statement = $this->DB->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }

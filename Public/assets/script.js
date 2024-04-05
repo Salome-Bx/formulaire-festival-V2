@@ -1,13 +1,7 @@
 // début code Salome
+
 // récupération des 3 blocs du formulaire
 let blocReservation = document.querySelector("#reservation");
-
-let blocOptions = document.querySelector("#options");
-
-blocOptions.classList.add("hidden");
-
-let blocCoordonnees = document.querySelector("#coordonnees");
-blocCoordonnees.classList.add("hidden");
 
 let NombrePlaces = document.querySelector("#NombrePlaces");
 
@@ -57,7 +51,6 @@ function suivant(blocACacher, blocAAfficher) {
   }
 }
 
-
 let nombreCasquesEnfants = document.querySelector("#nombreCasquesEnfants");
 let NombreLugesEte = document.querySelector("#NombreLugesEte");
 
@@ -106,6 +99,7 @@ tarifreduit.addEventListener("click", function () {
   }
 });
 pass1Jour.addEventListener("click", function () {
+
   displayTarifReduit.classList.add("tarifHidden");
   displayPass2Jour.classList.add("tarifHidden");
   displayPass1Jour.classList.remove("tarifHidden");
@@ -120,13 +114,21 @@ pass3Jour.addEventListener("click", function () {
   displayPass2Jour.classList.add("tarifHidden");
 });
 
-// faire la docstring de la fonction
+pass1Jour.addEventListener("click", function () {
+  displayTarifReduit.classList.add("tarifHidden");
+  displayPass2Jour.classList.add("tarifHidden");
+  displayPass1Jour.classList.remove("tarifHidden");
+});
+pass2Jour.addEventListener("click", function () {
+  displayTarifReduit.classList.add("tarifHidden");
+  displayPass1Jour.classList.add("tarifHidden");
+  displayPass2Jour.classList.remove("tarifHidden");
+});
+pass3Jour.addEventListener("click", function () {
+  displayPass1Jour.classList.add("tarifHidden");
+  displayPass2Jour.classList.add("tarifHidden");
+});
 
-function precedent(blocACacher, blocAAfficher) {
-
-  blocACacher.classList.add("hidden");
-  blocAAfficher.classList.remove("hidden");
-}
 // fin code Aubin
 
 // début code Elodie
@@ -180,10 +182,6 @@ let vanNuit2 = document.querySelector("#vanNuit2");
 let vanNuit3 = document.querySelector("#vanNuit3");
 let vanTroisNuits = document.querySelector("#van3Nuits");
 
-let enfantsOui = document.querySelector("input[name=enfantsOui]");
-let enfantsNon = document.querySelector("input[name=enfantsNon]");
-let casqueEnfant = document.querySelector(".casqueEnfant");
-
 tenteNuit1.addEventListener("change", () => {
   decocher(tenteNuit1, tenteTroisNuits);
   decocher3nuit("tente");
@@ -220,20 +218,26 @@ vanTroisNuits.addEventListener("change", () => {
   decocher(vanTroisNuits, vanNuit3);
 });
 
-enfantsOui.addEventListener("change", () => {
-  decocher(enfantsOui, enfantsNon);
-  if (enfantsOui.checked === true) {
-    casqueEnfant.classList.remove("tarifHidden");
-  } else {
-    casqueEnfant.classList.add("tarifHidden");
-  }
+// let enfants = document.querySelector("input[name=enfants]");
+let enfants = document.querySelector("#enfantsOui");
+let enfantsNon = document.querySelector("#enfantsNon");
+
+let casqueEnfant = document.querySelector(".casqueEnfant");
+
+enfants.addEventListener("change", () => {
+  casqueEnfant.classList.remove("tarifHidden");
 });
+
 enfantsNon.addEventListener("change", () => {
-  decocher(enfantsNon, enfantsOui);
-  if (enfantsNon.checked === true) {
-    casqueEnfant.classList.add("tarifHidden");
-  }
+  casqueEnfant.classList.add("tarifHidden");
+  nombreCasquesEnfants.value = 0;
 });
+// enfantsNon.addEventListener("change", () => {
+//   decocher(enfantsNon, enfantsOui);
+//   if (enfantsNon.checked === true) {
+//     casqueEnfant.classList.add("tarifHidden");
+//   }
+// });
 
 /**
  * [Decocher : permet de décocher une proposition]
